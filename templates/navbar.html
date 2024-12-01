@@ -1,0 +1,598 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Expert system</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    
+     <style>
+.navbar-custom4 {
+            /* background-color: #6a0dad;  */
+            background-color: #FCFBFF; 
+            color:blue;
+            transition: background-color 0.3s ease-in-out;
+            padding: 15rem 2rem;
+        }
+
+        /* Scrolled Navbar Styling */
+        .navbar-scrolled {
+            background-color: #0000ff; /* Blue */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            /* color: #ffffff; */
+            color:#000;
+        }
+
+        /* Navbar link styling with bottom border */
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            color: #000;
+            margin-right: 1.5rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        /* Bottom border effect */
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ffffff;
+            transform: scaleX(0);  /* Hidden initially */
+            transition: transform 0.3s ease;
+            transform-origin: bottom right;
+        }
+
+        /* Hover effect for the bottom border */
+        .navbar-nav .nav-link:hover::after {
+            transform: scaleX(1);  /* Expands the border on hover */
+            transform-origin: bottom left;
+        }
+
+        /* Hover effect for link text */
+        .navbar-nav .nav-link:hover {
+            color: #f0f0f0;
+        }
+        
+        .btn-custom {
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background-color: #F17732;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #f09563;
+            transform: translateY(-2px);
+        }
+
+
+
+        /* Footer */
+.footer {
+    overflow-x: hidden;
+}
+
+.foot{
+  padding-top: 50px;
+}
+/* Background styling */
+.footer-background {
+    /* background-image: url(' static/images/bg2.jpg'); */
+    height: auto; /* Adjust height to fit content */
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     /* Add some padding */
+}
+
+
+
+.iconfoot {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
+.inpem::placeholder{
+  color:#8f8f8f;
+  
+}
+
+
+/* Button CSS */
+.custom-btnf {
+  width: 130px;
+  height: 50px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+              7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+              4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 15px;
+}
+
+.btn-foot {
+  background: #F17732;
+  background: linear-gradient(0deg, #1F2278 0%, #1F2278 100%);
+  border: none;
+}
+
+.custom-btnf:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+              inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+              inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+/* Button CSS end */
+
+
+.footermail{
+  background-color:#1F2278;border-radius: 50%;height:20px;width:20px;display: flex;align-items: center;justify-content: center;
+}
+
+.footerbata{
+  color: #274760;line-height: 20px;font-size: 14px;
+}
+
+.footerback{
+  background-color:#1F2278;border-radius: 50%;height:16px;width:15px;display: flex;align-items: center;justify-content: center
+}
+
+.iconfoot:hover .footermail {
+  background: #F17732; 
+  transform:scale(0.9);
+  transition:all ease 200ms;
+}
+
+.iconfoot:hover .footerback {
+  background: #F17732; 
+  transform:scale(0.9);
+  transition:all ease 200ms;
+}
+
+.iconfoot:hover .footerbata {
+  color: #EE7633; 
+  transform:scale(0.98);
+  transition:all ease 200ms;
+
+}
+
+.img9:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img91:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+.img92:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img93:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img94:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+
+
+
+/* Css for wavy line */
+.wavy-line-container {
+  width: 100%;
+  height: 40px; /* Adjust height based on wave size */
+  overflow: hidden; /* Ensures no overflow in case of large waves */
+  
+}
+
+.wavy-line-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wavy-line-svg .path1 {
+  stroke: #cacaf7; /* Change color as needed */
+  stroke-width: 2; /* Adjust thickness */
+  fill: none; /* No fill inside the waves */
+}
+
+
+
+
+/* Scrollbar */
+
+body {
+  --sb-track-color: #f7fdff;
+  --sb-thumb-color: #1f2278;
+  --sb-size: 6px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 19px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 19px;
+  border: 1px solid #121212;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+
+
+
+     </style>
+    <style>
+        .sticky-icon {
+    position: fixed; /* Make it fixed so it stays in place */
+    left: 20px; /* Adjust as needed */
+    top: 670px; /* Adjust as needed */
+    z-index: 1000; /* Ensure it's on top of other content */
+
+}
+
+.sticky-icon img {
+    width: 40px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; 
+}
+
+    </style>
+
+
+<script>
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // This makes the scroll smooth
+        });
+    } 
+</script>
+
+</head>
+<body> 
+    
+    
+    <!-- <nav class="navbar navbar-expand-lg navbar-custom4 fixed-top" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'images/healthcare.png' %}" alt="MedExpert Logo" width="40" height="40">
+                MedExpert
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#departments">Departments</a></li>
+
+                    
+                    
+                    <li class="nav-item"><a class="nav-link" href="#blogs">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a class="btn btn-custom me-2" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-custom" href="{% url 'signup' %}">Signup</a>
+                </div>
+            </div>
+        </div>
+    </nav> -->
+   
+    <nav class="navbar navbar-expand-lg navbar-custom4 fixed-top" id="navbar">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+              <img src="{% static 'images/healthcare.png' %}" alt="MedExpert Logo" width="40" height="40">
+              MedExpert
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item" style="color:blue;"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#departments">Departments</a></li>
+                  
+                  <!-- Dropdown for Drugs & Supplements -->
+                  <!-- <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#departments" id="drugsSupplementsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Drugs & Supplements
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="drugsSupplementsDropdown">
+                          <li><a class="dropdown-item" href="#drugs">Drugs</a></li>
+                          <li><a class="dropdown-item" href="#supplements">Supplements</a></li>
+                      </ul>
+                  </li> -->
+  
+                  <li class="nav-item"><a class="nav-link" href="#blogs">Blogs</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
+              </ul>
+              <div class="d-flex">
+                  <a class="btn btn-custom me-2" href="{% url 'login' %}">Login</a>
+                  <a class="btn btn-custom" href="{% url 'signup' %}">Signup</a>
+              </div>
+          </div>
+      </div>
+  </nav>
+  
+   
+    <div style="position: absolute;z-index:1100 ; ">
+        {% include 'chatbotnav.html' %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Navbar -->
+    <div class="sticky-icon"  onclick="scrollToTop()">
+        <img src="{% static 'images/scrolltop.png' %}" alt="Icon">
+    </div>
+
+    
+
+
+
+<!-- Footer -->
+
+<footer class="footer">
+   
+    <!-- Html for wavy line starts -->
+      <div class="wavy-line-container">
+        <svg class="wavy-line-svg" viewBox="0 0 100 20" preserveAspectRatio="none">
+          <path d="M0,10 
+                   C2.5,0 7.5,0 10,10 
+                   S15,20 20,10 
+                   S25,0 30,10 
+                   S35,20 40,10 
+                   S45,0 50,10 
+                   S55,20 60,10 
+                   S65,0 70,10 
+                   S75,20 80,10 
+                   S85,0 90,10 
+                   S95,20 100,10"
+                stroke="#cacaf7" fill="none" stroke-width="2" class="path1" />
+        </svg>
+      </div>
+       <!-- Html for wavy line ends-->
+      
+    <div class="footer-background" style="background-image: url(' static/images/bg2.jpg');">
+        <div class="container">
+        <div class="row foot1">
+            <div class="col-md-3 foot">
+            <p style="font-size: 25px;font-weight:700;color:#1F2278;margin: 0;">MedExpert Medical &<br>
+                Healthcare </p>
+                <img src="{%static 'images/blueback.png' %}" width="70px"  style="margin-left: 70px;">
+                  <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/location.png' %}" width="15px" height="15px"  ></div>
+              <a href="https://www.google.co.in/maps/place/Sant+Nagar,+Verka,+Amritsar,+Punjab+143501/@31.662081,74.9161665,15z/data=!3m1!4b1!4m6!3m5!1s0x391962e154419897:0x17bb5195949a3d03!8m2!3d31.6620819!4d74.9264662!16s%2Fg%2F11f2sn60sd?entry=ttu" 
+              style="text-decoration: none;" target="_blank" ><p class="footerbata">Batala Road,Amritsar</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/emailwh.png' %}" width="15px" height="15px"  ></div>
+              <a href="mailto:sainimuskan731@gmail.com" 
+              style="text-decoration: none;" target="_blank" ><p class="footerbata" >sainimuskan731@gmail.com</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/phone.png' %}" width="15px" height="15px"  ></div>
+              <a href="tel:+91 77173-99046" 
+              style="text-decoration: none;" target="_blank" ><p  class="footerbata">+91-7717399046</p></a>
+                </div>
+                
+                  
+
+            </div>
+            <div class="col-md-2 foot">
+                <p style="font-size: 22px;font-weight:700;color:#1F2278;margin: 0px;"  >Quick Links</p>
+                
+                <img src="{%static 'images/blueback.png' %}" width="50px"  style="margin-left: 20px;">
+                <div class="iconfoot" style="padding-top: 10px;font-size: 17px;">
+                    <div class="footerback " >
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'index' %}" style="text-decoration: none;" ><p  class="footerbata">Home</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="" style="text-decoration: none;" ><p class="footerbata" >About</p></a>
+                </div>
+                
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="" style="text-decoration: none;" ><p class="footerbata" >Services</p></a>
+                </div>
+
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="" style="text-decoration: none;" ><p class="footerbata" >Blogs</p></a>
+                </div>
+
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'contact' %}" style="text-decoration: none;" ><p class="footerbata" >Contact</p></a>
+                </div>
+                       
+                
+            </div>
+
+
+            <div class="col-md-2 foot">
+                <p style="font-size: 25px;font-weight:700;color:#1F2278;margin: 0;">Our Services</p>
+                <img src="{%static 'images/blueback.png' %}" width="50px"  style="margin-left: 20px;">
+                <div class="iconfoot" style="padding-top: 10px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="" style="text-decoration: none;" ><p  class="footerbata">Dental</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="" style="text-decoration: none;" ><p   class="footerbata">Cardiology</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="" style="text-decoration: none;" ><p   class="footerbata">Pediatric</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="" style="text-decoration: none;" ><p  class="footerbata">Gynecology</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="" style="text-decoration: none;" ><p   class="footerbata">Neurology</p></a>
+                </div>
+            </div>
+            <div class="col-md-4 foot">
+                <p style="font-size: 40px;font-weight:700;color:#1F2278;">Be Our Subscribers</p>
+               
+                <p style="font-size: 16px;font-weight:500;color:#274760;">To get the latest news about health from our<br> experts.</p>
+                
+                <input type="email" class="inpem" style="position:relative;border-radius:40px;border:1px solid#1F2278 ;outline: none;padding: 20px;background:#fff;width:90%;height:50px" placeholder="Enter your Email">
+               <br><br>
+                <button class="custom-btnf btn-foot ">Submit</button> 
+
+            </div>
+        </div>
+    </div>
+   
+<br>
+    
+    <div style="background: #1F2278;" class="pt-4 pb-2"  >
+    <div class="container"  >
+        <div class="row" >
+            <div class="col-md-6" >
+               
+                <div class="iconfoot">
+                    <p style="color:white">Follow Us :</p>
+                    <div >
+                        <a href="https://www.facebook.com/profile.php?id=100075785425879" target="_blank"><img src="{%static 'images/facebook2.png' %}" width="30px" height="30px" class="img9"></a>  
+                           </div> 
+                    <div  >
+                    <a href="https://www.instagram.com/muskan_saini_27/?next=%2F" target="_blank"><img src="{%static 'images/instagram2.png' %}" width="30px" height="30px" class="img91"></a>  
+                       </div> 
+                        <div  >
+                           <a href="https://github.com/muskansaini27" target="_blank"><img src="{%static 'images/twitter2.png' %}" width="30px" height="30px" class="img92"  >  </a>
+                    </div>
+                    <div  >
+                    <a href="https://www.linkedin.com/in/muskan--saini/" target="_blank"> <img src="{%static 'images/linkedin2.png' %}" width="30px" height="30px"  class="img93" ></a>  
+                    </div>
+                    <div  >
+                    <a href="mailto:sainimuskan731@gmail.com" target="_blank"> <img src="{%static 'images/mail2.png' %}" width="30px" height="30px" class="img94"  >  </a>   
+                    </div>
+                    
+                    
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <p style="color:white">Copyright © 2024 Med Expert. All rights reserved.</p>
+                
+                
+            </div>
+            
+</div>
+        
+        </div>
+           </div>
+   
+    
+    </div>
+
+    
+    
+</footer>
+
+<!-- JavaScript for Scroll Effect -->
+<script>
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('navbar-scrolled'); // Apply blue background on scroll
+        } else {
+            navbar.classList.remove('navbar-scrolled'); // Reset to purple at top
+        }
+    });
+</script>
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+    </body>
+</html>
+
+
+
+

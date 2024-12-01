@@ -1,0 +1,168 @@
+{% extends 'sidebar1.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* General Styles */
+       
+
+        /* Full-page container */
+        .full-page-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+   
+
+        .result-card-container {
+            /* background: white; */
+            background: linear-gradient(to right, rgba(223, 223, 244,0.5), rgba(171, 127, 210, 0.2));
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+            height:700px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+   
+            opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s forwards 0.3s; /* Delay for a smoother effect */
+    /* background: linear-gradient(to right, rgba(223, 223, 244,0.5), #573178); */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        .result-heading {
+            color: #0b5394;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .result-image {
+            max-width: 300px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height:250px;
+        }
+
+        .result-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .highlight-text {
+            font-weight: bold;
+            color: #d9534f; /* Strong red for emphasis */
+        }
+
+        /* Explanation and Symptoms Block */
+        .info-container {
+            text-align: left;
+            background-color: #f9fafc;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 5px solid #0b5394;
+            border-radius: 5px;
+        }
+
+        /* Link Styling */
+        .upload-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #0b5394;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-link:hover {
+            background-color: #073763; /* Darker on hover */
+        }
+
+        @media (max-width:600px) {
+            .full-page-container {
+            overflow-x:visible;
+            overflow-y: visible;
+            }
+            /* Link Styling */
+            .upload-link {
+                        display: inline-block;
+                        margin-top: 30px;
+                        padding: 10px 10px;
+                        background-color: #0b5394;
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 5px;
+                        font-size: 15px;
+                        transition: background-color 0.3s ease;
+                        margin-bottom: 100px;
+                    }
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <section class="full-page-container">
+        <div class="result-card-container">
+            <!-- <h2 class="result-heading"> <span class="highlight-text">{{ label }}</span></h2> -->
+
+            <!-- Image Preview -->
+            <img src="{{ MEDIA_URL }}{{ image_url }}" alt="Uploaded Image" class="result-image">
+
+            <!-- Prediction Result Info -->
+            <p class="result-text">This person is predicted to have: <strong class="highlight-text">{{ label }}</strong>.</p>
+
+            <!-- Condition-specific Information -->
+            <div class="info-container">
+                {% if label == 'Lung adenocarcinoma' %}
+                    <p><strong>Explanation:</strong> Lung adenocarcinoma is a type of non-small cell lung cancer (NSCLC) and the most common form of lung cancer. It typically begins in the outer parts of the lungs.</p>
+                    <p><strong>Symptoms:</strong> Persistent cough, chest pain, shortness of breath, and fatigue.</p>
+                    <p><strong>Suggested Treatment:</strong> Treatment options include surgery, chemotherapy, radiation therapy, or targeted therapy depending on the stage.</p>
+
+                {% elif label == 'Lung benign tissue' %}
+                    <p><strong>Explanation:</strong> This refers to non-cancerous lung tissue. Benign growths in the lungs are not cancerous and usually do not spread to other parts of the body.</p>
+                    <p><strong>Symptoms:</strong> Typically asymptomatic, though some benign growths may cause cough or breathing issues if large enough.</p>
+                    <p><strong>Suggested Treatment:</strong> Observation or surgical removal if the benign growth causes discomfort or obstruction.</p>
+
+                {% elif label == 'Lung squamous cell carcinoma' %}
+                    <p><strong>Explanation:</strong> Lung squamous cell carcinoma is another type of non-small cell lung cancer (NSCLC), which originates in the squamous cells lining the airways in the lungs.</p>
+                    <p><strong>Symptoms:</strong> Coughing up blood, chest pain, difficulty swallowing, or a persistent cough.</p>
+                    <p><strong>Suggested Treatment:</strong> Treatment options include surgery, chemotherapy, radiation therapy, and immunotherapy depending on the stage and size of the tumor.</p>
+                {% endif %}
+            </div>
+
+            <!-- Upload Another Image -->
+            <a href="{% url 'heartupload' %}" class="upload-link">Upload another image</a>
+        </div>
+    </section>
+
+</body>
+</html>
+
+{% endblock %}

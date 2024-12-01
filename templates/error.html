@@ -1,0 +1,206 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Page Not Found</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+      .errormain{
+        width:100%;
+        height:100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+        .abc {
+            display: flex;
+            flex-direction: row;
+            
+            width: 90%;
+            max-width: 1000px;
+            height: 70%;
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .left {
+            flex: 1;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            animation: slideIn 1s ease-out;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #988fdb;
+            border-top-left-radius: 50%;
+            border-bottom-left-radius: 50%;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .right img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+             border-radius: 50%; 
+           /* border-top-right-radius: 50%;
+            border-bottom-left-radius: 50%;*/
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .right img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .error-code {
+            font-size: 5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .error-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #6c5ce7;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .action-button:hover {
+            background-color: #a29bfe;
+            transform: translateY(-2px);
+            animation: pulse 1s infinite;
+        }
+
+        .icon {
+            font-size: 6rem;
+            color:#ff6b6b ;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+         /* Media Queries */
+         @media (max-width: 768px) {
+            .abc {
+                flex-direction: column;
+            }
+
+            .right {
+                display: flex;
+                justify-content: center;
+            }
+
+            .right img {
+                width: 60%;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-title {
+                font-size: 1.8rem;
+            }
+
+            .icon {
+                font-size: 3rem;
+            }
+
+            .action-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="errormain">
+    <div class="container abc"  data-aos="zoom-in-down" data-aos-duration="800">
+        <!-- Left Section -->
+        <div class="left">
+            <div class="error-container">
+                <p class="error-title">Oops! Something went wrong.</p>
+                <div class="icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <p class="error-subtitle">{{ message }}</p>
+                
+                <a href="{%url 'dash'%}" class="action-button">Go Back Home</a>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right">
+            <img src="https://cdn3d.iconscout.com/3d/premium/thumb/dead-robot-3d-icon-download-in-png-blend-fbx-gltf-file-formats--bot-activity-20-pack-science-technology-icons-8222213.png" alt="Astronaut or Placeholder Image">
+            <!-- <img src="https://cdn3d.iconscout.com/3d/premium/thumb/robot-error-3d-illustration-download-in-png-blend-fbx-gltf-file-formats--failure-glitch-futuristic-30-pack-science-technology-illustrations-9692899.png?f=webp" alt="Astronaut or Placeholder Image"> -->
+        </div>
+    </div>
+</section>
+
+<script>
+    AOS.init();
+  </script>
+</body>
+</html>
+{% endblock %}
+
+
+
+
+

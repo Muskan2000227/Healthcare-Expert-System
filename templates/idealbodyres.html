@@ -1,0 +1,319 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Result</title>
+
+    <style>
+        *{
+            font-family: Montserrat, sans-serif;
+    scroll-behavior: smooth;
+        }
+        .section1{
+            width:100%;
+            height:100vh;
+            overflow-y: hidden;
+        }
+        .ressec{
+           
+           
+            /* overflow-y: scroll; */
+            height:100vh;
+            /* background-color: antiquewhite; */
+            display: grid;
+            grid-template-columns: 0.75fr 1.25fr;
+            margin-left: 80px;
+        }
+        .contdiv{
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdiv2{
+            margin-left: 30px;
+            margin-top: 50px;
+            padding-top: 70px;
+            margin-right: 30px;
+            display: flex;
+           
+            flex-direction: column;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdivsty2{
+            margin-left: 50px;
+            /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+        }
+
+
+        /* BUtton start */
+        .button1 {
+
+margin-bottom: 40px;
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+        /* BUtton end */
+
+        .smbtn{
+          display: none;
+        }
+
+        .heightdiv{
+          display: flex;gap:78px;font-size: 20px;
+        }
+
+        .mindiv{
+          display: flex;gap:30px;font-size: 20px;
+        }
+
+        .maxdiv{
+          display: flex;gap:30px;font-size: 20px;
+        }
+
+        @media  (max-width:600px) {
+
+.section1{
+  /* margin-top: 50px; */
+  overflow: hidden;
+  overflow-y:hidden;
+  overflow-x: hidden;
+  width:320px;
+}
+.ressec{ 
+         /* overflow: hidden; */
+         height:150vh;
+         /* background-color: antiquewhite; */
+         display:flex;
+         flex-direction:column;
+         align-items: center;
+         justify-content: center;
+         margin-left: 10px;
+         margin-top: 70px;
+         margin-right:10px;
+         width:300px;
+         padding: 20px;
+         
+     }
+     .contdiv{
+      padding: 10px;
+      display: none;
+
+     }
+
+     .contdiv2{
+      margin-top: 0px;
+     }
+
+     .bmicont{
+width:100%;
+/* margin: 15px; */
+margin-left: -10px;
+padding: 5px;
+}
+
+.heightdiv{
+  display: flex;gap:40px;font-size: 15px;
+}
+
+.mindiv{
+  display: flex;gap:30px;font-size: 15px;
+}
+
+.maxdiv{
+  display: flex;gap:30px;font-size: 15px;
+}
+
+.orangebmi{
+display:none;
+}
+
+.largebtn{
+display: none;
+}
+
+.smbtn{
+display: block;
+margin-left: 30px;
+}
+    
+}
+    </style>
+</head>
+<body >
+   
+    <section  >
+       <section class="section1">
+        
+        <h1 class="orangebmi" style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+        margin-left: auto; margin-right: auto;
+        padding: 8px;
+        color: #F17732;
+        font-weight: 700;
+        ">Ideal Body Weight Range</h1>
+   <div class="ressec" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 15px;height:80vh;margin-right: 50px;">
+ <div class="contdiv">
+    <img src="{{ graph }}" alt="Ideal Weight Range Graph" style="margin-top: 50px;">
+    
+    
+</div>
+<div >
+<div class="contdiv2" >
+    <div class="contdivsty2">
+        <div class="bmicont" style="display:flex;flex-direction: column;font-size: 20px;align-items: center;justify-content: center;background-color:#fff;;padding: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;;color:#000066;">
+
+
+    <div class="heightdiv" >
+    <p style="font-weight: 700;">Height </p>
+    <p>:</p>
+    <p style="color:#4A4A4A"> {{feet}}' {{inches}}'' </p>
+</div>
+
+
+<hr style="width:90%;text-align: center;background:black;">
+
+
+<div class="mindiv" style="">
+    <p style="font-weight: 700;">Minimum Weight </p>
+    <p>:</p>
+    <p style="color:#4A4A4A">{{ min_weight }} kg </p>
+</div>
+
+
+<div class="maxdiv" >
+    <p style="font-weight: 700;">Maximum Weight</p>
+    <p>:</p>
+    <p style="color:#4A4A4A"> {{ max_weight }} kg</p>
+</div>
+
+
+</div>
+
+
+<div class="largebtn" style="display: flex;width:100%;justify-content: center;align-items: center;margin-top: 50px;gap:20px">
+  
+  <button class="button1 largebtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background: #F17732;box-shadow: none;border-radius: 0px;">
+    Tips & Suggestions
+  </button>
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 largebtn" style="background:#000066;box-shadow: none;border-radius: 0px;" >
+  Back to Home
+  <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+   </svg>
+   
+ </button></a>  
+</div>
+
+
+<div >
+<button class="button1 smbtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:80%;background: #F17732;box-shadow: none;border-radius: 0px;margin-bottom: 10px;margin-left: 15px;">
+  Tips & Suggestions
+</button>
+
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 smbtn" style="width:80%;background:#000066;box-shadow: none;border-radius: 0px;margin-left: 15px;" >
+Back to Home
+<svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+   <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+ </svg>
+ 
+</button></a>
+</div>
+
+    
+</div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1000-" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Tips & Suggestions</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            
+            <h3 style="color: #000066;margin-bottom: 20px;">Recommendations:</h3>
+            
+            <!-- <h1>BMI Table</h1> -->
+           
+            <h4 style="text-align: center;margin-bottom: 20px;color: #F17732;">Diet Adjustments:</h4>
+            <ul>
+                <li><b>Underweight: </b> Focus on nutrient-dense foods with higher calories, such as nuts, avocados, whole grains, and lean proteins. Consider increasing meal frequency and portion sizes.
+                </li><br>
+                <li><b></b>Overweight/Obesity:</b>Emphasize a balanced diet rich in vegetables, fruits, lean proteins, and whole grains. Limit processed foods, sugary drinks, and high-fat snacks. Portion control and mindful eating are key.</li><br>
+                
+                
+            </ul>
+
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Exercise Recommendations:</h4>
+            <ul>
+                <li><b>Underweight: </b> Engage in strength training exercises to build muscle mass and improve overall weight. Incorporate aerobic activities to enhance cardiovascular health.</li><br>
+                <li><b>Overweight/Obesity:</b> Combine aerobic exercises (like walking, cycling, or swimming) with strength training to increase metabolism and support weight loss. Aim for at least 150 minutes of moderate aerobic activity per week.</li><br>
+                <li><b>Stay Hydrated:</b> Drink plenty of water throughout the day.</li><br>
+                <li><b>Regular Exercise:</b> Combine aerobic exercises with strength training to maintain muscle mass and overall fitness.</li><br>
+                
+            </ul>
+
+            
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Consult a Professional:</h4>
+            <ul>
+                <li><b>Healthcare Provider: </b>  A medical professional can provide personalized advice and assess any underlying health issues contributing to weight concerns.</li><br>
+                <li><b>Dietitian/Nutritionist:  </b>R For tailored dietary plans and nutritional guidance, especially if making significant dietary changes.</li><br>
+                
+            </ul>
+          
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+</body>
+</html>
+{% endblock %}

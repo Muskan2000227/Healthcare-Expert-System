@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drugs</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+
+.abc {
+  width: 100%;
+  height: fit-content;
+  overflow-y: auto; /* Enable vertical scrolling */
+  /* background-color: white; */
+  
+}
+
+
+      .drugmainsec{
+        width:100%;
+        height:fit-content;
+        /* margin-top: 20px; */
+        /* overflow-y: scroll;  */
+        background-color: white;
+        display: flex;
+       align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+
+      }
+      
+      .contentsec{
+        width:100%;
+        height:280px;
+        /* margin-top: 20px; */
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+     
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+       .text1{
+        margin-top: 40px;
+        color:#00157C;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+       }
+       .text2{
+        font-size: 18px;
+        margin-top: -10px;
+        text-align: center;
+       }
+       .searchbox{
+        display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        width: 70%;
+        height:70px;
+        background-color: #fff;
+        margin-top: -20px;
+        /* display: flex; */
+        /* flex-direction: column; */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
+      
+       }
+
+       /* .btnuses{
+        width:15%;
+        background-color: #fff;
+        outline:0;
+        border:1px solid #E1E1F3;
+       }
+       */
+
+       .btnuses {
+    flex: 1; /* Makes each button take up equal space */
+    min-width: 120px; /* Sets a minimum width for buttons */
+    background-color: #fff;
+    outline: 0;
+    border: 1px solid #E1E1F3;
+    text-align: center; /* Center the text inside buttons */
+}
+
+.left{
+        width:30px; 
+        height:30px;
+        position: absolute;
+        margin-top: 150px;
+        margin-left: 50px;
+       }
+     
+
+       @media (max-width:600px) {
+
+        .contentsec{
+        width:100%;
+        height:200px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+     
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+       
+      }
+
+        .text1{
+        margin-top: 0px;
+        color:#00157C;
+        font-size: 25px;
+        font-weight: bold;
+        padding:0 5px;
+       }
+       .text2{
+        font-size: 16px;
+        margin-top: -10px;
+        padding: 0 10px;
+       }
+       .searchbox{
+        width: 100%;
+        height:150px;
+        background-color: #fff;
+        margin-top: -20px;
+        grid-template-columns: repeat(2, 1fr); /* 3 buttons per row on small screens */
+        max-width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        
+      
+       }
+       .btnuses {
+        flex: 1 1 100%; /* Buttons take up full width on smaller screens */
+        margin: 5px 0; /* Adds vertical margin for spacing between stacked buttons */
+    }
+    .left{
+        width:30px; 
+        height:30px;
+        position: absolute;
+        margin-top: 130px;
+        margin-left: 10px;
+       }
+
+       .contentsec{
+        height:340px;
+       }
+       }
+
+    </style>
+
+
+    </head>
+    <body >
+
+
+      <section class="abc">
+        <a class="ar" href="{%url 'supplement'%}" style="text-decoration: none;"> <img src="{%static 'images/left.png'%}" alt="" class="left"></a>
+        <section class="drugmainsec" >
+            
+          <!-- main content -->
+          <section class="contentsec" style=" background-image: url('{% static 'images/DrugBackground.jpg'%}');background-size: cover;">
+<p class="text1" data-aos="zoom-in" data-aos-duration="1000">{{ drug.supplement_name }}- Uses, Side Effects, and More</p>
+<div style="display: flex;">
+<p class="text2" style="margin-top: 10px;" data-aos="zoom-in" data-aos-duration="1000"><span style="font-weight: 700;" data-aos="zoom-in" data-aos-duration="1000">Other Name(S):</span>{{drug.othername|safe}}</p>
+</div>
+          </section>
+
+<!-- Box to search -->
+<div class="searchbox" data-aos="zoom-in" data-aos-duration="1000">
+    <button class="btnuses" data-content="warnings">Overview</button>
+    <button class="btnuses active" data-content="uses">Uses</button>
+    <button class="btnuses" data-content="side-effects">Side Effects</button>
+    
+    <button class="btnuses" data-content="precautions">Precautions</button>
+    <button class="btnuses" data-content="interactions">Interactions</button>
+    <button class="btnuses" data-content="overdose">Dosing</button>
+    <!-- <button class="btnuses" data-content="images">Images</button> -->
+</div>
+
+
+
+ <div  style="padding: 70px;text-align: justify;line-height: 25px;">
+<div id="uses" class="content-section">
+  <h1 style="font-weight:bold ;color:#00157C;margin-bottom: 30px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Uses</h1>
+  {{drug.uses_drug | safe}}
+</div>
+<div id="side-effects" class="content-section" style="display:none;">
+  <h1 style="font-weight:bold ;color:#00157C;text-align: center;margin-bottom: 50px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Side Effects</h1>
+  {{drug.sideeffects_drug |safe}}
+</div>
+<div id="warnings" class="content-section" style="display:none;"> 
+  <h1 style="font-weight:bold ;color:#00157C;text-align: center;margin-bottom: 30px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Overview</h1>
+  {{drug.overview_drug|safe}}</div>
+<div id="precautions" class="content-section" style="display:none;">
+   <h1 style="font-weight:bold ;color:#00157C;text-align: center;margin-bottom: 30px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Precautions</h1>
+  {{drug.precaution_drug | safe}}</div>
+<div id="interactions" class="content-section" style="display:none;">
+   <h1 style="font-weight:bold ;color:#00157C;text-align: center;margin-bottom: 30px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Interactions</h1>
+  {{drug.interactions_Drug | safe}}</div>
+<div id="overdose" class="content-section" style="display:none;"> 
+  <h1 style="font-weight:bold ;color:#00157C;text-align: center;margin-bottom: 30px;background: linear-gradient(180deg, #fff 60%, #d2d9ff 0);width: fit-content;margin-left: auto;margin-right: auto;">Dosing</h1>
+  {{drug.dosing_Drug | safe}}</div>
+
+
+</div>
+
+    </section>
+  </section>
+
+
+    </body>
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+   document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.btnuses');
+  const sections = document.querySelectorAll('.content-section');
+
+  function activateButton(button) {
+    // Remove active class and color from all buttons
+    buttons.forEach(btn => {
+      btn.classList.remove('active');
+      btn.style.backgroundColor = '';
+      btn.style.color = '';
+    });
+
+    // Add active class and color to the clicked button
+    button.classList.add('active');
+    button.style.backgroundColor = '#00157C';
+    button.style.color = 'white';
+  }
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Hide all content sections
+      sections.forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Show the selected content section
+      const contentId = button.getAttribute('data-content');
+      document.getElementById(contentId).style.display = 'block';
+
+      // Activate the clicked button
+      activateButton(button);
+    });
+  });
+
+  // Activate the first button by default
+  activateButton(document.querySelector('.btnuses.active'));
+});
+
+
+</script>
+
+</html>
+{% endblock %}

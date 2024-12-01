@@ -1,0 +1,89 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiovascular Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #9C96EA, #eef2f3); /* Adjusted background color */
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden; /* Prevent overflow from body */
+        }
+        .dashboard-container {
+            height: 100vh; /* Set container height to 100% of the viewport */
+            padding: 40px;
+            overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+            /* margin-top: -100px; */
+        }
+      
+      
+        .no-data {
+            text-align: center;
+            color: #888;
+            padding: 50px 0;
+        }
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .graph-card{
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            margin-top: -50px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 10px;
+            }
+
+            .graph-card {
+                margin-top: 10px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .dashboard-container {
+                padding: 5px;
+            }
+
+            .graph-card {
+                margin-top: 5px;
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid dashboard-container">
+        <a href="{% url 'diseaseanalysis' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" alt="" ></a> 
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="graph-card">
+                    
+                    <div class="graph-container">
+                        {% if graph %}
+                            {{ graph|safe }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

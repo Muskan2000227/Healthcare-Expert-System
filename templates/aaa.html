@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Popup overlay and box */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s ease;
+        }
+
+        .popup-overlay.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .popup-box {
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            width: 900px; /* Increased width */
+            height: 450px; /* Increased height */
+            max-width: 95%; /* For responsiveness on smaller screens */
+            max-height: 90%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding: 0;
+            animation: fadeIn 0.5s ease; /* Fade-in effect */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Close button */
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        /* Left side with zigzag background */
+        .popup-left {
+            background-color: #f3e5f5;
+            width: 45%; /* Adjusted for balance */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            clip-path: polygon(0% 0%, 100% 0%, 85% 15%, 100% 30%, 85% 45%, 100% 60%, 85% 75%, 100% 90%, 85% 100%, 0% 100%); /* Zigzag effect */
+        }
+
+        .parrot-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Right side with text content */
+        .popup-right {
+            padding: 40px; /* Increased padding for larger size */
+            width: 55%; /* Adjusted for balance */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Ensures even spacing */
+        }
+
+        .popup-content {
+            flex-grow: 1; /* Allows this section to take up available space */
+        }
+
+        .highlight-text {
+            color: #7a40da;
+            font-size: 30px; /* Adjusted for larger space */
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .popup-right p {
+            font-size: 16px; /* Adjusted for balance with larger popup */
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* New button styles */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px; /* Adds space above buttons */
+        }
+
+        .button {
+            padding: 12px 20px; /* Button padding */
+            background-color: #7a40da; /* Button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 48%; /* Adjust width for both buttons */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding shadow for depth */
+        }
+
+        .button:hover {
+            background-color: #5d2c9e; /* Darker shade on hover */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .popup-box {
+                flex-direction: column;
+                height: auto; /* Allow height to adjust */
+            }
+            
+            .popup-left, .popup-right {
+                width: 100%;
+            }
+
+            .parrot-image {
+                max-width: 150px;
+            }
+
+            .popup-left {
+                clip-path: ellipse(100% 80% at 50% 10%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-overlay">
+        <div class="popup-box">
+            <button class="popup-close">&times;</button>
+            <div class="popup-left">
+                <img src="D:\healthcare\static\images\aa.png" alt="Heart" class="parrot-image">
+            </div>
+            <div class="popup-right">
+                <div class="popup-content">
+                    <h1 class="highlight-text">Welcome! Ready to Explore? 🚀</h1>
+                    <p style="width:90%;margin-top: 30px;">Unlock exclusive features and get the most out of your experience. Sign in and dive into your personalized dashboard. It only takes a few seconds to start exploring all we have. Create your free account and discover everything waiting for you inside.</p>
+                    <p style="font-size: 17px; font-weight: bold;text-align: center;margin-top: 30px;">Start Your Journey Now! 💡</p>
+                </div>
+                
+                <!-- New button container for Login and Signup -->
+                <div class="button-container">
+                    <button class="button" onclick="location.href='#'">Login</button>
+                    <button class="button" onclick="location.href='#'">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    // Show the popup after 3 seconds
+    setTimeout(function() {
+        document.querySelector('.popup-overlay').classList.add('show');
+    }, 3000);
+
+    // Close the popup when clicking on the close button or overlay
+    document.querySelector('.popup-close').addEventListener('click', closePopup);
+    document.querySelector('.popup-overlay').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closePopup();
+        }
+    });
+
+    function closePopup() {
+        document.querySelector('.popup-overlay').classList.remove('show');
+    }
+</script>
+</html>

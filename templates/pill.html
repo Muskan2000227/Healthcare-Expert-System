@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Search</title>
+</head>
+<body>
+    <h1>Search for Drug Information by Color, Shape, and Imprint</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="color">Enter Pill Color:</label>
+        <input type="text" id="color" name="color" placeholder="e.g. white" required>
+
+        <label for="shape">Enter Pill Shape:</label>
+        <input type="text" id="shape" name="shape" placeholder="e.g. round" required>
+
+        <label for="imprint">Enter Pill Imprint:</label>
+        <input type="text" id="imprint" name="imprint" placeholder="e.g. AP 115" required>
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    {% if result %}
+        <h2>Drug Information Results</h2>
+        <ul>
+            {% for drug in result %}
+                <li>
+                    <strong>Brand Name:</strong> {{ drug.openfda.brand_name|default:"N/A" }}<br>
+                    <strong>Generic Name:</strong> {{ drug.openfda.generic_name|default:"N/A" }}<br>
+                    <strong>Dosage Form:</strong> {{ drug.openfda.dosage_form|default:"N/A" }}<br>
+                    <strong>Manufacturer:</strong> {{ drug.openfda.manufacturer_name|default:"N/A" }}<br>
+                    <strong>Description:</strong> {{ drug.description|default:"N/A" }}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

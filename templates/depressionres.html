@@ -1,0 +1,368 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Test</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      .anxmainsec{
+        width:100%;
+        height:100%;
+       
+      }
+
+        .anxietysec{
+            width:100%;
+            height:100%;
+           /* background-color: bisque; */
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+         
+           
+        }
+        .anxtest{
+          font-size: 50px;
+            text-align: center;
+            margin-top: 30px;
+           
+        }
+
+        .card{
+            width: 45rem;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .navigation {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            gap:30px;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            background-color: #7368DE; /* Default lower intensity */
+            transition: background-color 0.3s;
+        }
+
+        .rdbtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            gap:20px;
+        }
+
+        .qtext{
+            text-align: center;
+            font-size:30px;
+            font-weight: 700;
+            color:#1F2278;
+        }
+
+        .qtext1{
+            text-align: center;
+            font-size:50px;
+            font-weight: 700;
+            color:#1F2278;
+            margin-bottom: 0px;
+        }
+
+        .thanktxt{
+            text-align: center;font-size: 30px;font-weight: 700;color:#1F2278;margin-top: 20px;
+        }
+
+        .btncenter{
+            /* display: flex;
+            align-items: center;
+            justify-content: center; */
+        }
+
+.btn-53,
+.btn-53 *,
+.btn-53 :after,
+.btn-53 :before,
+.btn-53:after,
+.btn-53:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-53 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #7368DE;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 90%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+
+.btn-53:disabled {
+  cursor: default;
+}
+
+.btn-53:-moz-focusring {
+  outline: auto;
+}
+
+.btn-53 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-53 [hidden] {
+  display: none;
+}
+
+.btn-53 {
+    margin-top: 20px;
+  border: 1px solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 1.0rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.btn-53 .original {
+  background:#7368DE;
+  color: #fff;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.btn-53:hover .original {
+  transform: translateY(100%);
+}
+
+.btn-53 .letters {
+  display: inline-flex;
+}
+
+.btn-53 span {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
+}
+
+.btn-53 span:nth-child(2n) {
+  transform: translateY(15px);
+}
+
+.btn-53:hover span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-53:hover span:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.btn-53:hover span:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.btn-53:hover span:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.btn-53:hover span:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.btn-53:hover span:nth-child(6) {
+  transition-delay: 0.5s;
+}
+
+
+@media  (max-width: 600px) {
+    .card {
+        width: 17rem; /* Adjust as needed for responsiveness */
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        overflow-y: scroll;
+    }
+
+    .hero_icon {
+        display: none; /* Hides .hero_icon on devices within the specified width range */
+    }
+
+    .rdbtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top:-10px;
+            margin-bottom: 20px;
+            gap:20px;
+        }
+
+        .qtext{
+            font-size:22px;
+            margin-bottom: 40px;
+        }
+
+        .qtext1{
+            font-size:33px;
+        }
+
+        .thanktxt{
+            font-size: 22px;
+        }
+}     
+
+
+    </style>
+
+
+    </head>
+    <body>
+        <section class="anxmainsec">
+            <div class="hero_icon"  style="position: absolute; left: 290px; top: 240px; z-index: 1;">
+                <img src="{%static 'images/gen.svg' %}" style="z-index: -1;">
+            </div>
+
+            <div class="hero_icon" style="position: absolute; right: 90px; top: 140px; z-index: 1;">
+                <img src="{%static 'images/gen2.svg' %}" style="z-index: -1;">
+            </div>
+          <!-- <p class="anxtest">Anxiety Test</p> -->
+          <h1 style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+          margin-left: auto; margin-right: auto;
+          padding: 8px;
+          color: #F17732;
+          font-weight: 700;
+          ">Depression Test Results</h1>
+          <div class="anxietysec">
+
+            <div class="card">
+        <!-- Numbering Circle -->
+ 
+    <div id="question1" class="question active" >
+
+        <!-- <p class="qtext1">Your Result is</p> -->
+        <div style="display: flex;align-items: center;justify-content: center;">
+        <img src="{% static 'images/icons8brain.png' %}" alt="" width="110px">
+       
+    </div>
+   
+        <h2 style="text-align: center;margin-top: 20px;color: {{ color }};
+        font-weight:bold;">{{ head }}</h2>
+        
+
+
+        <p style="text-align: justify;padding-left: 30px;padding-right: 30px;padding-top: 30px;line-height: 27px;">{{ msg }}</p>
+        <!-- <p class="thanktxt" >Thank you for taking the time to complete your Personal Assessment.</p> -->
+    </div>      
+<div style="display: flex;justify-content:space-around;width: 130%;">
+    <div class="btncenter">       
+   <a href="{% url 'depression' %}">   <button class="btn-53" type="submit">
+          <div class="original">Retake</div>
+          <div class="letters">
+            
+            <span>R</span>
+            <span>E</span>
+            <span>T</span>
+            <span>A</span>
+            <span>K</span>
+            <span>E</span>
+        </button></a>  
+            </div>
+          
+
+
+          <div class="btncenter">       
+            <a href="{% url 'dash' %}">  <button class="btn-53" type="submit">
+              <div class="original">Home</div>
+              <div class="letters">
+                
+                <span>H</span>
+                <span>O</span>
+                <span>M</span>
+                <span>E</span>
+               
+            </button></a>
+                </div>
+              
+        </div>
+       
+        <div id="question9" class="question">
+
+
+            <div class="result-footer">
+                <a href="{% url 'anxiety' %}">Retake the Test</a> |
+                <a href="{% url 'uprofile' %}">Go to Homepage</a>
+            </div>
+        
+    </form>
+
+    </div>
+    </div>
+    </section>
+    </body>
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+<script>
+    document.getElementById('retake-button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default button behavior
+        // Optional: Show a loading spinner or message
+        // Example: document.getElementById('loading').style.display = 'block';
+
+        // Redirect to the 'anxiety' URL after everything is ready
+        window.location.href = document.getElementById('retake-link').href;
+    });
+</script>
+    </html>
+
+
+{% endblock %}

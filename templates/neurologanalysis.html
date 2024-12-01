@@ -1,0 +1,170 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Data Analytics Applications</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .analysis{
+            width:100%;
+        }
+        .title {
+            font-size: 50px;
+            font-weight: bold;
+            /* margin-bottom: 10px; */
+            color: #1F2278;
+            margin-top: 20px;
+        }
+
+        .content {
+            margin-top: 50px;
+        }
+
+        .center-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 5px solid #ccc;
+            margin: 50px 0;
+        }
+
+        .box {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .box img {
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        .box h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #555;
+        }
+
+        /* Specific colors for different sections */
+        .cancer { background-color:#fff ; margin-top: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .detection { background-color: #FF3636; color: #fff; margin-top: 50px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .documentation { background-color: #7368DE; color: #fff;margin-top: 50px; box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .telehealth { background-color: #fff; color: #fff; margin-top: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .bias { background-color: #7368DE; color: #fff; margin-top: 50px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .financial { background-color: #FF3636; color: #fff; margin-top: 50px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .financial1 { background-color: #fff; color: #fff; margin-top: 50px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+        .financial1 { background-color: #fff; color: #fff; margin-top: 50px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;}
+
+ .arrow56{
+    margin-top: 40px;
+    margin-left: 30px;
+ }   
+ 
+ @media (max-width: 768px) {
+.title{
+    font-size: 30px;
+    margin-left:20px;
+    margin-top: 40px;
+}
+.arrow56{
+    position:relative;
+    z-index: 2;
+    margin-top: 40px;
+    margin-left: 10px;
+ }  
+
+
+}
+      
+    </style>
+</head>
+<body>
+    <section class="analysis" >
+        <a href="diseasecards">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+    <div class="container text-center" style="margin-top: -90px;">
+        
+        <h1 class="title" data-aos="zoom-in" data-aos-duration="1000">Neurological Disease Analysis</h1>
+
+        <div class="row content">
+            <!-- Left column -->
+            <div class="col-md-4">
+                <div class="box cancer" data-aos="zoom-in" data-aos-duration="1000">
+                    <a href="{% url 'neuro1' %}" style="text-decoration: none;display: flex;">   
+                        <img src="https://cdn-icons-png.flaticon.com/128/482/482743.png" alt="Researching Cures Icon">
+                  <h3 style="color:#000;">How has Neurological disease burden changed over time?</h3></a> 
+                </div>
+                <div class="box detection" data-aos="zoom-in" data-aos-duration="1000">
+                    <a href="{% url 'neuro2' %}" style="text-decoration: none;display: flex;">     <img src="https://cdn-icons-png.flaticon.com/128/2968/2968946.png" alt="Early Detection Icon">
+                      <h3  style="color: #fff;">Top 10 countries with highest Neurological diseases</h3></a>
+                </div>
+                <div class="box documentation " data-aos="zoom-in" data-aos-duration="1000">
+                    
+                    <a href="{% url 'neuro3' %}" style="text-decoration: none;display: flex;">     <img src="https://cdn-icons-png.flaticon.com/128/881/881760.png" alt="Patient Documentation Icon" style="width: 50px; height: 60px;">
+                   
+                     <h3 style="color: #fff;">Burden of Neurological diseases in a particular year for all countries</h3></a>
+                </div>
+                
+            </div>
+
+            <!-- Central image -->
+            <div class="col-md-4">
+                <img class="center-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmipycqrdvbDKvJhjl48UPPHxWxv_3BFC5Qg&s" alt="Central Image">
+            </div>
+
+            <!-- Right column -->
+            <div class="col-md-4">
+                <div class="box telehealth" data-aos="zoom-in" data-aos-duration="1200">
+                    <a href="{% url 'neuro4' %}" style="text-decoration: none;display: flex;">   <img src="https://cdn-icons-png.flaticon.com/128/2875/2875035.png" alt="Telehealth Icon" style="width: 50px; height: 70px;">
+                    <h3 style="color: #000;">Highest burden of Neurological diseases from the starting year to the end year</h3></a>
+                </div>
+                <div class="box financial" data-aos="zoom-in" data-aos-duration="1000">
+                    <a href="{% url 'neuro5' %}" style="text-decoration: none;display: flex;align-items: center;">    <img src="https://cdn-icons-png.flaticon.com/128/12014/12014812.png" alt="Financial Analysis Icon"  style="width: 50px; height: 50px;">
+                    <h3 style="color: #fff;">Comparison of countries</h3></a>
+                </div>
+                <div class="box bias" data-aos="zoom-in" data-aos-duration="1200">
+                    <a href="{% url 'neuro6' %}" style="text-decoration: none;display: flex;align-items: center;">     <img src="https://cdn-icons-png.flaticon.com/128/11496/11496770.png" alt="Bias Detection Icon" style="width: 50px; height: 50px;">
+                    <h3 style="color: #fff;">Impact of Neurological Diseases in a Region</h3></a>
+                </div>
+                
+            </div>
+        </div>
+        <div style="display: flex;align-items: center;justify-content: center;"> 
+        <div class="box financial1" style="width:500px;" data-aos="zoom-in" data-aos-duration="1200">
+            <a href="{% url 'neuro7' %}" style="text-decoration: none;display: flex;align-items: center;">      <img src="https://cdn-icons-png.flaticon.com/512/2932/2932853.png" alt="Financial Analysis Icon" style="width: 50px; height: 50px;">
+            <h3 style="color: #000;">Percentage of the total burden of Neurological disease does top 20 country contribute in each year</h3></a>
+        </div>
+    </div>
+    </div>
+</section>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

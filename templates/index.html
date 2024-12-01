@@ -1,0 +1,1557 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Expert System</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'css/index.css' %}">
+    <link rel="stylesheet" href="{%static 'css/base.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- <style>
+      /* Popup overlay and box */
+      .popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1100;
+          visibility: hidden;
+          opacity: 0;
+          transition: visibility 0s, opacity 0.3s ease;
+          overflow: hidden;
+      }
+
+      .popup-overlay.show {
+          visibility: visible;
+          opacity: 2;
+      }
+
+      .popup-box {
+          background-color: white;
+          border-radius: 20px;
+          display: flex;
+          width: 900px; /* Increased width */
+          height: 450px; /* Increased height */
+          max-width: 95%; /* For responsiveness on smaller screens */
+          max-height: 90%;
+          overflow: hidden;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          position: relative;
+          padding: 0;
+          animation: fadeIn 0.5s ease; /* Fade-in effect */
+          overflow: hidden;
+      }
+
+      @keyframes fadeIn {
+          from {
+              opacity: 0;
+              transform: scale(0.95);
+          }
+          to {
+              opacity: 1;
+              transform: scale(1);
+          }
+      }
+
+      /* Close button */
+      .popup-close {
+          position: absolute;
+          top: 10px;
+          right: 15px;
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          color: #333;
+      }
+
+      /* Left side with zigzag background */
+      .popup-left {
+          background-color: #f3e5f5;
+          width: 45%; /* Adjusted for balance */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          position: relative;
+          clip-path: polygon(0% 0%, 100% 0%, 85% 15%, 100% 30%, 85% 45%, 100% 60%, 85% 75%, 100% 90%, 85% 100%, 0% 100%); /* Zigzag effect */
+
+      }
+
+      .parrot-image {
+          max-width: 100%;
+          height: auto;
+      }
+
+      /* Right side with text content */
+      .popup-right {
+          padding: 40px; /* Increased padding for larger size */
+          width: 55%; /* Adjusted for balance */
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between; /* Ensures even spacing */
+          overflow: hidden;
+      }
+
+      .popup-content {
+          flex-grow: 1; /* Allows this section to take up available space */
+      }
+
+      .highlight-text {
+          color: #7a40da;
+          font-size: 30px; /* Adjusted for larger space */
+          font-weight: bold;
+          margin-bottom: 15px;
+      }
+
+      .popup-right p {
+          font-size: 16px; /* Adjusted for balance with larger popup */
+          color: #555;
+          margin-bottom: 10px;
+      }
+
+      /* New button styles */
+      .button-container {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px; /* Adds space above buttons */
+      }
+
+      .buttonmd {
+          padding: 12px 20px; /* Button padding */
+          background-color: #7a40da; /* Button color */
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          font-weight: bold;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          width: 48%; /* Adjust width for both buttons */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding shadow for depth */
+          overflow: hidden;
+      }
+
+      .buttonmd:hover {
+          background-color: #5d2c9e; /* Darker shade on hover */
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+          .popup-box {
+              flex-direction: column;
+              height: auto; /* Allow height to adjust */
+          }
+          
+          .popup-left, .popup-right {
+              width: 100%;
+          }
+
+          .parrot-image {
+              max-width: 150px;
+          }
+
+          .popup-left {
+              clip-path: ellipse(100% 80% at 50% 10%);
+          }
+      } -->
+
+      <!-- .heromsec {
+            /* background-image: url('static/images/blueline.png');
+            background-size: cover;
+            padding: 20px;
+            color: white;
+            font-family: 'Courier New', Courier, monospace; 
+            white-space: nowrap;
+            overflow: hidden; 
+            border-right: 2px solid white; Cursor effect */
+            animation: blink 0.7s infinite; /* Blinking cursor effect */
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+  </style> -->
+
+  <style>
+    /* Popup overlay and box */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.popup-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-box {
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 900px;
+    height: 450px;
+    max-width: 95%;
+    max-height: 90%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding: 0;
+    animation: fadeIn 0.5s ease;
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Close button */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    z-index: 2;
+}
+
+/* Left side with zigzag background */
+.popup-left {
+    background-color: #f3e5f5;
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    clip-path: polygon(0% 0%, 100% 0%, 85% 15%, 100% 30%, 85% 45%, 100% 60%, 85% 75%, 100% 90%, 85% 100%, 0% 100%);
+}
+
+.parrot-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Right side with text content */
+.popup-right {
+    padding: 40px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.popup-content {
+    flex-grow: 1;
+}
+
+.highlight-text {
+    color: #7a40da;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.popup-right p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+
+}
+
+/* Button styles */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.buttonmd {
+    padding: 12px 20px;
+    background-color: #7a40da;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 48%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.buttonmd:hover {
+    background-color: #5d2c9e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .popup-box {
+        width: 80%;
+        height: auto;
+        /* overflow: hidden; */
+    }
+}
+
+@media (max-width: 768px) {
+    .popup-box {
+        flex-direction: column;
+        height: auto;
+        width: 90%;
+    }
+
+    .popup-left, .popup-right {
+        width: 100%;
+        padding: 20px;
+        /* overflow: hidden; */
+    }
+
+    .popup-left {
+        clip-path: ellipse(100% 80% at 50% 10%);
+    }
+
+    .highlight-text {
+        font-size: 26px;
+    }
+
+    .popup-right p {
+        font-size: 15px;
+    }
+
+    .buttonmd {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .popup-overlay {
+      display: flex;
+
+        height:100%;
+    }
+
+    .popup-box {
+       height:350px;
+    }
+    .popup-box {
+        padding: 10px;
+        overflow: hidden;
+    }
+
+    .popup-left{
+        display: none;
+    }
+
+    .jour{
+        display: none;
+    }
+
+    .popup-right {
+        background-color: #f3e5f5;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .highlight-text {
+        font-size: 22px;
+        margin-bottom: -5px;
+    }
+
+    .popup-right p {
+        font-size: 12px;
+    }
+
+    .buttonmd {
+        font-size: 14px;
+        padding: 10px 15px;
+        margin: 5px;
+    }
+
+    .parrot-image {
+        max-width: 170px;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 768px) {
+    .comp{
+        display: none;
+    }
+
+    .cd2{
+      margin-top: 40px;
+      overflow: hidden;
+      
+     
+    }
+  
+  
+  
+}
+
+
+
+  </style>
+    
+
+
+</head>
+<body>
+  <div class="popup-overlay"  data-aos="fade-up-right"  style="overflow: hidden;">
+    <div class="popup-box">
+        <button class="popup-close" >&times;</button>
+        <div class="popup-left">
+            <img src="{% static 'images\aa.png' %}" alt="Heart" class="parrot-image" data-aos="zoom-in-up" >
+        </div>
+        <div class="popup-right">
+            <div class="popup-content">
+                <!-- <img src="{% static 'images/healthcare.png' %}" width="40px" height="40px" alt=".."> -->
+                <h1 class="highlight-text">Welcome! Ready to Explore? 🚀</h1>
+                <p  style="width:90%;margin-top: 30px;text-align: justify;" >Unlock exclusive features and get the most out of your experience. Sign in and dive into your personalized dashboard. It only takes a few seconds to start exploring all we have. Create your free account and discover everything waiting for you inside.</p>
+                <p class="jour" style="font-size: 17px; font-weight: bold;text-align: center;margin-top: 10px;">Start Your Journey Now! 💡</p>
+            </div>
+            
+            <!-- New button container for Login and Signup -->
+            <div class="button-container">
+              <button class="buttonmd" onclick="location.href='{% url 'index' %}'">Home</button>
+
+                <button class="buttonmd" onclick="location.href='{% url 'signup' %}'">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ let scrollPosition = 0;
+
+// Show the popup after 3 seconds
+setTimeout(function() {
+    document.querySelector('.popup-overlay').classList.add('show');
+    scrollPosition = window.scrollY; // Get current scroll position
+    document.body.style.position = 'fixed'; // Fix body position
+    document.body.style.top = `-${scrollPosition}px`; // Shift the body up
+}, 9000);
+
+// Close the popup when clicking on the close button
+document.querySelector('.popup-close').addEventListener('click', closePopup);
+
+// Function to close the popup
+function closePopup() {
+    document.querySelector('.popup-overlay').classList.remove('show');
+    document.body.style.position = ''; // Reset body position
+    document.body.style.top = ''; // Reset top position
+    window.scrollTo(0, scrollPosition); // Restore original scroll position
+}
+
+
+</script>
+
+
+
+<script>
+    const text = "We Provide All Health Care Solutions";
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            document.getElementById("typingEffect").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, 100); // Adjust the speed of typing here (in milliseconds)
+        } else {
+            // After typing is complete, wait a moment and then start over
+            setTimeout(resetTyping, 1000); // Adjust delay before resetting (in milliseconds)
+        }
+    }
+
+    function resetTyping() {
+        document.getElementById("typingEffect").innerHTML = ""; // Clear the text
+        index = 0; // Reset index
+        type(); // Start typing again
+    }
+
+    // Start the typing effect after the page loads
+    window.onload = type;
+</script>
+ 
+
+
+
+
+
+   <div class="mmain" style="margin-top: 50px;">
+   
+
+    <!--Hero sec  -->
+<section class="herosec position-relative" style=" background-image: url('/static/images/aboutbg.jpg');">
+    <div class="hero_icon" style="position: absolute;bottom: 200px;left:70px">
+
+
+    </div>
+   <div class="bghero container ">
+    <div class="row hero_main" style="overflow: hidden;">
+        <div class="col-md-6 hero_left">
+            
+            <!-- <img src="{%static 'images/scrolltop.png' %}" style="z-index: 1000;"> -->
+            <!-- <p class="heromsec" >We Provide All Health Care Solution</p> -->
+
+<p id="typingEffect" class="heromsec" style=" background-image: url('static/images/blueline.png');"></p>
+          <p data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300" class="mainhead"   >Protect Your Health And Take Care Of Your<br> Wealth</p>
+            <br>          
+        <a href="{%url 'about' %}"> <button class="custom-btn btn-2 ">Read More</button>     </a>          
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 750px; top: 170px; z-index: 1;">
+            <img src="{%static 'images/square.png' %}" style="z-index: -1;">
+        </div>
+        <div class="col-md-6" data-aos="flip-left" data-aos-duration="1000" style="overflow: hidden;">
+            <img src="{%static 'images/hero_img.png' %}" width="105%"   class="hero_img" >
+        </div>
+    </div>   
+    <div class="hero_icon" style="position: absolute; left: 200px; top: 100px; z-index: 1;">
+        <img src="{%static 'images/plus.png' %}" style="z-index: -1;">
+    </div>
+   
+    <div class="hero_icon" style="position: absolute; left: 500px; bottom: 100px; z-index: 1;">
+        <img src="{%static 'images/zigzag.png' %}" style="z-index: -1;">
+    </div>
+    <div class="hero_icon" style="position: absolute; right: 150px; top: 120px; z-index: 1;">
+        <img src="{%static 'images/circle.png' %}" style="z-index: -1;">
+    </div>
+  </div>  
+   
+</section>
+
+<!-- About us -->
+ <section class="about_us" style="background-image: url('/static/images/bg2.jpg');background-size: cover;">
+    <div class="container">
+        <div class="hero_icon" style="position: absolute; right: 100px; top: 1000px; z-index: 1;">
+            <img src="{%static 'images/sqdot.png' %}" style="z-index: -1;">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 1000px; z-index: 1;">
+            <img src="{%static 'images/square.png' %}" style="z-index: -1;">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 355px; top: 1160px; z-index: 1;">
+            <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1200px; top: 1400px; z-index: 1;">
+            <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 650px; top: 1400px; z-index: 1;">
+            <img src="{%static 'images/circle.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="row aboutsec">
+           
+            <div class="col-md-6">
+                <div class="row ">
+
+                <div class="col-12 col-md-5  ">
+                    <ul class="image-list"><li style="padding-top: 70px;">
+                                  <img src="{%static 'images/abt1.jpg' %}" style="border-radius: 0 80px 80px;border-style: none;
+                                 
+                                  width: 100%;
+                                  vertical-align: middle;padding-bottom: 20px;" data-aos="flip-up" data-aos-duration="900"></li>
+                               <li class="hide" style="padding-left: 50px;"> <img src="{%static 'images/abt3.jpg' %}" style="border-radius:50px 50px 50px 0;border-style: none; 
+                                  height: auto;
+                                  max-width: 100%;
+                                  vertical-align: middle;" data-aos="flip-up" data-aos-duration="900" ></li>
+                                  </ul>
+                                  </div>
+
+                                  <div class="col-md-7">
+                                    <ul class="image-list hide" ><li style="padding-bottom: 50px;">
+                                    <img src="{%static 'images/abt2.jpg' %}" style="border-radius:60px 0 60px 60px;border-style: none;
+                                    height:300px;
+                                    max-width: 100%;
+                                    vertical-align: middle;" data-aos="flip-up" data-aos-duration="900">
+                                    </li>
+                                 <li> <img src="{%static 'images/dentist.jpg' %}" style="border-radius: 30px 30px 0 30px;border-style: none;
+                                    height: auto;
+                                    max-width: 120%;
+                                    vertical-align: middle;" data-aos="flip-up" data-aos-duration="900">
+                                    </li>                                </ul>
+                                    </div>                
+            </div></div>
+            <div class="col-md-6 pt-4">
+                <p class="aboutus" style=" background-image: url('static/images/orangeline.png');" data-aos="flip-left" data-aos-duration="800">About Us</p>
+                <p class="place" data-aos="fade-right" data-aos-duration="800">The Great Place Of Medical Hospital Center</p>
+                <p style="color:rgb(68, 67, 67);line-height: 24px;" data-aos="zoom-in-up" data-aos-duration="800">We provide the special tips and advice’s of heath care treatment and high level of best technology involve in the our website.</p>
+               <div class="row" style="padding-top: 40px;">
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(226, 207, 243); padding: 5px; ">
+                            <img src="{% static 'images/graph.png' %}" data-aos="fade-right">
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;">
+                           Analysis
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgba(86, 200, 220, 0.5); padding: 5px; ">
+                            <img src="{% static 'images/iconsmedicine.png' %}"  data-aos="fade-right" >
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 10px; display: flex; align-items: center; font-weight: bold; font-size: 14px;" >
+                           Drugs & Supplements
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row" style="padding-top: 20px;">
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(238, 207, 207); padding: 5px; ">
+                            <img src="{% static 'images/testtube.png' %}"  data-aos="fade-right">
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;">
+                           Tests
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(215, 247, 227); padding: 5px; ">
+                            <img src="{% static 'images/calculator.png' %}"  data-aos="fade-right">
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;">
+                           Calculators
+                        </div>
+                        
+                    </div>
+                </div>  
+            </div>
+<br>
+<a href="{%url 'about' %}">     <button class="custom-btn custom-btn5 btn-2 ">Read More</button></a>
+            
+            </div>
+        </div>
+    </div>
+</section> 
+
+ <!-- DEpartments -->
+ <section class="departmentsec" style=" background-image: url('static/images/aboutbg.jpg');" >
+    <div class="container">
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 1900px; z-index: 1;">
+            <img src="{%static 'images/icon.png' %}" style="z-index: -1;">
+        </div>
+        
+        <div class="hero_icon" style="position: absolute; left: 650px; top: 1999px; z-index: 1;">
+            <img src="{%static 'images/plus.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1200px; top: 2200px; z-index: 1;">
+            <img src="{%static 'images/rhombus.png' %}" style="z-index: -1;" >
+        </div>
+       
+        <div style="display: flex;justify-content: center;margin-bottom: 0px;" class="pt-5 ">
+            <p  class="valueabt" style="margin-bottom: 0px;background-image: url('static/images/orangeline.png');" >Departments</p>
+            </div>
+            <p class="depchange" data-aos="flip-left" data-aos-duration="800">Our Departments</p>
+    
+    
+    
+    <p class="text-center" style="color:rgb(102, 104, 146) ;margin-top: -5px;padding-bottom: 20px;"> We utilize the latest medical technologies and evidence-based practices to ensure the highest standards of care.</p>
+    <div class="row ps-3">
+        
+    <div class="col-md-2 " style="cursor: pointer;overflow: hidden;" data-aos="flip-up" data-aos-duration="1000">
+        <div  class="same crutches"  onmouseover="showSection('crut','main1')" onmouseout="img()" >
+           
+    <img src="{%static 'images/crutches2.png' %}" style="padding:20px;" width="90px" id="crut" >
+    
+    
+    <p id="para"  >Crutches</p>
+    </div>
+    </div>
+    <div class="col-md-2 " style="cursor: pointer;"  data-aos="flip-up" data-aos-duration="1000">
+        <div class="same x-ray"  onmouseover="showSection('x-ray','main2')" onmouseout="img1()" >
+           
+    <img src="{%static 'images/x-ray2.png' %}" style="padding:20px;" width="90px" id="x-ray" >
+    <p id="para1">X-ray</p>
+    </div>
+    </div>
+    <div class="col-md-2 " style="cursor: pointer;" data-aos="flip-up" data-aos-duration="1000">
+        <div class="same pul" onmouseover="showSection('pulmonary','main3')" onmouseout="img2()" >
+           
+    <img src="{%static 'images/pul.png' %}" style="padding:20px;" width="90px" id="pulmonary">
+    <p id="para2"> Pulmonary</p>
+    </div>
+    </div>
+    <div class="col-md-2 " style="cursor: pointer;" data-aos="flip-up" data-aos-duration="1000">
+        <div class="same cardio" onmouseover="showSection('cardio','main4')" onmouseout="img3()" >
+           
+    <img src="{%static 'images/medicalheart2.png' %}" style="padding:20px;" width="90px" id="cardio">
+    <p id="para3">Cardiology</p>
+    </div>
+    </div>
+    <div class="col-md-2 " style="cursor: pointer;" data-aos="flip-up" data-aos-duration="1000">
+        <div class=" same dental" onmouseover="showSection('dental','main5')" onmouseout="img4()" >
+           
+    <img src="{%static 'images/teeth.png' %}" style="padding:15px;" width="90px" id="dental">
+    <p id="para4">Dental care</p>
+    </div>
+    </div>
+    <div class="col-md-2 " style="cursor: pointer;" data-aos="flip-up" data-aos-duration="1000">
+        <div class="same brain" onmouseover="showSection('brain','main6')" onmouseout="img5()" >
+           
+    <img src="{%static 'images/brain.png' %}" style="padding:15px;" width="90px" id="brain" >
+    <p id="para5">Neurology</p>
+    </div>
+    </div>
+    
+    </div>
+    
+    <div class="main1 hide" >
+        <div class="row hide">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/crutchesmain.png' %}" >
+            </div>
+            <div class="col-md-6  hide" style="padding-top: 100px;">
+                <p class="wel" data-aos="zoom-in-up">Welcome to our <span style="color:#0CB8B6">Crutches</span></p>
+                <p class="regain" data-aos="zoom-in-up">Our Crutches Department is committed to helping you regain your mobility safely</p>
+                <p class="mainpara" data-aos="zoom-in-up">Welcome to the Crutches Department, where we provide a comprehensive range of crutches designed to support your mobility and enhance your comfort. Whether recovering from an injury, surgery, or requiring long-term assistance, our selection of crutches caters to various needs.</p>
+                <br>
+               <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+        
+    </div>
+    <div class="main2" style="display:none;">
+        <div class="row">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/xraymain.png' %}">
+            </div>
+            <div class="col-md-6 hide " style="padding-top: 100px;">
+                <p class="wel">Welcome to our <span style="color:#E6492D;">X-ray</span></p>
+                <p class="regain">The X-Ray Department is committed to providing high-quality imaging services to support your healthcare journey.</p>
+                <p class="mainpara">Welcome to the X-Ray Department, where we utilize state-of-the-art imaging technology to assist in diagnosing and treating various medical conditions. Our team of experienced radiologists and technicians is dedicated to providing accurate and timely results in a comfortable and safe environment.</p>
+                <br>
+                <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+    </div>
+    <div class="main3" style="display:none;">
+        <div class="row">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/pulmonarymain.png' %}">
+            </div>
+            <div class="col-md-6 hide " style="padding-top: 100px;">
+                <p class="wel">Welcome to our <span style="color:#37AF47">Pulmonary</span></p>
+                <p class="regain">The Pulmonary Department is committed to providing comprehensive care and support for all your respiratory health needs.</p>
+                <p class="mainpara">Welcome to the Pulmonary Department, where we specialize in diagnosing, treating, and managing diseases and disorders affecting the respiratory system. Our team of experienced pulmonologists and healthcare professionals is dedicated to providing comprehensive care and personalized treatment plans to improve your lung health and quality of life.</p>
+                <br>
+                <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+    </div>
+    <div class="main4" style="display:none;">
+        <div class="row">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/cardiologymain.png' %}">
+            </div>
+            <div class="col-md-6 hide " style="padding-top: 100px;">
+                <p class="wel">Welcome to our <span style="color:#1665D8">Cardiology</span></p>
+                <p class="regain">The Cardiology Department is dedicated to providing comprehensive, patient-centered care to help you achieve and maintain optimal heart health.</p>
+                <p class="mainpara">Welcome to the Cardiology Department, where we specialize in the diagnosis, treatment, and prevention of heart and vascular diseases. Our team of expert cardiologists, nurses, and healthcare professionals is dedicated to providing comprehensive cardiac care using the latest technology and treatment approaches to ensure the best outcomes for our patients.</p>
+                <br>
+                <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+    </div>
+    <div class="main5" style="display:none;">
+        <div class="row">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/dentalmain.png' %}">
+            </div>
+            <div class="col-md-6 hide " style="padding-top: 100px;">
+                <p class="wel">Welcome to our <span style="color:#F6AB2F">Dental</span></p>
+                <p class="regain">The Dental Department is dedicated to helping you achieve and maintain a healthy, beautiful smile. </p>
+                <p class="mainpara">Welcome to the Dental Department, where we are committed to providing exceptional oral healthcare for patients of all ages. Our team of skilled dentists, hygienists, and support staff utilize the latest technology and techniques to ensure that you receive the highest quality of care in a comfortable and friendly environment.</p>
+                <br>
+                <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+    </div>
+    <div class="main6" style="display:none;">
+        <div class="row">
+            <div class="col-md-6 pt-5 hide">
+                <img src="{%static 'images/neurologymain.png' %}">
+            </div>
+            <div class="col-md-6 hide " style="padding-top: 100px;">
+                <p class="wel">Welcome to our <span style="color:#76777a">Neurology</span></p>
+                <p class="regain">The Neurology Department is committed to providing comprehensive care and support for all your neurological health needs.</p>
+                <p class="mainpara">Welcome to the Neurology Department, where we specialize in diagnosing and treating disorders of the nervous system. Our team of experienced neurologists, neurosurgeons, and healthcare professionals is dedicated to providing comprehensive care using the latest advancements in medical science to improve your neurological health and quality of life.</p>
+                <br>
+                <a href="{%url 'signup'%}"><button class="custom-btn2 btn-4 ">Explore</button></a> 
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    </div>
+      </section> 
+
+<!-- Our Values -->
+ <section class="valuesec" >
+    <div class="container">
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 2490px; z-index: 1;">
+            <img src="{%static 'images/zigzag.png' %}" style="z-index: -1;" width="100px">
+        </div>
+        <div class="hero_icon" style="position: absolute; right: 200px; top: 2430px; z-index: 1;">
+            <img src="{%static 'images/sqdot.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 650px; top: 2899px; z-index: 1;">
+            <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1200px; top: 3200px; z-index: 1;">
+            <img src="{%static 'images/rhombus.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 200px; top: 3000px; z-index: 1;">
+            <img src="{%static 'images/pulmonary.png' %}" style="z-index: -1;" >
+        </div>
+
+
+
+    <div style="display: flex;justify-content: center;" class="pt-5">
+    
+    <p  class="valueabt" style="margin-bottom: 0px;background-image: url('static/images/orangeline.png');">Values</p>
+    </div>
+    <p style="text-align: center;color:#1F2278;font-size: 55px;font-weight: 1000;" data-aos="flip-left" data-aos-duration="800">Our Values</p>
+<div class="row " >
+    <div class="col-md-4 pt-5 ab " data-aos="zoom-in-down" data-aos-duration="800">
+        <div style=" box-shadow:0 4px 21px 1px rgba(48, 123, 196, .1);border-radius: 40px; background:#FAF9FF;transition: box-shadow 0.3s ease;;width:92%;height: 330px;padding: 40px;">
+            <div  style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div  style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/compassion.svg' %}"  ></div>
+              
+        <p class="comp" style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Compassion</p>
+        </div>
+        <p>We understand that seeking medical care can be a stressful and emotional experience, and we strive to create a welcoming and supportive environment that puts our patients at ease and every one.</p>
+        </div>
+    </div>
+    <!-- <div class="col-md-4 ab cd2" >
+        <div  style=" box-shadow:0 4px 21px 1px rgba(48, 123, 196, .1);border-radius: 40px; background:#FAF9FF;transition: box-shadow 0.3s ease;height: 330px;;width:92%;padding: 40px;">
+            <div   style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/excellence.svg' %}"   ></div>
+                
+        <p class="comp" style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Excellence</p>
+        </div>
+        <p>We are committed to providing excellent medical care and services to our patients. We believe in continuously improving our skills, knowledge, and resources to ensure that we deliver the highest quality care possible.</p>
+        </div>
+    </div> -->
+    <div class="col-md-4 ab cd2" data-aos="zoom-in-down" data-aos-duration="800">
+        <div style=" box-shadow:0 4px 21px 1px rgba(48, 123, 196, .1);border-radius: 40px; background:#FAF9FF;transition: box-shadow 0.3s ease;;width:92%;height: 330px;padding: 40px;">
+            <div  style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div  style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/excellence.svg' %}"   ></div>
+              
+        <p class="comp" style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Excellence</p>
+        </div>
+        <p>We are committed to providing excellent medical care and services to our patients. We believe in continuously improving our skills,knowledge,resources to ensure that we deliver highest quality care possible.</p>
+        </div>
+    </div>
+    <div class="col-md-4 pt-5 ab" data-aos="zoom-in-down" data-aos-duration="800">
+        <div  style=" box-shadow: 0 4px 21px 1px rgba(48, 123, 196, .1);border-radius: 40px; background:#FAF9FF;transition: box-shadow 0.3s ease;height: 330px;;width:92%;padding: 40px;">
+            <div  style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/integrity.svg' %}"   ></div>
+                
+        <p class="comp" style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Integrity</p>
+        </div>
+        <p>We believe in practicing medicine with integrity and honesty. We are transparent in our communication and decision-making processes, and we always put our patient's interests first & provide best solution.</p>
+           
+    </div>
+
+    </div>
+    
+</div>
+
+
+
+<div class="row justify-content-center pt-5" data-aos="zoom-in-down" data-aos-duration="800">
+    <div class="col-md-4  ab hide" >
+        <div class="boxshadowvalue" style=" box-shadow: 0 4px 21px 1px rgba(48, 123, 196, .1);background:#FAF9FF;border-radius: 40px; transition: box-shadow 0.3s ease;height: 330px;;width:92%;padding: 40px;">
+            <div style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/respect.svg' %}"   ></div>
+               
+        <p style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Respect</p>
+        </div>
+        <p>We treat all individuals with respect and dignity, regardless of their background, beliefs, or circumstances. We believe that every person deserves to be treated with compassion and kindness.</p>
+        </div>
+    </div>
+    <div class="col-md-4 ab hide" data-aos="zoom-in-down" data-aos-duration="800">
+        <div style=" box-shadow:0 4px 21px 1px rgba(48, 123, 196, .1);background:#FAF9FF;border-radius: 40px; transition: box-shadow 0.3s ease;height: 330px;;width:92%;padding: 40px;">
+            <div style="display: flex;justify-content: center;padding-bottom: 10px;">
+                <div style="background-color:#307bc4;border-radius: 50%;height:50px;width:50px;display: flex;align-items: center;justify-content: center;">
+                    <img src="{%static 'images/teamwork.svg' %}"   ></div>
+               
+        <p style="font-size: 30px;font-weight: 600;color: #1F2278;" class="ps-2">Teamwork</p>
+        </div>
+        <p>We believe in working collaboratively with our team membersvand other healthcare professionals to provide comprehensive and effective care to our patients.</p>
+        </div>
+    </div></div>
+
+
+
+
+</div>
+
+ </section> 
+
+<!-- Reviews -->
+ <section class="reviewsec" style="background-image: url('static/images/bg2.jpg');" >
+    <div class="container">
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 3440px; z-index: 1;">
+            <img src="{%static 'images/bluedot.png' %}" style="z-index: -1;">
+        </div>
+        <div class="hero_icon" style="position: absolute; right: 200px; top: 3630px; z-index: 1;">
+            <img src="{%static 'images/circle.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 650px; top: 3790px; z-index: 1;">
+            <img src="{%static 'images/icon.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1400px; top: 3900px; z-index: 1;">
+            <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+        </div>
+        
+
+        <div style="display: flex; justify-content: center;" class=" valrev">
+            <p class="valuereview" style="margin-bottom: 0; background-image: url('static/images/orangeline.png');">Reviews</p>
+        </div>
+        <p class="what" data-aos="flip-left" data-aos-duration="800">What People say?</p>
+
+        <div class="row " style="overflow: hidden;">
+            <div class="col-md-6 review-column"  style="overflow: hidden;">
+                <div class="row avatar avt" onclick="showreview('reviewmain1')" data-aos="flip-left" data-aos-duration="900" style="overflow: hidden;">
+            
+                    <div class="col-md-2 ">
+                        <img src="{%static 'images/avatar_1.webp' %}" width="80" alt="Avatar 1" >
+                    </div>
+                    <div class="col-md-4 mainpaul">
+                        <p class="paul pt-3 m-0">PAULO HUBERT</p>
+                        <p class="loc">New York, USA</p>
+                    </div>
+                    
+                </div>
+
+                <div class="row avatar avt1"  onclick="showreview('reviewmain2')" data-aos="flip-left" data-aos-duration="900" style="overflow: hidden;">
+                    <div class="col-md-3">
+                        <img src="{%static 'images/avatar_2.webp' %}" width="80" alt="Avatar 2">
+                    </div>
+                    <div class="col-md-6 mainpaul">
+                        <p class="paul pt-3 m-0">LAURENCE VENDATTA</p>
+                        <p class="loc">California, USA</p>
+                    </div>
+                </div>
+
+                <div class="row avatar avt2" onclick="showreview('reviewmain3')" data-aos="flip-left" data-aos-duration="900" style="overflow: hidden;">
+                    <div class="col-md-2">
+                        <img src="{%static 'images/avatar_3.webp' %}" width="80" alt="Avatar 3">
+                    </div>
+                    <div class="col-md-6 mainpaul">
+                        <p class="paul pt-3 m-0">CASSANDRA RAUL</p>
+                        <p class="loc">Florida</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 diffreview">
+                <div class="reviewmain reviewmain1">
+                    <img src="{%static 'images/quote.png' %}" style="padding-left: 50px;" alt="Quote">
+                    <p class="chngereview mb-0" data-aos="flip-left" data-aos-duration="900">I recently had to bring my child to MedExpert for a minor injury, and I was so impressed with the care he received. The pediatrician was great with him and made him feel at ease, and the entire staff was kind and attentive.</p>
+                    <div class="stars">
+                        <img src="{%static 'images/rating.png' %}"   alt="Rating 1">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 2">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 3">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 4">
+                        <img src="{%static 'images/starhalf.png' %}" width="20" alt="Half Star">
+                    </div>
+                </div>
+                <div class="reviewmain reviewmain2" style="display: none;">
+                    <img src="{%static 'images/orangequote.png' %}" style="padding-left: 50px;" alt="Quote">
+                    <p class="chngereview mb-0">The pediatrician was great with him and made him feel at ease, and the entire staff was kind and attentive. I recently had to bring my child to ProHealth for a minor injury, and I was so impressed with the care he received.</p>
+                    <div class="stars">
+                        <img src="{%static 'images/orngestar.png' %}"  alt="Rating 1">
+                        <img src="{%static 'images/orngestar.png' %}" width="20" alt="Rating 2">
+                        <img src="{%static 'images/orngestar.png' %}" width="20" alt="Rating 3">
+                        <img src="{%static 'images/orngestar.png' %}" width="20" alt="Rating 4">
+                        <img src="{%static 'images/orngestar.png' %}" width="20" alt="Rating 5">
+                    </div>
+                </div>
+                <div class="reviewmain reviewmain3" style="display: none;">
+                    <img src="{%static 'images/quote.png' %}" style="padding-left: 50px;" alt="Quote">
+                    <p class="chngereview mb-0">I was so impressed with the care he received. The pediatrician was great with him and made him feel at ease, and the entire staff was kind and attentive I recently had to bring my child to ProHealth for a minor injury, and .</p>
+                    <div class="stars">
+                        <img src="{%static 'images/rating.png' %}"  alt="Rating 1">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 2">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 3">
+                        <img src="{%static 'images/rating.png' %}" width="20" alt="Rating 4">
+                        <img src="{%static 'images/starhalf.png' %}" width="20" alt="Half Star">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<!-- Contact us -->
+<section class="contactSec" style="background-image: url('static/images/aboutbg.jpg');">
+  
+    <div class="container container1">
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 4290px; z-index: 1;">
+            <img src="{%static 'images/zigzag.png' %}" style="z-index: -1;" width="100px">
+        </div>
+        <div class="hero_icon" style="position: absolute; right: 100px; top: 4530px; z-index: 1;">
+            <img src="{%static 'images/circleline.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 850px; top: 4799px; z-index: 1;">
+            <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1400px; top: 4200px; z-index: 1;">
+            <img src="{%static 'images/plus.png' %}" style="z-index: -1;" width="70px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 100px; top: 4800px; z-index: 1;">
+            <img src="{%static 'images/pulmonary.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 720px; top: 4270px; z-index: 1;">
+            <img src="{%static 'images/message.png' %}" style="z-index: -1;" >
+        </div>
+      <div class="contactContainer" data-aos="zoom-in" data-aos-duration="1200">
+        <div class="leftContact">
+            <div style="display: flex; justify-content: center;" class=" valrev">
+                <p class="valuereview" style="margin-bottom: 0; background-image: url('static/images/orangeline.png');">Contact Us</p>
+            </div> 
+          <p class="contadHeading" data-aos="flip-left" data-aos-duration="800">Get In Touch</p>
+          
+          <form class="form form1">
+            
+
+            <input
+              placeholder="Enter your name"
+              title="Enter your name"
+              name="name"
+              type="text"
+              class="input_field" required
+            />
+
+            <input
+              placeholder="Enter your e-mail"
+              title="Enter your e-mail"
+              name="email"
+              type="email"
+              class="input_field" required
+            />
+
+            <textarea name="textarea" rows="5" cols="40" class="txtarea" placeholder="Message" required></textarea>
+            
+            <button class="custom-btn btn-2 ">Submit</button> 
+          </form>
+        </div>
+       
+        <div class="rightContact" style="display: flex; justify-content: center;" data-aos="flip-up" data-aos-duration="2300">
+          <img
+            src="{%static 'images/contactmain.png' %}"
+            alt=""
+            class="contactImg hero_icon" data-aos="flip-up" data-aos-duration="1700"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Faq section -->
+<section class="faqsec" style=" background-image: url('static/images/bg2.jpg');">
+    <div class="container">
+        <div style="display: flex; justify-content: center;" class=" valrev">
+            <p class="valuereview" style="margin-bottom: 0;background-image: url('static/images/orangeline.png');">Faq's</p>
+        </div>
+        <p class="what" data-aos="flip-left" data-aos-duration="800" >Frequently Asked Questions</p><br>
+      <div class="accordion" id="accordionExample"  style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <div class="accordion-item1" data-aos="fade-right" data-aos-duration="1000" >
+          <h2 class="accordion-header">
+            <button class="accordion-button accordion-button1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+               <strong> How does the expert system provide healthcare recommendations?</strong>
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                The expert system uses [Artificial Intelligence, machine learning algorithms, a database of medical knowledge] to analyze your symptoms and health information, providing recommendations based on current medical guidelines and practices..
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-right" data-aos-duration="1000">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <strong> What types of conditions can the system diagnose or give advice on?</strong>
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                The system can provide information and advice on a range of conditions, including [Common illnesses, chronic conditions, preventive health tips]. However, it is not a substitute for professional medical diagnosis and treatment.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-right" data-aos-duration="1000">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <strong> Is my personal health data safe and secure with the expert system?</strong>
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Yes, your personal health data is protected with industry-standard security measures, including [Encryption, secure access controls, compliance with data protection regulations]. We prioritize your privacy and data security.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-right" data-aos-duration="1000">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <strong> How accurate are the recommendations provided by the system?</strong>
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                The recommendations are based on [Extensive medical data, evidence-based guidelines]. While the system provides valuable insights, it is always best to consult with a healthcare provider for a thorough assessment and personalized care.
+              </div>
+            </div>
+        </div>
+
+        <div class="accordion-item5" data-aos="fade-right" data-aos-duration="1000">
+            <h2 class="accordion-header" id="headingFive">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                <strong> How can I find information about specific medications?</strong>
+              </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                You can find information about specific medications by [Searching in our database, consulting the medication guide provided by your healthcare provider, checking reliable medical sources]. Always follow your healthcare provider's advice regarding medication use.
+              </div>
+            </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+<!--Blogs section  -->
+<!-- <section class="mainblog" style=" background-image: url('static/images/line-bg2.png');"> 
+    <div style="display: flex; justify-content: center;" class=" valrev">
+        <p class="valuereview" style="margin-bottom: 0;background-image: url('static/images/orangeline.png');">Blogs</p>
+    </div>
+    <p class="what" >Latest Updates</p><br>
+    <div class="blogSec">
+    <div class="blogContainer">
+        
+
+     
+      <div class="blog1">
+        <img src="{%static 'images/blogimg3.png' %}" style="object-fit: cover" alt="" />
+        <div class="blogData">
+         
+          <div class="date-icon">
+         
+            <p style="color: gray; font-size: 14px">12 March 2024</p>
+        
+            <div style="display: flex; gap: 5px">
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/linkedin2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/facebook2.png' %}"
+                  width="27px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/instagram2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+         
+          <div class="blogContent">
+            <div class="blogText">
+              <p class="imp">The Importance of Mental Health:</p>
+              <p class="under">Understanding and Managing Anxiety Disorders</p>
+            </div>
+
+            <a
+              href=""
+              style="
+                text-decoration: none;
+                color: blue;
+                margin-top: 10px;
+                font-size: 14px;
+              "
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+     
+      <div class="blog1">
+        <img src="{%static 'images/blogimg2.png' %}" style="object-fit: cover" alt="" />
+        <div class="blogData">
+         
+          <div class="date-icon">
+           
+            <p style="color: gray; font-size: 14px">12 March 2024</p>
+           
+            <div style="display: flex; gap: 5px">
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/linkedin2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/facebook2.png' %}"
+                  width="27px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/instagram2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div class="blogContent">
+            <div class="blogText">
+              <p class="imp">The Importance of Mental Health:</p>
+              <p class="under">Understanding and Managing Anxiety Disorders</p>
+            </div>
+
+            <a
+              href=""
+              style="
+                text-decoration: none;
+                color: blue;
+                margin-top: 10px;
+                font-size: 14px;
+              "
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+      
+      <div class="blog1">
+        <img src="{%static 'images/blogimg4.png' %}" style="object-fit: cover" alt="" />
+        <div class="blogData">
+         
+          <div class="date-icon">
+        
+            <p style="color: gray; font-size: 14px">12 March 2024</p>
+         
+            <div style="display: flex; gap: 5px">
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/linkedin2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/facebook2.png' %}"
+                  width="27px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+              <div class="blogicon">
+                <img
+                  src="{%static 'images/instagram2.png' %}"
+                  width="30px"
+                  style="object-fit: cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+         
+          <div class="blogContent">
+            <div class="blogText">
+              <p class="imp">The Importance of Mental Health:</p>
+            
+              <p class="under">Understanding and Managing Anxiety Disorders</p>
+            </div>
+
+            <a
+              href=""
+              style="
+                text-decoration: none;
+                color: blue;
+                margin-top: 10px;
+                font-size: 14px;
+              "
+              >Learn More</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  </section>  -->
+  <section class="mainblog" style="background-image: url('static/images/line-bg2.png');">
+    <div style="display: flex; justify-content: center;" class="valrev">
+        <p class="valuereview" style="margin-bottom: 0;background-image: url('static/images/orangeline.png');">Blogs</p>
+    </div>
+    <p class="what" data-aos="flip-left" data-aos-duration="800">Latest Updates</p><br>
+    <div class="blogSec">
+        <div class="blogContainer" data-aos="zoom-in-up" data-aos-duration="1500">
+            {% for blog in blogs %}
+            <div class="blog1">
+                {% if blog.image %}
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" height="250px;">
+            {% else %}
+                <img src="{% static 'path/to/default/image.jpg' %}" alt="Default Image">
+            {% endif %}
+                <div class="blogData">
+                    <div class="date-icon">
+                        <span style="color: gray;display: flex;">{{ blog.wdate|safe }} || {{ blog.bywho|striptags }} </span>
+                        <div style="display: flex; gap: 5px">
+                            
+                        </div>
+                    </div>
+                    <div class="blogContent">
+                        <div class="blogText">
+                            <p class="imp">{{ blog.title|striptags|truncatewords:4 }}</p>
+                            <p class="under">{{ blog.desc|truncatewords:10|striptags }}</p>
+                        </div>
+                        <a href="{% url 'blog_detail' blog.id %}" style="text-decoration: none; color: blue; margin-top: 10px; font-size: 14px;">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+  <!-- Icons section -->
+<section class="iconsec">
+    <div class="container">
+        
+        <div class="row iconmin">
+            <div class="col-md-3">
+               <img src="{%static 'images/brand_1.png' %}" width="70%" class="trans" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/medicon2.jpg' %}"  width="70%" class="trans iconrev" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/medicon.jpg' %}"  width="90%" class="trans trans2" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/brand_2.png' %}"  width="70%" class="trans trans3" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+        </div>
+
+        <div class="row pt-5 iconrev">
+            <div class="col-md-3">
+               <img src="{%static 'images/medicon1.jpg' %}"  width="90%" class="trans" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/brand_2.png' %}"  width="70%" class="trans" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/medicon3.jpg' %}"  width="70%" class="trans" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+            <div class="col-md-3">
+                <img src="{%static 'images/brand_3.png' %}"  width="70%" class="trans" data-aos="zoom-in-right" data-aos-duration="1000">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+</div> 
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+<script src="{%static 'index.js' %}"></script>
+
+
+<script>
+  function img(){
+    document.getElementById("crut").src = "{%static 'images/crutches2.png' %}";
+    document.getElementById("para") .style.color="black";
+}
+
+
+function img1(){
+    document.getElementById("x-ray").src = "{%static 'images/x-ray2.png' %}";
+    document.getElementById("para1") .style.color="black";
+}
+
+
+function img2(){
+    document.getElementById("pulmonary").src = "{%static 'images/pul.png' %}";
+    document.getElementById("para2") .style.color="black";
+}
+
+
+function img3(){
+    document.getElementById("cardio").src = "{%static 'images/medicalheart2.png' %}";
+    document.getElementById("para3") .style.color="black";
+}
+
+
+function img4(){
+    document.getElementById("dental").src = "{%static 'images/teeth.png' %}";
+    document.getElementById("para4") .style.color="black";
+}
+
+
+function img5(){
+    document.getElementById("brain").src = "{%static 'images/brain.png' %}";
+    document.getElementById("para5") .style.color="black";
+}
+
+
+
+// To show diff departments
+function showSection(id,sectionClass) {
+    
+    if(id=='crut'){
+        document.getElementById("crut").src = "{%static 'images/crutches3.png' %}";
+        document.getElementById("para") .style.color="white";
+    }
+    if(id=='x-ray'){
+          document.getElementById("x-ray").src = "{%static 'images/x-ray.png' %}";
+          document.getElementById("para1") .style.color="white";
+    }
+    if(id=='pulmonary'){
+        document.getElementById("pulmonary").src = "{%static 'images/pul2.png' %}";
+        document.getElementById("para2") .style.color="white";
+    
+    }
+    if(id=='cardio'){
+       document.getElementById("cardio").src = "{%static 'images/medicalheart.png' %}";
+    document.getElementById("para3") .style.color="white";
+    }
+    if(id=='dental'){
+        document.getElementById("dental").src = "{%static 'images/teeth2.png' %}";
+        document.getElementById("para4") .style.color="white";
+    }    
+    if(id=='brain'){
+        document.getElementById("brain").src = "{%static 'images/brain2.png' %}";
+        document.getElementById("para5") .style.color="white";
+    }
+    
+    document.querySelector('.main1').style.display = 'none';
+    document.querySelector('.main2').style.display = 'none';
+    document.querySelector('.main3').style.display = 'none';
+    document.querySelector('.main4').style.display = 'none';
+    document.querySelector('.main5').style.display = 'none';
+    document.querySelector('.main6').style.display = 'none';
+    
+    // Show the selected section if it exists
+    if (sectionClass) {
+        document.querySelector(`.${sectionClass}`).style.display = 'block';
+    }
+  }
+</script>
+
+<script>
+    AOS.init();
+    
+   
+ 
+   
+ </script>  
+</body>
+</html>
+
+{% endblock %}

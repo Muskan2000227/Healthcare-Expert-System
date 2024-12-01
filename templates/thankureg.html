@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+   <style>
+    * {
+    
+    overflow-x: hidden;
+    font-family: Montserrat, sans-serif;
+    scroll-behavior: smooth;
+}
+    .dv{
+    display:flex; 
+    flex-direction: column;
+    justify-content:center;
+    background-image: url('/static/images/bg2.jpg'); 
+    background-size: cover;
+    align-items: center;
+    width:100%;
+    height:97vh;
+    
+
+   }
+   .imgrobo{
+    width:300px;
+    margin-bottom: -70px;
+   }
+   .thank{
+    font-size: 40px;
+    margin-bottom:3px;
+   }
+   .reach{
+    text-align: center;
+    width:320px;
+    font-size: 16px;
+    color:grey
+   }
+
+   
+.button {
+ margin-top: 20px;
+margin-bottom: 10px;
+  width: 180px;
+  height: 40px;
+  background-image: linear-gradient(rgb(214, 202, 254), rgb(158, 129, 254));
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+.lets{
+    color:grey;
+    font-size:14px;
+    margin-top: 30px;
+}
+
+.iconfoot{
+    display: flex;
+    flex-direction:row;
+    gap:10px;
+}
+
+.img9:hover {
+    transform:scale(1.2);
+  transition:all ease 200ms;
+
+}
+
+.img91:hover {
+    transform:scale(1.2);
+  transition:all ease 200ms;
+
+}
+
+.img92:hover {
+    transform:scale(1.2);
+  transition:all ease 200ms;
+
+}
+
+.img93:hover {
+transform:scale(1.2);
+  transition:all ease 200ms;
+
+}
+
+.img94:hover {
+    transform:scale(1.2);
+  transition:all ease 200ms;
+
+}
+
+.btns{
+  display: flex;
+  gap:150px;
+}
+
+@media (max-width: 600px) {
+
+  .dv{
+  height: 97vh;
+ 
+  display:flex; 
+    flex-direction: column;
+    /* justify-content:center; */
+    background-image: url('/static/images/bg2.jpg'); 
+    background-size: cover;
+    /* align-items: center; */
+    width:100%;
+   
+  }
+   .btns{
+    display: flex;
+    flex-direction:column;
+    gap:10px;
+    /* height:200px; */
+    margin-bottom: 10px;
+  
+   } 
+   .lets{
+    margin-top: 0px;
+   }
+
+   .ab{
+    display: none;
+   }
+  }
+    </style>
+   
+</head>
+<body>
+    
+<div class="dv" >
+    <img src="{%static 'images/robotimg.png' %}" class="imgrobo"  >
+    <p class="thank">Thank you for Registering !</p>
+    <p class="reach">Your email has been registered successfully. You can now login.</p>
+
+
+ <div class="btns" >  
+<a href="{%url 'index' %}" style="text-decoration: none;"><button class="button ab" >
+ Back to Home
+ <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+  </svg>
+  
+</button></a>
+
+<a href="{%url 'login' %}" style="text-decoration: none;"><button class="button" >
+  Login 
+  <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+   </svg>
+   
+ </button></a>
+</div> 
+
+
+<p class="lets">Let's connect</p>
+<div class="iconfoot" >
+
+<div>    
+    <a href="https://www.facebook.com/profile.php?id=100075785425879" target="_blank"><img src="{%static 'images/facebook2.png' %}" width="30px" height="30px" class="img9"></a>  
+       </div> 
+
+<div>
+<a href="https://www.instagram.com/muskan_saini_27/?next=%2F" target="_blank"><img src="{%static 'images/instagram2.png' %}" width="30px" height="30px" class="img91"></a>  
+   </div> 
+
+<div>
+       <a href="https://github.com/muskansaini27" target="_blank"><img src="{%static 'images/twitter2.png' %}" width="30px" height="30px" class="img92"  >  </a>
+</div>
+
+<div>
+<a href="https://www.linkedin.com/in/muskan--saini/" target="_blank"> <img src="{%static 'images/linkedin2.png' %}" width="30px" height="30px"  class="img93" ></a>  
+</div>
+
+<div>
+<a href="mailto:sainimuskan731@gmail.com" target="_blank"> <img src="{%static 'images/mail2.png' %}" width="30px" height="30px" class="img94"  >  </a>   
+</div>
+
+</div>
+
+
+
+</div>
+    
+</body>
+</html>

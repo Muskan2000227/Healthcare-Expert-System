@@ -1,0 +1,157 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   
+<link rel="stylesheet" href="{%static 'css/login.css' %}">
+<link rel="stylesheet" href="{%static 'css/base.css' %}">
+
+</head>
+<body>
+
+
+
+
+    <!-- Signup page -->
+   <section class="loginmain" style="background-image: url('static/images/line-bg2.png');">      
+<div class="logincen" style="display: flex;justify-content: center;align-items: center;margin-top:-30px">
+        <!-- Login form start -->
+        <div class="container cont">
+            <div class="heading">Sign Up</div>
+            {% if err %}
+            <div class="alert alert-danger" role="alert">
+             {{err}}
+            </div>
+                       
+            {% endif %}
+
+           
+            <div class="alert alert-success" role="alert">
+              {{msg}}
+             </div>
+
+           
+            <form class="forml" action="{% url 'check_otp' %}" method="POST">
+             {% csrf_token %}
+              <!-- Username field -->
+              <div class="group" style="margin-bottom: 20px;">
+                <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+                    <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 7.5c0 2.071-1.679 3.75-3.75 3.75s-3.75-1.679-3.75-3.75S9.929 3.75 12 3.75 15.75 5.429 15.75 7.5zM4.5 19.5c0-3.038 4.962-5.25 7.5-5.25s7.5 2.212 7.5 5.25v.75h-15v-.75z"
+                  />
+              </svg>
+              <input class="input1" type="text" placeholder="Username" name="username" value="{{name}}"  readonly>
+              </div>
+
+              <!-- Email field -->
+              <div class="group" style="margin-bottom: 20px;">
+                <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+                    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75zM3 6l8.25 5.25L19.5 6"
+    />
+              </svg>
+              <input class="input1" type="email" placeholder="Email" name="email" value="{{email}}" readonly>
+              </div>
+<!-- Password Field 1 -->
+<div class="group" style="margin-bottom: 20px;">
+  <svg
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    class="icon1"
+    onclick="togglePasswordVisibility('passwordInput1', this)"
+  >
+    <!-- Closed Lock Icon -->
+    <path
+      class="closed-lock"
+      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    ></path>
+    <!-- Open Lock Icon -->
+    <path
+      class="open-lock"
+      style="display: none"
+      d="M7 10V6.75a5 5 0 019.9-.25M18 10h-12a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    ></path>
+  </svg>
+  <input id="passwordInput1" class="input1" type="password" placeholder="Password" name="passw"  value="{{password}}" readonly/>
+</div>
+
+<!-- Otp field -->
+ <input type="text" value="{{org_otp}}" name="o_otp" hidden                     >
+<div class="group" style="margin-bottom: 20px;">
+    <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+        <path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75zM3 6l8.25 5.25L19.5 6"
+/>
+  </svg>
+  <input class="input1" type="text" placeholder="Otp" name="e_otp">
+  </div>
+
+             
+       <button  class="login-button" type="submit" data-toggle="modal" data-target="#exampleModalCenter">Signup</button>              
+            </form>
+           
+
+            
+<!-- <div class="account" style="display: flex;align-items: center;justify-content: center;gap:5px;padding-top: 20px;">
+            <p style="font-size: 13px;">Account already exists?</p>
+         <a href="{%url 'login' %}" style="text-decoration: none;"><p class="signup">SignIn</p></a>
+        </div> -->
+
+        
+          
+<!-- Login form ends -->
+
+</div>
+   </section>
+
+   
+
+    
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+  <script>
+    function togglePasswordVisibility(passwordInputId, iconElement) {
+  // Get the password input field by its ID
+  const passwordInput = document.getElementById(passwordInputId);
+
+  // Find the closed and open lock icons within the clicked SVG
+  const closedLockIcon = iconElement.querySelector(".closed-lock");
+  const openLockIcon = iconElement.querySelector(".open-lock");
+
+  // Toggle the input type between password and text
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    closedLockIcon.style.display = "none";
+    openLockIcon.style.display = "block";
+  } else {
+    passwordInput.type = "password";
+    closedLockIcon.style.display = "block";
+    openLockIcon.style.display = "none";
+  }
+}
+
+  </script>
+
+
+</body>
+</html>
+

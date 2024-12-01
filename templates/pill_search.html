@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pill Identification</title>
+</head>
+<body>
+    <h1>Pill Identification</h1>
+    <form method="GET" action="{% url 'pill_search' %}">
+        <label for="imprint">Imprint:</label>
+        <input type="text" id="imprint" name="imprint" required><br><br>
+        
+        <label for="color">Color:</label>
+        <select id="color" name="color" required>
+            {% for color in colors %}
+                <option value="{{ color }}">{{ color }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <label for="shape">Shape:</label>
+        <select id="shape" name="shape" required>
+            {% for shape in shapes %}
+                <option value="{{ shape }}">{{ shape }}</option>
+            {% endfor %}
+        </select><br><br>
+        
+        <button type="submit">Search</button>
+    </form>
+
+    {% if pill_data %}
+        <h2>Search Results</h2>
+        <ul>
+            {% for pill in pill_data %}
+                <li>{{ pill }}</li>
+            {% endfor %}
+        </ul>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>

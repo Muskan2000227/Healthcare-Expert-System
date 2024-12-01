@@ -1,0 +1,198 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseases</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    <style>
+        .dismaincards{
+            width:100%;
+            height: 100vh;
+            overflow:auto;
+        }
+        
+        .disordermain {
+            width: 100%;
+            height: auto; /* Allow the height to adjust automatically */
+            overflow-y: auto;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .content {
+            text-align: center;
+            padding: 50px;   
+        }
+
+        .heading {
+            font-size: 36px;
+            font-weight: bold;
+            color: #694B96;
+            margin-bottom: 30px; /* Adjusted margin for better spacing */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the cards */
+        }
+
+        .row {
+            display: flex;
+            justify-content: center; /* Center the row items */
+            width: 100%; /* Full width for the row */
+            margin-bottom: 20px; /* Spacing between rows */
+        }
+
+        .info-card {
+            background-color: #fff;
+            width: 320px; /* Increased card width */
+            height: auto; /* Auto height for flexible content */
+            margin: 15px; /* Space around cards */
+            padding: 15px; /* Padding inside cards */
+            border-radius: 10px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align items to the top */
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .info-card img {
+            width: 100%; /* Make the image responsive */
+            height: 150px; /* Set a fixed height for images */
+            border-radius: 10px; /* Rounded corners for the image */
+            object-fit: cover; /* Cover the area without stretching */
+            margin-bottom: 10px; /* Spacing below the image */
+        }
+
+        .info-card h2 {
+            font-size: 18px; /* Font size for the title */
+            color: #333;
+            font-weight: bold;
+            margin: 10px 0; /* Margin for the title */
+        }
+
+        .info-card p {
+            font-size: 14px; /* Font size for content */
+            color: #666; /* Lighter color for content */
+            margin-bottom: 15px; /* Space below content */
+        }
+
+        .btn {
+            padding: 10px 15px; /* Button padding */
+            background-color: #9370DB; /* Button background color */
+            color: white; /* Button text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners for the button */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s ease; /* Smooth background color transition */
+        }
+
+        .btn:hover {
+            background-color:#A056FF; /* Darker color on hover */
+            color:white;
+        }
+
+        .info-card:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .arrow56{
+            position: absolute;
+            z-index: 2;
+    margin-top: 40px;
+    margin-left: 70px;
+ } 
+
+        /* Media query for responsive design */
+        @media (max-width: 768px) {
+            .heading{
+                margin-top: 20px;
+            }
+            .info-card {
+                width: 600px !important; /* Adjust width for smaller screens */
+                padding: 10px;
+            }
+            .content {
+            text-align: center;
+            padding: 10px;   
+        }
+
+        .arrow56{
+    margin-top: 40px;
+    margin-left: 10px;
+ } 
+
+    [data-aos=zoom-in-down] {
+        transform: none !important; 
+        opacity: 1 !important; 
+    }
+        }
+
+
+    </style>
+</head>
+<body>
+    <section class="dismaincards">
+        <a href="{%url 'disdisorder'%}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+        <section class="disordermain" style="margin-top: -20px;">
+            <section class="content">
+                <h1 class="heading" data-aos="zoom-in-down" data-aos-duration="1000">Disease Analysis</h1>
+    
+                <div class="container">
+                    <div class="row">
+                        <div class="info-card" data-aos="zoom-in-down" data-aos-duration="1000">
+                            <img src="{%static 'images/neuro.jpg'%}" alt="AI Tools">
+                            <h2>Neurological Disease</h2>
+                            <p>Conditions affecting the brain and nervous system, often leading to impaired function and quality of life.</p>
+                         <a href="neurologanalysis">  <button class="btn">Analysis</button></a> 
+                        </div>
+                        <div class="info-card" data-aos="zoom-in-down" data-aos-duration="1000">
+                            <img src="{%static 'images/aa.png'%}" alt="Cloud Computing" style="object-fit: contain;background-color: #000;" >
+                            <h2>Cardiovascular Disease</h2>
+                            <p> A group of disorders affecting the heart and blood vessels, often leading to serious health complications .</p>
+                            <a href="diseaseanalysis">   <button class="btn">Analysis</button></a>
+                        </div>
+                        <div class="info-card" data-aos="zoom-in-down" data-aos-duration="1000">
+                            <img src="{%static 'images/dig5.png'%}" alt="Blockchain" style="object-fit: contain;background-color: #000;">
+                            <h2>Digestive Disease</h2>
+                            <p>A range of disorders impacting the gastrointestinal tract, which can cause symptoms like pain, bloating.</p>
+                            <a href="digestiveanalysis">      <button class="btn">Analysis</button></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="info-card" data-aos="zoom-in-down" data-aos-duration="1000">
+                            <img src="{%static 'images/kid2.png'%}" alt="Health Exchange" style="object-fit: contain;background-color: #000;">
+                            <h2>Dibetic Kidney Disease</h2>
+                            <p> A progressive condition caused by diabetes, leading to kidney damage and reduced kidney function over time.</p>
+                            <a href="diabkidanalysis">      <button class="btn">Analysis</button></a>
+                        </div>
+                        <div class="info-card" data-aos="zoom-in-down" data-aos-duration="1000">
+                            <img src="{%static 'images/resp2.png'%}" alt="Machine Learning" style="object-fit: contain;background-color: #000;">
+                            <h2>Chronic Respiratory Disease</h2>
+                            <p>A group of long-term lung diseases that cause breathing difficulties, including asthma and many more.</p>
+                            <a href="respiratoryanalysis">     <button class="btn">Analysis</button></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+</body>
+</html>
+{% endblock %}

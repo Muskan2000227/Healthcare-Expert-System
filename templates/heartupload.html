@@ -1,0 +1,248 @@
+{% extends 'sidebar1.html' %} 
+{% block content %} 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung Cancer Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+
+
+        
+         /* Zoom in and out animation */
+         @keyframes zoomInOut {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+      
+        @keyframes float {
+            0% {
+                transform: translatey(0px);
+            }
+            50% {
+                transform: translatey(-10px);
+            }
+            100% {
+                transform: translatey(0px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .lungcancer {
+            width: 100vw;
+            height: 100vh;
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Vertically center the card */
+            justify-content: center; /* Horizontally center the card */
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .container27 {
+            background: white; /* White background for the card */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+            padding: 40px; /* Padding inside the card */
+            max-width: 1000px; /* Maximum width for the card */
+            width: 100%; /* Full width for smaller screens */
+            height:600px;
+        }
+
+        .cancermid{
+          display:grid;
+          grid-template-columns: 1fr 1fr;
+          gap:20px;
+          background: linear-gradient(to right, rgba(223, 223, 244,0.5), rgba(171, 127, 210, 0.5));
+        }
+
+        h1 {
+            /* text-align: center; Center the title */
+            color: #920000; /* Dark text color */
+            margin-bottom: 20px; /* Space below the title */
+            margin-top: 50px;
+            font-size: 50px;
+            font-weight: 900;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        form {
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeInUp 1s forwards 0.3s; /* Delay for a smoother effect */
+    /* background: linear-gradient(to right, rgba(223, 223, 244,0.5), #573178); */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        .form-label {
+            margin-bottom: 10px; /* Spacing below the label */
+            font-weight: bold; /* Make label bold */
+            color: #555; /* Darker grey color */
+            margin-top: 50px;
+            margin-left: 20px;
+        }
+
+        .lungcancer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(to right, rgba(223, 223, 244,0.5), #573178); */
+    z-index: -1;
+}
+
+        .form-control {
+            width: 70%; /* Full width for input */
+            padding: 10px; /* Padding inside the input */
+            margin-bottom: 20px; /* Space below inputs */
+            border: 1px solid #ccc; /* Light grey border */
+            border-radius: 5px; /* Slightly rounded corners */
+            box-sizing: border-box; /* Include padding in width */
+            margin-left: 20px;
+            
+        }
+
+        #image-preview {
+            margin-top: 10px;
+            border-radius: 50%;
+            max-width: 100%;
+            height: auto;
+            mix-blend-mode: multiply;
+            height: 500px;
+           
+           
+            transition: opacity 0.5s ease;
+            animation: zoomInOut 3s ease-in-out infinite;
+        }
+
+       
+
+
+        .btn {
+            width: 80%;
+            height: 2.3em;
+            margin: 0.5em;
+            background: black;
+            color: white; /* Text color */
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
+        .btn:hover {
+            color: white; /* Keep text color white on hover */
+        }
+
+        .btn:after {
+            content: "";
+            background: #9370DB; /* Red background for hover effect */
+            position: absolute;
+            z-index: -1;
+            left: -20%;
+            right: -20%;
+            top: 0;
+            bottom: 0;
+            transform: skewX(-45deg) scale(0, 1);
+            transition: all 0.8s;
+        }
+
+        .btn:hover:after {
+            transform: skewX(-45deg) scale(1, 1); /* Show the red background on hover */
+        }
+
+
+        @media (max-width:600px) {
+            .lungcand{
+                font-size: 44px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <section class="lungcancer">
+        <div class="container27">
+            <div class="cancermid">
+
+                <div>
+                    <img src=" https://img.freepik.com/free-vector/lung-human-anatomy-biology-organ-body-system-health-care-medical-hand-drawn-cartoon-art-illustration_56104-958.jpg" id="image-preview" alt="Image Preview"/></div>
+
+                <div>
+            
+            <form method="POST" enctype="multipart/form-data" style="margin-top: 70px;">
+                <h1 class="lungcand" style="padding-right: 5px;">Lung<br>Cancer Detection</h1>
+                {% csrf_token %}
+                <label for="image" class="form-label">Choose an image:</label>
+                <input type="file" name="image" id="image" class="form-control" accept="image/*" onchange="previewImage(event)" required>
+                
+                
+                
+
+                <button type="submit" class="btn">Analyze</button>
+
+               
+            </form>
+        </div>
+            
+             
+        </div>
+        </div>
+    </section>
+</body>
+<!-- 
+<script>
+    // Function to display the selected image preview
+    function previewImage(event) {
+        const imageInput = event.target;
+        const imagePreview = document.getElementById('image-preview');
+        
+        // Check if a file was selected
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            
+            // Once the file is loaded, display the image preview
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;  // Set the src of the img tag
+                imagePreview.style.display = 'block';  // Make the image visible
+            };
+            
+            reader.readAsDataURL(imageInput.files[0]);  // Read the file as a data URL
+        }
+    }
+</script> -->
+
+</html>
+{% endblock %}

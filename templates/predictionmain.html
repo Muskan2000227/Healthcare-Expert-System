@@ -1,0 +1,183 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Dashboard</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        body {
+            /* background-color: #FAF5FF; Soft lavender */
+        }
+        .mainn {
+            width: 100%;
+            height: 100vh;
+            /* background-color: #FAF5FF; */
+            padding: 50px 0;
+        }
+
+        .analy {
+            font-size: 46px;
+            text-align: center;
+            font-weight: bold;
+            color: #4B0082;
+            margin-bottom: 60px;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    padding: 40px 25px;
+    transition: transform 400ms ease, box-shadow 1000s ease;
+    text-align: center;
+    
+    /* Initial state for animation */
+    opacity: 0;
+    transform: scale(0.8);
+    animation: zoomIn 0.8s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            font-size: 50px;
+            color: #8A2BE2;
+            margin-bottom: 25px;
+            /* border: 3px solid #9370DB; */
+            padding: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #4B0082;
+        }
+
+        .card-text {
+            font-size: 15px;
+            color: #606060;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #9370DB;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            transition: background-color 0.4s ease;
+        }
+
+        .btn:hover {
+            background-color: #6F4C9A;
+            cursor: pointer;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 25px;
+               
+            }
+            
+            [data-aos=zoom-in-right] {
+        transform: none !important; 
+        opacity: 1 !important; 
+    }
+    
+
+        }
+
+    </style>
+</head>
+<body>
+    <section class="mainn">
+        <p class="analy" data-aos="zoom-in-right">Prediction Dashboard</p>
+        <div class="container">
+            <!-- Card 1 -->
+            <div class="card" style="background-color: #9370DB;color:white"  >
+                <div class="card-icon">
+                    <i class="fas fa-heart" style="color: #fff;"></i>
+                </div>
+                <h5 class="card-title" style="color: #fff;">Disease Prediction</h5>
+                <p class="card-text " style="color: #fff;" >Gain comprehensive insights into disease trends, causes, and their global impact through data analysis.</p>
+                <a href="{% url 'preddiscards' %}" class="btn" style="color: #000; background:#fff;">Prediction</a>
+            </div>
+            <!-- Card 2 -->
+            <div class="card" >
+                <div class="card-icon">
+                    <i class="fas fa-brain" ></i>
+                </div>
+                <h5 class="card-title" style="color: #000;">Disorder Prediction</h5>
+                <p class="card-text" >Examine patterns and contributing factors associated with various mental health disorders.</p>
+                <a href="{% url 'predictiondiscards' %}" class="btn">Prediction</a>
+            </div>
+            <!-- Card 3 -->
+            <div class="card" style="background-color: #9370DB;color:white" >
+                <div class="card-icon" style="color: #fff;" >
+                    <i class="fas fa-dollar-sign" ></i>
+                </div>
+                <h5 class="card-title" style="color: #fff;" >Health Expenses Prediction</h5>
+                <p class="card-text" style="color: #fff;" >Assess the financial impact of healthcare services and the allocation of health resources.</p>
+                <a href="{% url 'healthprediction' %}" class="btn" style="color: #000; background:#fff;">Prediction</a>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    AOS.init({
+        once: true, // Ensures animation happens only once
+        duration: 1000,
+    
+    });
+</script>
+
+</html>
+{% endblock %}

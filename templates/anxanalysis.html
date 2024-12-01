@@ -1,0 +1,339 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Disorder</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    <style>
+      .anxmain{
+        width:100%;
+        height:100vh;
+        overflow: hidden;
+      }
+      
+      .arrow56{
+            margin-top: 50px;
+            margin-left:40px;
+        }
+
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Montserrat', sans-serif; */
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.content {
+    text-align: center;
+    padding: 50px;
+    margin-top: -100px;
+}
+
+.heading {
+    font-size: 50px;
+    font-weight: bold;
+    color:#1F2278;
+    margin-bottom: 25px;
+    margin-top: 100px;
+}
+
+.main-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.img-container {
+    flex: 1;
+    text-align: center;
+    margin-right: 40px; /* Space between image and cards */
+}
+
+.large-image {
+    width: 650px; /* Set the width */
+    height: 550px; /* Maintain aspect ratio */
+    border-radius:50%; /* Rounded corners */
+    border: 2px solid #6F4C9A; /* Border color */
+    object-fit: cover; 
+    margin-top: 30px;
+}
+
+
+
+.cards-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    gap: 20px; 
+    
+}
+
+.info-card {
+    background: linear-gradient(135deg, rgba(135, 104, 240, 0.9), rgba(99, 92, 245, 0.9)); 
+    border-radius: 15px; 
+    width: 450px; 
+    padding: 20px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    color: white; 
+}
+
+.info-card h2 {
+    font-size: 18px; 
+    color: #fff; 
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); 
+    margin: 0; 
+}
+
+/* Hover effects */
+.info-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); 
+}
+
+
+/* Colors for each card */
+.ai {
+    
+    margin-left: -80px;
+    margin-top: 10px;
+}
+
+.cloud {
+   
+    margin-left: -20px;
+}
+
+.blockchain {
+    
+    margin-left: 20px;
+}
+
+.health-exchange {
+    
+    margin-left: 30px;
+}
+
+.ml {
+   
+    margin-left: 20px;
+}
+
+.big-data {
+    
+    margin-left: -20px;
+}
+
+.ehr {
+    
+    margin-left: -80px;
+}
+
+.info-card:hover {
+    transform: scale(1.05);
+}
+
+.arrow56{
+    position: absolute;
+    z-index: 2;
+    margin-top: 50px;
+    margin-left: 40px;
+}
+
+@media (max-width: 768px) {
+    .anxmain{
+        overflow-y: auto;
+    }
+            .heading {
+                font-size: 30px; /* Smaller heading on mobile */
+                margin-top: 5px;
+            }
+            .large-image {
+                width: 100%; /* Full width on mobile */
+                height: auto; /* Auto height for aspect ratio */
+            }
+            .info-card {
+                width: 100%; /* Full width cards on mobile */
+               
+            }
+            .main-container {
+                flex-direction: column; /* Stack image and cards on mobile */
+                align-items: center; /* Center align */
+            }
+            .img-container {
+                margin-right: 0; /* Remove right margin on mobile */
+                margin-bottom: 20px; /* Add space below image */
+            }
+
+            .ai {
+   
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+.cloud {
+   
+    margin-left: 0px;
+}
+
+.blockchain {
+    
+    margin-left: 0px;
+}
+
+.health-exchange {
+    
+    margin-left: 0px;
+}
+
+.ml {
+    
+    margin-left: 0px;
+}
+
+.big-data {
+   
+    margin-left: 0px;
+}
+
+.ehr {
+    
+    margin-left: 0px;
+}
+
+.arrow56{
+            margin-top: 50px;
+            margin-left:20px;
+        }
+
+        }
+
+        @media (max-width: 480px) {
+            .anxmain{
+        overflow-y: auto;
+    }
+      
+            .heading {
+                font-size: 24px; /* Further reduce heading size */
+                margin-top: 100px;
+            }
+            .info-card h2 {
+                font-size: 16px; /* Smaller font size for card headings */
+            }
+
+            .ai {
+  
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+.cloud {
+    
+    margin-left: 0px;
+}
+
+.blockchain {
+  
+    margin-left: 0px;
+}
+
+.health-exchange {
+    
+    margin-left: 0px;
+}
+
+.ml {
+    
+    margin-left: 0px;
+}
+
+.big-data {
+    
+    margin-left: 0px;
+}
+
+.ehr {
+   
+    margin-left: 0px;
+}
+
+[data-aos=zoom-in-down] {
+        transform: none !important; 
+        opacity: 1 !important; 
+    }
+
+        }
+
+    </style>
+</head>
+<body>
+  <section class="anxmain">
+    <a href="{% url 'disordercards' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a> 
+
+
+    <section class="content">
+      <h1 class="heading" data-aos="zoom-in-down" data-aos-duration="1000">Anxiety Disorder Analysis</h1>
+
+      <div class="main-container">
+          <div class="img-container">
+             
+              <img src="{%static 'images/anximg.png'%}" class="large-image" data-aos="zoom-in-down" data-aos-duration="1000">
+              
+             
+              
+
+          </div>
+          
+          
+           <div class="cards-container">
+              <div class="info-card ai" data-aos="zoom-in-down" data-aos-duration="1000">
+              <a href="{% url 'anx1' %}" style="text-decoration: none;">  <h2>Burden of Anxiety Disorders</h2></a>  
+              </div>
+              <div class="info-card cloud" data-aos="zoom-in-down" data-aos-duration="1000">
+                <a href="{% url 'anx2' %}" style="text-decoration: none;">    <h2>Countries with Highest Anxiety Disorders</h2></a>
+              </div>
+              <div class="info-card blockchain" data-aos="zoom-in-down" data-aos-duration="1000">
+                <a href="{% url 'anx3' %}" style="text-decoration: none;">   <h2>Impact of Anxiety Disorders in a Region</h2>
+              </div></a>
+              <div class="info-card health-exchange" data-aos="zoom-in-down" data-aos-duration="1000">
+                <a href="{% url 'anx4' %}" style="text-decoration: none;">   <h2>Countries Ranking Over Time?</h2>
+              </div></a>
+              <div class="info-card ml" data-aos="zoom-in-down" data-aos-duration="1000">
+                <a href="{% url 'anx5' %}" style="text-decoration: none;">    <h2>Global Anxiety Disorder Burden Visualization</h2></a>
+              </div>
+              <div class="info-card big-data" data-aos="zoom-in-down" data-aos-duration="1000">
+                <a href="{% url 'anx6' %}" style="text-decoration: none;">  <h2>Country Comparison: Anxiety Health Impact</h2></a>
+              </div>
+              <div class="info-card ehr" >
+                <a href="{% url 'anx7' %}" style="text-decoration: none;">  <h2>What Share Do Top 20 countries contribute?</h2></a>
+              </div>
+          </div> 
+      
+          
+      
+      
+      
+      </div>
+
+
+  </section>
+
+  </section>  
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,285 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/icofont@1.0.0/css/icofont.min.css">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+<style>
+  .card{
+ /* Initial state for animation */
+    opacity: 0;
+    transform: scale(0.8);
+    animation: zoomIn 0.8s ease-out forwards;
+}
+
+@keyframes zoomIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+  
+.abc{
+  overflow: hidden;
+}
+
+  .bmisvg{
+     margin-top:10px;
+  }
+
+  .bmisvg2{
+     margin-top:10px;
+  }
+
+  .bmisvg3{
+    margin-top:12px;
+  }
+
+  .bmisvg4{
+    margin-top: -9px;
+  }
+
+  .bmisvg5{
+    margin-top: 10px;
+  }
+
+  @media (max-width:600px) {
+
+    .abc{
+      overflow: scroll;
+    }
+    .bmisvg{
+      margin-top: -10px;
+    }
+
+    .bmisvg2{
+     margin-top:-30px;
+  }
+  .bmisvg3{
+    margin-top: -10px;
+  }
+
+  .bmisvg4{
+    margin-top: -55px;
+  }
+  .bmisvg5{
+    margin-top: -8px;
+  }
+  }
+</style>
+<section class="abc"  >
+  <p class="heromsec" style="width: fit-content;
+  padding: 6px;margin-top: 20px;
+  color: #5d5fe9;
+  font-weight: 700;
+  font-size: 40px; background-image: url('static/images/blueline.png'); margin-left: auto; margin-right: auto;"
+  data-aos="zoom-out" data-aos-duration="1000">Calculators</p>
+  <!-- Card Section -->
+  <section class="calculatorSec">
+   
+    <div class="card"  >
+      <div style="height:200px;">
+        <img src="{% static 'images/bmi.jpg'%}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">BMI Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;">Explore and calculate your Body Mass Index (BMI) to understand your weight status and overall health.</p>
+        <a href="{% url 'bmi' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg  width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle bmisvg" style="background: rgba(156, 150, 234, 0.5);">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+    <div class="card"   >
+      <div style="height:200px;">
+        <img src="{% static 'images/bmr.png'%}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3" >
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">BMR Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;">Calculate your Basal Metabolic Rate (BMR) to estimate the number of calories your body needs at rest to maintain basic physiological functions.</p>
+        <a href="{% url 'bmr' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle" style="background: rgba(156, 150, 234, 0.5);margin-top:-30px">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+
+    <div class="card"  >
+      <div style="height:200px;">
+        <img src="{% static 'images/calorie.png'%}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">Calorie Intake Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;">Track your daily calorie intake to maintain or achieve your desired weight and overall health.</p>
+        <a href="{% url 'calorie' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle bmisvg2" style="background: rgba(156, 150, 234, 0.5);">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+    <div class="card"  >
+      <div style="height:200px;">
+        <img src="{% static 'images/weight.jpeg'%}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">Ideal Body Weight Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;"> Determine your ideal body weight range for a healthier and balanced lifestyle.</p>
+        <a href="{% url 'ideal' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle" style="background: rgba(156, 150, 234, 0.5);margin-top:-10px">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+    <div class="card" >
+      <div style="height:200px;">
+        <img src="{% static 'images/hydration.jpeg' %}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">Hydration Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;"> Stay hydrated by tracking your daily water intake to maintain optimal health and energy levels.</p>
+        <a href="{% url 'hydration' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle bmisvg3" style="background: rgba(156, 150, 234, 0.5);">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+    <div class="card" >
+      <div style="height:200px;">
+        <img src="{% static 'images/bloodpress.jpeg' %}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">Blood pressure Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;">  Monitor your blood pressure regularly to ensure it stays within a healthy range and reduce the risk of cardiovascular issues.</p>
+        <a href="{% url 'bloodpress' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle bmisvg4" style="background: rgba(156, 150, 234, 0.5);">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+
+
+    <div class="card"  >
+      <div style="height:200px;">
+        <img src="{% static 'images/diabetes.jpeg' %}" class="card-img-top" alt="" style="height:200px; width: 100%;border-radius:10%;">
+      </div>
+      <div class="card-body pt-2 ps-3 pe-3 pb-3">
+        <h5 class="card-title pb-2 " style="text-align: center;color: #1F2278;font-weight: bold;">Diabetes Calculator</h5>
+        <p class="card-text pb-2" style="text-align: justify;font-size: 14px;">Keep track of your blood sugar levels to manage diabetes effectively and maintain overall health.</p>
+        <a href="{% url 'diabetes' %}" style="display: flex; align-items: center; justify-content: center;">
+          <svg width="70" height="70" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="border p-3 rounded-circle bmisvg5" style="background: rgba(156, 150, 234, 0.5);">
+            <!-- <circle cx="12" cy="12" r="11.5" fill="none" stroke="black" stroke-width="3"></circle> -->
+            <path stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 7l5 5-5 5" />
+          </svg>
+        </a>
+        
+      </div>
+    </div>
+
+
+    
+
+
+    
+
+  </section>
+</section>
+
+
+<style>
+  .abc {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.calculatorSec {
+  margin-left: 50px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns per row */
+  gap: 20px; /* Space between cards */
+  padding: 20px; /* Optional: Add padding around the section */
+}
+
+ .card {
+  width:21em;
+  border-radius:8%;
+  height: 400px;
+ 
+  /* background: #fff; */
+  background: linear-gradient(90deg, rgb(223, 224, 248,0.5) 0%, #fff 100%);
+  transition: 300ms ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding: 1em; 
+  margin-bottom: 30px;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  
+}
+
+@media (max-width:600px) {
+  .calculatorSec {
+  margin-left: 10px;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns:1fr; /* Three columns per row */
+  gap: 20px; /* Space between cards */
+  padding: 10px; /* Optional: Add padding around the section */
+}
+.card {
+  width:18em;
+  border-radius:8%;
+  height: 400px;
+ 
+  /* background: #fff; */
+  background: linear-gradient(90deg, rgb(223, 224, 248,0.5) 0%, #fff 100%);
+  transition: 300ms ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding: 1em; 
+  margin-bottom: 30px;
+}
+  
+}
+
+
+
+</style>
+{% endblock %}

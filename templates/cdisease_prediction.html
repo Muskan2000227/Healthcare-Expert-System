@@ -1,0 +1,524 @@
+{% extends 'sidebar1.html' %} 
+{% block content %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cardiovascular Disease Prediction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOMD5osx5ckJtG8r1d6cRkXwV3dkFFpCCcO4DZ1NQ6d9QH1L+ObBRU7+j04ag==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    
+    <style>
+       
+        .dpred {
+            min-height: 100vh;
+            width:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* background: linear-gradient(145deg, #E6E6FA, #F5F0FF);          */
+            overflow: hidden;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: space-between;
+            /* justify-content: center; */
+            align-items: center;
+            text-align: left;
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            /* background-color: rgba(255, 255, 255, 0.9); */
+            background-color: #cdc1ff;
+            background-image: linear-gradient(316deg, #fff 0%, #cab0e6 74%);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            gap: 30px;
+            max-width: 1200px;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #4B0082; /* Indigo */
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .formpred {
+            /* flex: 1; */
+            flex: 0 0 60%; /* Make the form take up 60% of the container width */
+            background-color: #ffffff;
+            /* background-color: #cdc1ff;
+            background-image: linear-gradient(316deg, #fff 0%, #cab0e6 74%); */
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            transition: transform 0.3s;
+            height:500px;
+            /* margin-left: 40px; */
+        }
+
+        .formpred:hover {
+            transform: translateY(-10px);
+        }
+
+        .inputselect {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #D3D3D3;
+            font-size: 1rem;
+            padding: 12px 40px 12px 40px; /* Add padding to make room for the icon */
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #9370DB;
+            box-shadow: 0 0 10px rgba(147, 112, 219, 0.4);
+            outline: none;
+        }
+
+        .icon {
+            position: absolute;
+            left: 15px;
+            top: 35%;
+            transform: translateY(-50%);
+            color: #9370DB;
+        }
+
+        .form-floating {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            background-color: #9370DB;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #6F4C9A;
+            transform: translateY(-5px);
+        }
+
+        /* .arrow56 {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            z-index: 1;
+        } */
+
+        .p1 {
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .image-section {
+
+          flex: 0 0 40%; 
+            text-align: center;
+        }
+
+        .image-section img {
+            max-width: 500px;
+            /* border-radius: 10px; */
+            height:500px;
+            mix-blend-mode: multiply;
+            margin-left: -90px;
+            /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+            overflow: hidden;
+        }
+
+        .arrow56{
+    margin-top: -570px;
+    margin-left: 30px;
+ } 
+
+       /* Adjust layout for smaller screens */
+@media screen and (max-width: 768px) {
+    .container1 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .formpred, .image-section {
+        flex: 1 1 100%; /* Make both sections take 100% width on small screens */
+        max-width: 100%;
+    }
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loaderMiniContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 130px;
+  height: fit-content;
+}
+.barContainer {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  background-position: left;
+}
+.bar {
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(
+    to right,
+    rgb(161, 94, 255),
+    rgb(217, 190, 255),
+    rgb(161, 94, 255)
+  );
+  background-size: 200% 100%;
+  border-radius: 10px;
+  animation: bar ease-in-out 3s infinite alternate-reverse;
+}
+@keyframes bar {
+  0% {
+    background-position: left;
+  }
+  100% {
+    background-position: right;
+  }
+}
+.bar2 {
+  width: 50%;
+}
+.svgIcon {
+  position: absolute;
+  left: -25px;
+  margin-top: 18px;
+  z-index: 2;
+  width: 70%;
+  animation: search ease-in-out 3s infinite alternate-reverse;
+}
+@keyframes search {
+  0% {
+    transform: translateX(0%) rotate(70deg);
+  }
+
+  100% {
+    transform: translateX(100px) rotate(10deg);
+  }
+}
+.svgIcon circle,
+line {
+  stroke: rgb(162, 55, 255);
+}
+.svgIcon circle {
+  fill: rgba(98, 65, 142, 0.238);
+} 
+
+
+
+/* General Styles for responsiveness */
+@media screen and (max-width: 1024px) {
+    .container1 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        
+    }
+    .formpred, .image-section {
+        flex: 1 1 100%; /* Make both sections take 100% width on medium screens */
+        max-width: 100%;
+        margin-bottom: 30px;
+    }
+    .formpred {
+        height: auto; /* Allow form height to adjust */
+    }
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container1 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px; /* Add padding for smaller screens */
+        margin-top: 50px;
+    }
+    .formpred, .image-section {
+        flex: 1 1 100%; /* Make both sections take 100% width on small screens */
+        max-width: 100%;
+        padding: 20px;
+        
+    }
+    .formpred {
+        height: auto; /* Allow form height to adjust */
+    }
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+    .arrow56 {
+        margin-top: -50px;
+        margin-left: 0;
+    }
+    .p1 {
+        font-size: 1rem; /* Adjust paragraph size */
+        margin-bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2em; /* Reduce font size for headings */
+        margin-bottom: 15px;
+    }
+    .container1 {
+        padding: 10px;
+        margin-right: 20px;
+        margin-left: -30px;
+    }
+    .formpred {
+        padding: 15px;
+        
+    }
+    .image-section img {
+        width: 100%;
+        height: auto;
+    }
+    .inputselect .form-control,
+    .inputselect .form-select {
+        font-size: 0.9rem; /* Adjust font size for inputs */
+    }
+    button {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 12px;
+    }
+
+    .image-section{
+      display: none;
+    }
+
+    .arrow56 {
+        margin-top: -450px;
+        margin-left: 20px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    h1 {
+        font-size: 1.8em; /* Further reduce font size */
+    }
+    .formpred {
+        padding: 10px;
+    }
+    .form-control,
+    .form-select {
+        font-size: 0.85rem; /* Adjust font size for smaller screens */
+    }
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+
+    [data-aos=zoom-in-down] {
+        transform: none !important; 
+        opacity: 1 !important; 
+    }
+}
+    </style>
+  </head>
+  <body>
+    <section class="dpred">
+      <a href="{% url 'preddiscards' %}">
+        <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt="">
+      </a> 
+      <div class="container1">
+        <div class="formpred" data-aos="zoom-in-down" data-aos-duration="1000">
+          <h1 data-aos="zoom-in-down" data-aos-duration="1000">Cardiovascular Disease Prediction</h1>
+          <!-- <p class="p1">Forecast the Impact of Cardiovascular Disease! Choose your country and time frame to reveal future trends in cardiovascular disease burden. Explore the evolving patterns and anticipate healthcare challenges ahead!</p> -->
+          <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="inputselect">
+              <div style="position: relative;">
+                <i class="fas fa-globe icon"></i>
+                <select name="country" class="form-select form-select-lg mb-4" required id="country">
+                  <option selected disabled>Select a country</option>
+                  {% for i in data %}
+                      <option value="{{ i }}">{{ i }}</option>
+                  {% endfor %}
+              </select>
+              </div>
+              <div style="position: relative;">
+                <i class="fas fa-calendar-alt icon"></i>
+                <div class="form-floating">
+                  <input type="number" class="form-control" id="yearsInput" placeholder="Enter the years" name="steps" required />
+                  <label for="floatingInput">Enter the years</label>
+                </div>
+              </div>
+            </div>
+            <button type="submit" id="predictButton">Check for Predicted Burden</button>
+          </form>
+        </div>
+
+        <div class="image-section">
+          <img src="https://www.millihealth.com/wp-content/uploads/2018/07/Hover-v2.gif" alt="" data-aos="zoom-in-down" data-aos-duration="1000">
+        </div>
+      </div>
+    
+    </section>
+
+
+
+
+    <div id="loadingOverlay" style="display: none;">
+      <!-- <div class="loader"></div> -->
+      <!-- <div class="loader JS_on">
+        <span class="binary"></span>
+        <span class="binary"></span>
+        <span class="getting-there">LOADING STUFF...</span>
+      </div> -->
+      
+<div class="loader">
+  <div class="loaderMiniContainer">
+    <div class="barContainer">
+      <span class="bar"></span>
+      <span class="bar bar2"></span>
+    </div>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 101 114"
+      class="svgIcon"
+    >
+      <circle
+        stroke-width="7"
+        stroke="black"
+        transform="rotate(36.0692 46.1726 46.1727)"
+        r="29.5497"
+        cy="46.1727"
+        cx="46.1726"
+      ></circle>
+      <line
+        stroke-width="7"
+        stroke="black"
+        y2="111.784"
+        x2="97.7088"
+        y1="67.7837"
+        x1="61.7089"
+      ></line>
+    </svg>
+  </div>
+</div>
+
+  </div>
+  </body>
+
+
+  
+
+
+
+<script>
+  $(document).ready(function () {
+      $("#predictButton").on("click", function () {
+          // Validate inputs
+          const country = $("#country").val();
+          const years = $("#yearsInput").val();
+
+          if (!country) {
+              alert("Please select a country.");
+              event.preventDefault();
+              return;
+          }
+
+          if (!years || years <= 0) {
+              alert("Please enter a valid number of years.");
+              return;
+          }
+
+          // Show the full-screen overlay with spinner
+          $("#loadingOverlay").show();
+
+          // Perform the AJAX request
+          $.ajax({
+              url: "/run_prediction1/", // Django URL for the prediction view
+              method: "POST",
+              headers: { "X-CSRFToken": csrf_token }, // CSRF token for Django
+              data: {
+                  country: country,
+                  years: years,
+              },
+              success: function (response) {
+                  // Hide the overlay after receiving the response
+                  $("#loadingOverlay").hide();
+
+                  // Redirect to the next page
+                  window.location.href = "/next_page/"; // Adjust as needed
+              },
+              error: function (xhr, status, error) {
+                  // Hide the overlay in case of error
+                  $("#loadingOverlay").hide();
+
+                  // Display error message
+                  alert("An error occurred: " + error);
+              },
+          });
+      });
+  });
+</script>
+</html>
+{% endblock %}

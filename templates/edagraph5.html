@@ -1,0 +1,75 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Frequency Visualization</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+    <style>
+        /* Styles for the entire page */
+        .edagraph {
+            width: 100vw;
+            height: 100vh;
+            display: flex; /* Enable flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+           
+        }
+        .heart {
+            background-color: #FFE6E6;
+            padding: 20px;
+            padding-right: 50px;
+           
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 15px;
+        }
+        .arrow56{
+    margin-top: -560px;
+    margin-left: -100px;
+    margin-right: 50px;
+ }   
+
+
+ .graphfreq{
+    width:900px;height:80vh;
+ }
+
+
+ @media (max-width:600px) {
+
+    .heart{
+        margin-left: -180px;
+    }
+    .graphfreq{
+    width:350px;height:60vh;
+ }
+
+ .arrow56{
+    margin-top: -560px;
+    margin-left: 100px;
+    /* margin-right: 50px; */
+ } 
+    
+ }
+    </style>
+</head>
+<body>
+    <section class="edagraph">
+        <a href="eda">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+        <div class="heart">
+           
+            <img src="{{ graph }}" alt="Heart Disease Frequency" class="graphfreq" data-aos="zoom-out-right" data-aos-duration="1000">
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

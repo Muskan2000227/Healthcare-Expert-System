@@ -1,0 +1,742 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+    <style>
+        /* Basic styling */
+        /* body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            
+            
+        } */
+        .section1 {
+            width: 100%;
+            height: 100vh;
+           
+            /* margin-top: 50px; */
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: scroll;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            
+
+        }
+        .cardsec{
+            width: 80%;
+            height:70vh;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 20px;
+            
+        }
+        .gridsec{
+            display: grid;
+            grid-template-columns:0.75fr 1.25fr;   
+            
+            height: 100%;       
+            /* align-items: center; */
+        }
+        .imgcard{
+            height: 100%;
+            /* margin-top: 30px; */
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            background-color: #fff;
+            border-radius: 20px;
+        }
+
+        .contdiv{
+            background-color: #7368DE;
+           
+            width:100%;
+            height: 100%;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+
+        .inpstyle{
+
+        }
+/* button start */
+.button1 {
+ margin-top: -10px;
+margin-bottom: 10px;
+  width: 180px;
+  height: 40px;
+  background:#fff;
+  /* background: #CBE6F5; */
+ 
+  border: none;
+  /* border-radius: 50px; */
+  color: rgb(0,0,0);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition-duration: .3s;
+}
+
+.button2 {
+ margin-top: -10px;
+margin-bottom: 10px;
+  width: 180px;
+  height: 40px;
+  background:#fff;
+ 
+  border: none;
+  /* border-radius: 50px; */
+  color: rgb(0,0,0);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill:black;
+}
+
+.arrowIcon2 {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon2 path {
+  fill:white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+.button2:active {
+  transform: translate(2px ,0px);
+  background-color:rgb(139, 113, 255,0.2);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+/* button end */
+.btn1, .btn2{
+    transition: all 200ms ease;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.btn1:active , .btn2:active{
+    background-color:rgb(139, 113, 255) ;
+    color: #fff;
+}
+
+
+
+
+
+
+        .formstyle{
+            margin-top: 50px;
+            width:500px;
+            background-color:#DFDFF4;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 10px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            
+        }
+        .p1 {
+            text-align: center;
+            font-size: 22px;
+            margin: 0;
+        }
+          
+        .inpstyle{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           margin-top: 40px;
+           
+        }
+        .label1{
+            font-size: 17px;
+            width: 200px;
+            color:#fff;
+            /* margin-left:120px;
+            margin-top: 50px; */
+            margin-right: -90px; 
+        }
+        .inpwgt{
+            width: 200px;
+            height:30px;
+            padding: 20px;
+            outline: none;
+            border: 0;
+            border-radius: 15px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        
+        .label2{
+            color:white;
+        }
+        .selectfi{
+            width: 150px;
+            height:40px;
+            padding: 5px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 15px;
+            outline: none;
+            border: 0;
+        }
+        
+        
+
+        .button1.male {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+    }
+    .button1.female {
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+    }
+
+    /* Hide the original radio inputs */
+    input[type="radio"] {
+        display: none;
+    }
+
+    /* Active styles when a radio button is selected */
+    input[type="radio"]:checked + label {
+        background-color:#7368DE;
+        color: white;
+        border-color: #007bff;
+    }
+
+    input[type="radio"]:checked + label  .arrowIcon path {
+  fill:white;
+}
+
+    @media (max-width: 480px) {
+           
+           .section1 {
+          width: 100%;
+          height: 100vh;        
+        
+          /* padding: 20px; */
+          box-sizing: border-box;
+          overflow-y: scroll;
+          display: flex;
+          flex-direction: column;
+          /* justify-content: center; */
+          /* align-items: center; */
+          overflow-x: hidden;
+          /* margin-left: -20px; */
+          /* margin-right: -50px; */
+          margin: 0px;
+      }
+
+     
+      .cardsec{
+  
+           width: 100%;
+         /* height:100vh;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          border-radius: 20px; */
+          
+      }
+
+       .gridsec{
+          /* display: grid;
+          grid-template-columns:1fr;               */
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+          /* align-items: center; */
+      }
+
+      .imgcard{
+          display: none;    
+      }
+      .contdiv{
+          background-color: #7368DE;
+          width:100vw;
+          height: 70vh;
+          border-radius: 20px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+
+      .rdbtn{
+  margin-top: 40px;
+   display: flex; 
+   /* align-items: center; 
+   justify-content: center; */
+} 
+
+      .button1 {
+/* margin-top: -10px; */
+margin-bottom: 10px;
+margin-left: 0px;
+width: 100px;
+height: 40px;
+background:#fff;
+
+border: none;
+/* border-radius: 50px; */
+color: rgb(0,0,0);
+font-weight: 600;
+display: flex;
+/* align-items: center;
+justify-content: center; */
+/* float: left; */
+gap: 5px;
+cursor: pointer;
+box-shadow: 1px 3px 0px rgb(139, 113, 255);
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+transition-duration: .3s;
+}
+
+
+.label1{
+          font-size: 13px;
+          width: 200px;
+          color:#fff;
+          /* margin-left:120px;
+          margin-top: 50px; */
+          margin-right: -110px; 
+      }
+      .inpwgt{
+          width: 150px;
+          height:30px;
+          padding: 10px 10px;
+          outline: none;
+          border: 0;
+          border-radius: 15px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          font-size: 13px;
+      }
+      
+      .label2{
+          font-size: 13px;
+          width: 200px;
+          color:#fff;
+          /* margin-left:120px;
+          margin-top: 50px; */
+          margin-right: -170px; 
+      }
+
+      .label3{
+          font-size: 13px;
+          width: 200px;
+          color:#fff;
+          /* margin-left:120px;
+          margin-top: 50px; */
+          margin-right: -110px; 
+      }
+      .selectfi{
+          width: 80px;
+          height:30px;
+          /* padding: 20px 10px; */
+          outline: none;
+          border: 0;
+          border-radius: 15px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          font-size: 13px;
+      }
+      .selectfi1{
+          width: 150px;
+          height:30px;
+          /* padding: 20px 10px; */
+          outline: none;
+          border: 0;
+          border-radius: 15px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          font-size: 13px;
+      }
+         
+          .p1{
+              font-size: 18px;
+          }
+          input, .select1, button {
+              padding: 8px;
+              font-size: 14px;
+          }
+
+          .cic{
+              text-align:center;margin-top:40px;font-size:22px;color: #fff;
+          }
+      }
+
+
+ 
+.btn-11,
+.btn-11 *,
+.btn-11 :after,
+.btn-11 :before,
+.btn-11:after,
+.btn-11:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-11 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  font-weight: 900;
+  line-height: 1.0;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.btn-11:disabled {
+  cursor: default;
+}
+
+.btn-11:-moz-focusring {
+  outline: auto;
+}
+
+.btn-11 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-11 [hidden] {
+  display: none;
+}
+
+.btn-11 {
+  border-radius: 99rem;
+  border-width: 2px;
+  overflow: hidden;
+  padding: 0.8rem 3rem;
+  position: relative;
+}
+
+.btn-11 span {
+  mix-blend-mode: difference;
+}
+
+.btn-11:after,
+.btn-11:before {
+  background: linear-gradient(
+    90deg,
+    #fff 25%,
+    transparent 0,
+    transparent 50%,
+    #fff 0,
+    #fff 75%,
+    transparent 0
+  );
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: translateY(var(--progress, 100%));
+  transition: transform 0.2s ease;
+}
+
+.btn-11:after {
+  --progress: -100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 25%,
+    #fff 0,
+    #fff 50%,
+    transparent 0,
+    transparent 75%,
+    #fff 0
+  );
+  z-index: -1;
+}
+
+.btn-11:hover:after,
+.btn-11:hover:before {
+  --progress: 0;
+}
+
+
+
+
+.modal-backdrop {
+  z-index: -1;
+}
+
+#gridsecContainer {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+#gridsecContainer.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+/* BUtton start */
+.buttonab {
+
+/* margin-bottom: 10px; */
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, #000066 0%, #000066 100%);
+  border: none;
+  /* border-radius: 50px; */
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  /* box-shadow: 1px 3px 0px #000066; */
+  transition-duration: .3s;
+  margin-right: 30px;
+}
+
+
+.buttonab:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+    </style>
+</head>
+<body>
+
+
+    
+    <section  class="section1">
+      
+      <div style="display: flex;justify-content: flex-end;align-items: flex-end;margin-left: 780px;margin-bottom: 20px;"  >
+        <!-- Button trigger modal -->
+        <button class="buttonab" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+           About BMI
+          </button>
+   <!-- Modal -->
+   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1000-" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h1 class="modal-title fs-5" id="staticBackdropLabel">BMI(Body Mass Index )</h1>
+           <button type="button" class="btn-close btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+ 
+             
+             <h1 style="color:#000066;">What is BMI?</h1>
+             <ul>
+                 
+             </ul>
+             <li>Body mass index (BMI) is a simple, reliable, and low-cost screening measure of health.</li><br>
+                <li>Body Mass Index (BMI) is widely used as an indicator of body fat content. Your weight alone is not sufficient to establish if you are in a healthy weight range.</li><br>
+                <li>Having a BMI outside the healthy weight range can increase a person's risk for certain health problems.</li>
+             <img src="{% static 'images/bmitab.png' %}" alt="" width="450px" style="margin-top:-50px;">
+             <h2 style="text-align: center;">Health risks related to being underweight?</h2>
+             <ul>
+                 <li>Vitamin deficiencies</li><br>
+                 <li>Anaemia</li><br>
+                 <li>Diminished immunity or the ability to ward off infections</li><br>
+                 <li>Malnutrition</li><br>
+                 <li>Hormonal imbalances</li>
+             </ul>
+ 
+ 
+             <h2 style="text-align: center;">Health risks related to being overweight?</h2>
+             <ul>
+                 <li>Type 2 diabetes</li><br>
+                 <li>Heart conditions</li><br>
+                 <li>Certain types of cancer (breast, colon, endometrial, gall bladder, kidney, liver)</li><br>
+                 <li>High blood pressure</li><br>
+                 <li>Stroke</li>
+             </ul>
+           
+        <img src="{% static 'images/bmiable.jpg'%}" alt="" width="450px">
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          
+         </div>
+       </div>
+     </div>
+   </div>
+ 
+ </div>
+
+
+        
+        <div class="cardsec" data-aos="flip-right" data-aos-duration="900" >
+            <div class="gridsec"  id="gridsecContainer" >
+                
+        <div>
+            <div class="imgcard" >
+                <img id="toggleImage" src="{% static 'images/bmi.jpg' %}" width="500px" height="500px" style="object-fit:fill;border-radius: 20px;">
+            </div>
+            
+        </div>
+        <div class="contdiv" >
+            <p style="text-align:center;margin-top: 40px;font-size: 45px;color: #fff;font-weight: bold;">BMI Calculator</p>
+            <form id="bmiForm" method="POST" >
+                {% csrf_token %}
+
+               
+
+
+                <div style="margin-top: 40px; display: flex; align-items: center; justify-content: center;">
+                  <!-- Hidden radio inputs -->
+                  <input type="radio" id="male" name="gender" value="male" checked style="background-color: #7368DE;">
+                  <label class="button1 male" for="male" >
+                      Male
+                      <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="white" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 8c-2.67 0-8 1.34-8 4v6h16v-6c0-2.66-5.33-4-8-4zm-3 8v-4h6v4h-6z"/>
+                      </svg>
+                  </label>
+              
+                  <input type="radio" id="female" name="gender" value="female" style="background-color: #7368DE;">
+                  <label class="button1 female" for="female"  >
+                      Female
+                      <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-2 7h4c1.1 0 2 .9 2 2v5h1c.55 0 1 .45 1 1s-.45 1-1 1h-1v3c0 .55-.45 1-1 1s-1-.45-1-1v-3H7c-.55 0-1-.45-1-1s.45-1 1-1h1v-5c0-1.1.9-2 2-2z"/>
+                      </svg>
+                  </label>
+              </div>
+
+
+                <!-- input fields -->
+                 <div class="inpstyle">
+                <label for="wht"  class="label1">Weight (kg):</label>
+                <input type="number" step="0.1" id="wht" name="wht" class="inpwgt" min="20" max="300" placeholder="Enter weight" required>
+            </div>
+
+            <div style="display: flex;justify-content: center;align-items: center; gap: 15px; margin-top: 50px;">
+                <label for="feet" class="label2">Height :</label>
+                <select name="feet" id="feet" class="selectfi" style="padding-left: 10px;padding-right: 10px;">
+                    <option value="0" selected>Select Feet'</option>
+                    <option value="1">1'</option>
+                    <option value="2">2'</option>
+                    <option value="3">3'</option>
+                    <option value="4">4'</option>
+                    <option value="5">5'</option>
+                    <option value="6">6'</option>
+                    <option value="7">7'</option>
+                </select>
+
+                <select name="inches" id="inches" class="selectfi" style="color: #000;padding-left: 10px;padding-right: 10px;">
+                    <option value="0" selected>Select Inches"</option>
+                    <option value="1">1"</option>
+                    <option value="2">2"</option>
+                    <option value="3">3"</option>
+                    <option value="4">4"</option>
+                    <option value="5">5"</option>
+                    <option value="6">6"</option>
+                    <option value="7">7"</option>
+                    <option value="8">8"</option>
+                    <option value="9">9"</option>
+                    <option value="10">10"</option>
+                    <option value="11">11"</option>
+                </select>
+            </div>
+
+
+            
+
+                <div style="display: flex;width:100%;justify-content: center;margin-top: 40px;">              
+<button class="btn-11">
+  <span class="text">Calculate</span>
+</button>
+</div>
+            </form>
+
+            </div></div>
+        
+        </div>
+    </div>
+    </div>
+    </section>
+
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById('bmiForm').addEventListener('submit', function(event) {
+            var feet = document.getElementById('feet').value;
+            var inches = document.getElementById('inches').value;
+
+            if (feet === '0' || inches === '0') {
+                alert('Please select a valid height.');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+
+
+  
+
+<script>
+    const modal = document.getElementById('staticBackdrop');
+    const gridsecContainer = document.getElementById('gridsecContainer');
+
+    modal.addEventListener('show.bs.modal', () => {
+        gridsecContainer.classList.add('hidden');
+    });
+
+    modal.addEventListener('hide.bs.modal', () => {
+        gridsecContainer.classList.remove('hidden');
+    });
+</script>
+
+
+</body>
+</html>
+{% endblock %}

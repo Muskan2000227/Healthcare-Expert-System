@@ -1,0 +1,275 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Map with Magnifying Effect</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        .maping {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+        }
+
+        .magnifier {
+            position: fixed;
+            
+            border: 2px solid #000;
+            border-radius: 50%;
+            cursor: none;
+            width: 150px;
+         
+            height: 150px;
+            display: none;
+            overflow: hidden;
+            background-repeat: no-repeat;
+            
+            background-position: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+           
+            left: 10px;
+           
+            top: 10px;
+          
+            margin-left: 700px;
+
+        }
+
+        .smallanat{
+            display: none;
+        }
+
+        .largeanot{
+            display: block;
+        }
+
+        @media (max-width:600px) {
+            .smallanat{
+            display: block;
+            margin-top:-1300px;
+            margin-left: -250px;
+        }
+
+        .largeanot{
+            display:none;
+            visibility: hidden;
+        }
+
+        .anatomyc{
+            display: none;
+            visibility: hidden;
+        }
+        #bodymap{
+            width:100px;
+            height:100px;
+        }
+        }
+
+     
+    </style>
+
+
+
+</head>
+
+<body style="background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(239,243,246,1) 100%);">
+    <section class="maping" >
+        <section class="largeanot" style="display: flex;flex-direction:row;justify-content: space-evenly;width:100%;">
+
+            <div class="anatomyc" style="width:40%;display: flex;flex-direction: column;justify-content: center;">
+                <p style="text-transform:uppercase;word-spacing:5px;letter-spacing: 5px;"  data-aos="zoom-in-up" data-aos-duration="1200">Exploring the Wonders of </p>
+                <p style="font-size: 70px;color:#920000;font-weight:1000;line-height: 90px;"  data-aos="zoom-in-up" data-aos-duration="1400">Human Anatomy</p>
+                <p style="font-size: 23px;"  data-aos="zoom-in-up" data-aos-duration="1200">A journey inside the Human Body</p>
+                <p style="font-size: 15px;width:80%;text-align: justify;color:rgb(100, 99, 99)"  data-aos="zoom-in-up" data-aos-duration="1600">
+                    On this interactive image of the human body, you can click on any part or organ to reveal symptoms
+                    and related diseases specific to that area. This feature provides an informative and engaging way to
+                    explore potential health conditions by visually interacting with different regions of the body.</p>
+                <br>
+                <div style="display: flex;flex-direction:row;gap:20px"  data-aos="zoom-in-up" data-aos-duration="1800">
+                <div style="background-color:#D9D9D9;width:170px;padding: 10px;border-radius: 10px;display: flex;flex-direction: column;align-items: center;justify-content: center;">
+                    <img src="{% static 'images/bones.png' %}" alt="" width="40px">
+                  206 Bones
+                </div>
+                <div style="background-color:#D9D9D9;width:140px;padding: 10px;border-radius: 10px;display: flex;flex-direction: column;align-items: center;justify-content: center;">
+                    <img src="{% static 'images/brains.png' %}" alt="" width="40px">
+                  86B Neurons
+                </div>
+                <div style="background-color:#D9D9D9;width:140px;padding: 10px;border-radius: 10px;display: flex;flex-direction: column;align-items: center;justify-content: center;">
+                    <img src="{% static 'images/biceps.png' %}" alt="" width="40px">
+                  600 Muscles
+                </div>
+            </div>
+            </div>
+
+            <div style="width:50%;margin-left:-380px" data-aos="zoom-in-up" data-aos-duration="1000">
+            <div class="image-container"  >
+
+                <img id="body-map" src="{% static 'images/body4.png' %}" alt="Body Map" usemap="#image-map">
+
+                <div id="magnifier" class="magnifier"></div>
+
+                <map name="image-map">
+                    <area target="" alt="Stomach" title="Stomach" href="{% url 'symptoms' 1 %}" coords="404,228,465,251"
+                        shape="rect">
+                        <area target="" alt="Stomach" title="Stomach" href="{% url 'symptoms' 1 %}" coords="449,218,475,243" shape="rect"></area>
+                    <area target="" alt="Large Intestine" title="Large Intestine" href="{% url 'symptoms' 2 %}"
+                        coords="385,250,403,306" shape="rect"></area>
+                    <area target="" alt="Large Intenstine" title="Large Intenstine" href="{% url 'symptoms' 2 %}"
+                        coords="393,246,474,262" shape="rect"></area>
+                    <area target="" alt="Large Intenstine" title="Large Intenstine" href="{% url 'symptoms' 2 %}"
+                        coords="461,254,475,312" shape="rect"></area>
+                    <area target="" alt="Large Intenstine" title="Large Intenstine" href="{% url 'symptoms' 2 %}"
+                        coords="429,312,467,325" shape="rect"></area>
+                    <area target="" alt="Small Intestine" title="Small Intestine" href="{% url 'symptoms' 3 %}"
+                        coords="401,259,458,306" shape="rect">
+                        <area target="" alt="" title="Esophagus" href="{% url 'symptoms' 4 %}" coords="420,84,438,144" shape="rect"></area>    
+                       
+                            <area target="" alt="Heart" title="Heart" href="{% url 'symptoms' 5 %}" coords="415,159,446,192" shape="rect"></area>
+                            <area target="" alt="Lungs" title="Lungs" href="{% url 'symptoms' 6 %}" coords="383,147,414,195" shape="rect"></area>
+                            <area target="" alt="Lungs" title="Lungs" href="{% url 'symptoms' 6 %}" coords="445,143,477,198" shape="rect"></area>
+                            <area target="" alt="Brain" title="Brain" href="{% url 'symptoms' 7 %}" coords="405,19,458,50" shape="rect"></area>
+                            <area target="" alt="Eyes" title="Eyes" href="{% url 'symptoms' 8 %}" coords="404,53,457,61" shape="rect"></area>
+                            <area target="" alt="Nose" title="Nose" href="{% url 'symptoms' 9 %}" coords="421,62,441,72" shape="rect"></area>
+                            <area target="" alt="Mouth" title="Mouth" href="{% url 'symptoms' 10 %}" coords="413,79,444,89" shape="rect"></area>
+                            <area target="" alt="Liver" title="Liver" href="{% url 'symptoms' 11 %}" coords="386,203,438,228" shape="rect"></area>
+                            <area target="" alt="Liver" title="Liver" href="{% url 'symptoms' 11 %}" coords="432,196,470,217" shape="rect"></area>
+                            <area target="" alt="Ear" title="Ear" href="{% url 'symptoms' 12 %}" coords="385,53,401,77" shape="rect"></area>
+                            <area target="" alt="Ear" title="Ear" href="{% url 'symptoms' 12 %}" coords="461,50,469,79" shape="rect"></area>
+                            <area target="" alt="Knee" title="Knee" href="{% url 'symptoms' 13 %}" coords="370,479,421,532" shape="rect"></area>
+                            <area target="" alt="Knee" title="Knee" href="{% url 'symptoms' 13 %}" coords="444,479,492,542" shape="rect"></area>
+                            <area target="" alt="Shoulder" title="Shoulder" href="{% url 'symptoms' 14 %}" coords="360,144,21" shape="circle"></area>
+    <area target="" alt="Shoulder" title="Shoulder" href="{% url 'symptoms' 14 %}" coords="391,128,21" shape="circle"></area>
+
+    <area target="" alt="Shoulder" title="Shoulder" href="{% url 'symptoms' 14 %}" coords="505,139,21" shape="circle"></area>
+    <area target="" alt="Shoulder" title="Shoulder" href="{% url 'symptoms' 14 %}" coords="471,126,21" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="346,180,29" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="335,220,24" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="321,256,28" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="304,293,25" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 1 %}" coords="296,331,19" shape="circle">               </area>   
+    
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="522,178,29" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="527,218,26" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="543,263,28" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="560,301,25" shape="circle"></area>
+    <area target="" alt="Arm" title="Arm" href="{% url 'symptoms' 15 %}" coords="574,335,20" shape="circle"></area>
+
+    <area target="" alt="Leg" title="Leg" href="{% url 'symptoms' 16 %}" coords="356,362,430,481" shape="rect"></area>
+    <area target="" alt="Leg" title="Leg" href="{% url 'symptoms' 16 %}" coords="444,369,510,481" shape="rect"></area>
+    <area target="" alt="Leg" title="Leg" href="{% url 'symptoms' 16 %}" coords="373,540,424,665" shape="rect"></area>
+    <area target="" alt="Leg" title="Leg" href="{% url 'symptoms' 16 %}" coords="438,535,492,664" shape="rect"></area>
+
+
+    <area target="" alt="Hand" title="Hand" href="{% url 'symptoms' 17 %}" coords="277,357,304,414" shape="rect"></area>
+    <area target="" alt="Hand" title="Hand" href="{% url 'symptoms' 17 %}" coords="557,354,585,418" shape="rect"></area>
+    <area target="" alt="Foot" title="Foot" href="{% url 'symptoms' 18 %}" coords="369,659,424,714" shape="rect"></area>
+    <area target="" alt="Foot" title="Foot" href="{% url 'symptoms' 18 %}" coords="443,657,498,715" shape="rect"></area>
+</map>
+            </div>
+
+        </div>
+
+        
+
+        </section>
+
+        <section class="smallanat" >
+            <div style="width:100%;">
+                <div class="image-container"  >
+    
+                    <img id="body-map1" src="{% static 'images/body4.png' %}" alt="Body Map"  style="width:750px;margin-top: 70px;margin-left: 30px;" onclick="showPopup()">
+    
+    
+    
+                    
+                </div>
+    
+            </div>
+            <div id="popupMessage" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem; text-align: center; padding: 20px;">
+                <div style="background-color: rgba(0, 0, 0, 0.8); padding: 30px; border-radius: 10px; max-width: 80%; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);">
+                    <p>For best experience, please open this feature on a larger screen.</p>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                        <!-- Close Button -->
+                        <button onclick="closePopup()" style="background-color: #ff4b5c; color: white; padding: 10px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2rem;">Close</button>
+                        <!-- Home Button -->
+                        <button onclick="goHome()" style="background-color: #4CAF50; color: white; padding: 10px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2rem;">Home</button>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                // Function to show the popup only when the image is clicked
+                function showPopup() {
+                    document.getElementById("popupMessage").style.display = "flex"; // Show the popup
+                }
+            
+                // Function to close the popup when the close button is clicked
+                function closePopup() {
+                    document.getElementById("popupMessage").style.display = "none"; // Hide the popup
+                }
+            
+                // Function to redirect to the home page when the "Home" button is clicked
+                function goHome() {
+                    window.location.href = "{%url 'dash'%}"; // Redirect to the homepage (change the path if needed)
+                }
+            </script>
+            
+        </section>
+    </section>
+    <script>
+        const magnifier = document.getElementById('magnifier');
+        const img = document.getElementById('body-map');
+        const imgContainer = document.querySelector('.image-container');
+
+        magnifier.style.backgroundImage = `url(${img.src})`;
+
+        imgContainer.addEventListener('mousemove', function (e) {
+            const rect = img.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const imgWidth = img.width;
+            const imgHeight = img.height;
+
+            // Display the magnifier
+            magnifier.style.display = 'block';
+
+            // Calculate the position of the magnifier
+            const magLeft = imgContainer.offsetWidth + 10; // Position to the right of the image container
+            const magTop = Math.max(10, Math.min(y - magnifier.offsetHeight / 2, imgHeight - magnifier.offsetHeight)); // Keep within the image bounds
+
+            magnifier.style.left = `${magLeft}px`;
+            magnifier.style.top = `${magTop}px`;
+
+            // Calculate the background position to zoom into the area under the cursor
+            const scale = 1.75; // Adjust scale here for less zoom
+            magnifier.style.backgroundSize = `${imgWidth * scale}px ${imgHeight * scale}px`;
+            const bgPosX = (x / imgWidth) * 100;
+            const bgPosY = (y / imgHeight) * 100;
+            magnifier.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+        });
+
+        imgContainer.addEventListener('mouseleave', function () {
+            magnifier.style.display = 'none';
+        });
+    </script>
+
+
+<script>
+    AOS.init();
+  </script>
+</body>
+
+</html>
+{% endblock %}

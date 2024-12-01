@@ -1,0 +1,701 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety Test</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+    <style>
+       .topsec{
+        width:100vw;
+        height: 100vh;
+       
+
+       }
+      .anxmainsec{
+        width:100%;
+        height:fit-content;
+       
+
+        /* overflow-y: scroll; */
+      }
+
+        .anxietysec{
+            width:100%;
+            height:100%;
+           /* background-color: bisque; */
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            /* overflow-y: scroll; */
+           
+        }
+        .anxtest{
+          font-size: 50px;
+            text-align: center;
+            margin-top: 30px;
+            /* overflow-y: scroll; */
+        }
+
+        .card{
+            width: 45rem;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 30px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .question {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .navigation {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            gap:30px;
+        }
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            margin: 0 auto;
+            margin-bottom: 30px;
+            background-color: #7368DE; /* Default lower intensity */
+            transition: background-color 0.3s;
+        }
+
+        .rdbtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            gap:20px;
+        }
+
+        .qtext{
+            text-align: center;
+            font-size:30px;
+            font-weight: 700;
+            color:#1F2278;
+        }
+
+        .qtext1{
+            text-align: center;
+            font-size:50px;
+            font-weight: 700;
+            color:#1F2278;
+            margin-bottom: 30px;
+        }
+
+        .thanktxt{
+            text-align: center;font-size: 30px;font-weight: 700;color:#1F2278;margin-top: 20px;
+        }
+
+        .btncenter{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+.btn-53,
+.btn-53 *,
+.btn-53 :after,
+.btn-53 :before,
+.btn-53:after,
+.btn-53:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
+.btn-53 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #7368DE;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+
+.btn-53:disabled {
+  cursor: default;
+}
+
+.btn-53:-moz-focusring {
+  outline: auto;
+}
+
+.btn-53 svg {
+  display: block;
+  vertical-align: middle;
+}
+
+.btn-53 [hidden] {
+  display: none;
+}
+
+.btn-53 {
+    margin-top: 20px;
+  border: 1px solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 1.0rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.btn-53 .original {
+  background:#7368DE;
+  color: #fff;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.btn-53:hover .original {
+  transform: translateY(100%);
+}
+
+.btn-53 .letters {
+  display: inline-flex;
+}
+
+.btn-53 span {
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: transform 0.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.2s;
+}
+
+.btn-53 span:nth-child(2n) {
+  transform: translateY(15px);
+}
+
+.btn-53:hover span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.btn-53:hover span:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.btn-53:hover span:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+.btn-53:hover span:nth-child(4) {
+  transition-delay: 0.3s;
+}
+
+.btn-53:hover span:nth-child(5) {
+  transition-delay: 0.4s;
+}
+
+.btn-53:hover span:nth-child(6) {
+  transition-delay: 0.5s;
+}
+
+
+@media  (max-width: 600px) {
+    .card {
+        width: 17rem; /* Adjust as needed for responsiveness */
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        overflow-y: scroll;
+    }
+
+    .hero_icon {
+        display: none; /* Hides .hero_icon on devices within the specified width range */
+    }
+
+    .rdbtn{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top:-10px;
+            margin-bottom: 20px;
+            gap:20px;
+        }
+
+        .qtext{
+            font-size:22px;
+            margin-bottom: 40px;
+        }
+
+        .qtext1{
+            font-size:33px;
+        }
+
+        .thanktxt{
+            font-size: 22px;
+        }
+}     
+
+
+    </style>
+
+
+    </head>
+    <body>
+        <section class="topsec">
+        <section class="anxmainsec">
+            <div class="hero_icon"  style="position: absolute; left: 290px; top: 240px; z-index: 1;">
+                <img src="{%static 'images/gen.svg' %}" style="z-index: -1;">
+            </div>
+
+            <div class="hero_icon" style="position: absolute; right: 90px; top: 140px; z-index: 1;">
+                <img src="{%static 'images/gen2.svg' %}" style="z-index: -1;">
+            </div>
+          <!-- <p class="anxtest">Anxiety Test</p> -->
+          <h1 style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+          margin-left: auto; margin-right: auto;
+          padding: 8px;
+          color: #F17732;
+          font-weight: 700;
+          " data-aos="zoom-in" data-aos-duration="1200">Depression Test</h1>
+          <div class="anxietysec">
+
+            <div class="card" data-aos="zoom-in" data-aos-duration="1200">
+        <!-- Numbering Circle -->
+    <div class="circle" id="circle" style="display: none;">1</div>
+ 
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div id="question1" class="question active" >
+        <p class="qtext1" data-aos="zoom-in" data-aos-duration="1000">Take the Quiz</p>
+ 
+        
+
+        <p data-aos="zoom-in" data-aos-duration="1100">Over the last 2 weeks, how often have you been bothered by the following problems?</p>
+        <p style="text-align: center;" data-aos="zoom-in" data-aos-duration="1200">Please note, all fields are required.</p>
+
+       
+</div>
+
+
+    
+<div id="question2" class="question" data-aos="zoom-in" data-aos-duration="1200">
+    <p class="qtext" data-aos="zoom-in" data-aos-duration="1200">Little interest or pleasure in doing things?</p>
+    <div class="rdbtn">
+        <div>
+            <label>
+                <input type="radio" name="q1" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q1" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q1" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q1" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label>
+        </div>
+    </div>
+</div>
+
+<div id="question3" class="question">
+    <p class="qtext">Feeling down, depressed, or hopeless?</p>
+    <div class="rdbtn">
+        <div>
+            <label>
+                <input type="radio" name="q2" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q2" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q2" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q2" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label>
+        </div>
+    </div>
+</div>
+
+<div id="question4" class="question">
+    <p class="qtext">Trouble falling or staying asleep, or sleeping too much?</p>
+    <div class="rdbtn" style="margin-left: 40px;">
+        <div>
+            <label>
+                <input type="radio" name="q3" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q3" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q3" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q3" value="4" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label>
+        </div>
+    </div>
+</div>
+
+
+<div id="question5" class="question">
+    <p class="qtext">Feeling tired or having little energy?</p>
+    <div class="rdbtn">
+        <div>
+            <label>
+                <input type="radio" name="q4" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q4" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q4" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q4" value="5" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label>
+        </div>
+    </div>
+</div>
+
+<div id="question6" class="question">
+    <p class="qtext">Poor appetite or overeating?</p>
+    <div class="rdbtn">
+        <div>
+            <label>
+                <input type="radio" name="q5" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q5" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q5" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q5" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label><br>
+        </div>
+    </div>
+</div>
+
+<div id="question7" class="question">
+    <p class="qtext">Feeling bad about yourself - or that you are a failure or have let yourself or your family down?</p>
+    <div class="rdbtn" style="margin-left: 40px;">
+        <div>
+            <label>
+                <input type="radio" name="q6" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q6" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q6" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q6" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label><br>
+        </div>
+    </div>
+</div>
+
+
+<div id="question8" class="question">
+    <p class="qtext">Trouble concentrating on things, such as reading the newspaper or watching television?</p>
+    <div class="rdbtn" style="margin-left: 50px;">
+        <div>
+            <label>
+                <input type="radio" name="q7" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q7" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q7" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q7" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label><br>
+        </div>
+    </div>
+</div>
+
+
+
+        
+
+<div id="question9" class="question">
+    <p class="qtext">Moving or speaking so slowly that other people could have noticed. Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?</p>
+    <div class="rdbtn" style="margin-left: 50px; margin-bottom: -10px;">
+        <div>
+            <label>
+                <input type="radio" name="q8" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q8" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q8" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q8" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label><br>
+        </div>
+    </div>
+</div>
+
+
+<div id="question10" class="question">
+    <p class="qtext">Thoughts that you would be better off dead, or of hurting yourself?</p>
+    <div class="rdbtn" style="margin-left: 50px;">
+        <div>
+            <label>
+                <input type="radio" name="q9" value="0" required>&nbsp;&nbsp;&nbsp;Not at All
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q9" value="1" required>&nbsp;&nbsp;&nbsp;Several Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q9" value="2" required>&nbsp;&nbsp;&nbsp;More than half the Days
+            </label><br>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="q9" value="3" required>&nbsp;&nbsp;&nbsp;Nearly every Day
+            </label><br>
+        </div>
+    </div>
+</div>
+
+        
+
+        <div id="question11" class="question">
+            <p class="thanktxt" >Thank you for taking the time to complete your Personal Assessment.</p>
+     <div class="btncenter">       
+<button class="btn-53">
+  <div class="original">Submit</div>
+  <div class="letters">
+    
+    <span>S</span>
+    <span>U</span>
+    <span>B</span>
+    <span>M</span>
+    <span>I</span>
+    <span>T</span>
+    </div>
+  </div>
+</button>
+
+     
+        </div>
+
+        
+    </form>
+       
+    
+        <div class="navigation">
+            <button data-aos="zoom-in" data-aos-duration="1200" id="prevBtn" style="border-radius: 50%;padding:10px;outline:2px solid #7368DE;border:none;color: #7368DE;font-size: 15px;font-weight: bold;background-color: #fff;display: none;" onclick="showQuestion('prev')" disabled><img src="{% static 'images/icons8.png' %}" alt="" height="20px"></button>
+            <button data-aos="zoom-in" data-aos-duration="1200" id="nextBtn" style="border-radius: 50%;padding:10px;outline:2px solid #7368DE;border:none;color: #7368DE;font-size: 15px;font-weight: bold;background-color:#fff ;" onclick="showQuestion('next')"><img src="{% static 'images/icons89.png' %}" alt="" height="20px"></button>
+        </div>
+
+  
+    </div>
+    </div>
+    </section>
+</section>
+
+
+        <script>
+            let currentQuestion = 1;
+            const totalQuestions =11;
+            // document.getElementById(1).style.display = 'none';
+            function updateCircle() {
+
+                const displayedNumber = currentQuestion - 1;
+
+// Update the circle's number
+document.getElementById('circle').textContent = displayedNumber;
+                // Update the circle's number
+              
+
+                if (currentQuestion === 1 || currentQuestion === totalQuestions) {
+        document.getElementById('circle').style.display = 'none';
+    } else {
+        document.getElementById('circle').style.display = 'flex';
+    }
+
+    if (currentQuestion === 1) {
+        document.getElementById('prevBtn').style.display = 'none';
+    } else {
+        document.getElementById('prevBtn').style.display = 'flex';
+    }
+
+    // Hide the Next button if it's the last question
+    if (currentQuestion === totalQuestions) {
+        document.getElementById('nextBtn').style.display = 'none';
+    } else {
+        document.getElementById('nextBtn').style.display = 'flex';
+    }
+
+   
+
+
+
+
+            }
+    
+            function showQuestion(direction) {
+                // Hide the current question
+                document.getElementById(`question${currentQuestion}`).classList.remove('active');
+    
+                // Update the current question index based on the direction
+                if (direction === 'next' && currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                } else if (direction === 'prev' && currentQuestion > 1) {
+                    currentQuestion--;
+                }
+    
+                // Show the new question
+                document.getElementById(`question${currentQuestion}`).classList.add('active');
+    
+                // Update the circle
+                updateCircle();
+
+                // Disable/Enable the Previous button based on the current question index
+    const nextBtn = document.getElementById('nextBtn');
+    prevBtn.disabled = currentQuestion === 1;
+
+    // Hide the Previous button if on question 9
+    if (currentQuestion === 11) {
+        nextBtn.style.display = 'none';
+    } else {
+        nextBtn.style.display = 'block';
+    }
+
+    
+                // Disable/Enable the Previous button based on the current question index
+                document.getElementById('prevBtn').disabled = currentQuestion === 1;
+    
+                // Disable/Enable the Next button based on the current question index
+                document.getElementById('nextBtn').disabled = currentQuestion === totalQuestions;
+            }
+        </script>
+
+<script>
+    function validateAndNext() {
+        const options = document.getElementsByName('q1');
+        let selected = false;
+    
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                selected = true;
+                break;
+            }
+        }
+    
+        if (!selected) {
+            alert("Please select an option before proceeding.");
+        } else {
+            // Code to proceed to the next question
+            alert("Proceeding to the next question...");
+        }
+    }
+    </script>
+
+    
+
+    </body>
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </html>
+    {% endblock %}

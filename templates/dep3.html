@@ -1,0 +1,283 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disorder</title>
+
+    <style>
+        .mental1{
+            width:100%;
+            height:100vh;
+            overflow: hidden;
+        }
+
+        .mainc{
+            display: flex;
+            justify-content: center;
+            margin-top: -80px;
+        }
+
+        .selectc{
+            width: 70%;
+            height:150px;
+            background-color: #9370DB;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 20px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: 1px solid white;
+            transition: transform 0.3s ease;
+        }
+
+        .selectc:hover {
+        transform: translateY(-10px); /* Lift effect */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    }
+
+        .btndiv{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            width: 200px;
+            padding: 12px;
+            background-color:#D80027;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color:#D80027;
+            color: white;
+            transform: scale(1.04);
+        }
+
+        /* Styles for the table box */
+        .table-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+      
+
+        .table-box {
+            width: 90%;
+            background-color: #f0f0f5;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: 1px solid #9370DB;
+            height:480px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        table, th, td {
+            border: 1px solid #9370DB;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #9370DB;
+            color: white;
+        }
+
+        td {
+            background-color: #fafafa;
+        }
+        .mendis{
+            text-align: center;
+            font-size: 30px;
+            margin-top: 10px;
+        }
+
+        .maing {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    width: 90%;
+    height: 490px; /* Define height */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+}
+
+
+
+#graph{
+ margin-top: 50px;
+ /* height:400px; */
+}
+
+.arrow56{
+            margin-top: 50px;
+            margin-left:40px;
+        }
+
+
+            /* For mobile screens */
+    @media (max-width: 480px) {
+        .mental1{
+            
+            overflow:scroll;
+        }
+        .mainc{
+            overflow: scroll;
+            margin-top: 70px;
+        }
+
+        .arrow56{
+            position: absolute;
+            z-index:2;
+            margin-top: -5px;
+        }
+        .table-box {
+            max-width: 90%;  /* Reduce width to 95% for small screens */
+            padding: 10px;
+        }
+
+        th, td {
+            font-size: 10px;
+            padding: 3px;
+        }
+    }
+
+        
+    </style>
+<script>
+    function validateForm() {
+        var country = document.getElementById("country").value;
+
+        if (country === "") {
+            alert("Please select a year!");
+            return false;  // Prevent form submission
+        }
+
+        return true;  // Allow form submission
+    }
+</script>
+</head>
+
+<body>
+
+    <section class="mental1">
+        <a href="{% url 'depsnalysis' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a> 
+        <div class="mainc">
+            <div class="selectc">
+                <form action="" method="POST" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    <select name="year" id="country" style="width:100%; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                        <option selected disabled value="">Select Year</option>
+                        {% for i in nyear %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="btndiv">
+                        <button type="submit" class="btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Added Table Box Below -->
+         <!-- Conditionally render the graph or the table -->
+         {% if graph %}
+         <div class="maing">
+             <!-- Embed the graph data here -->
+             <div id="graph">{{ graph|safe }}</div>
+         </div>
+         {% else %}
+         <!-- Added Table Box Below -->
+         <div class="table-container">
+             <div class="table-box">
+                 <h3 class="mendis">Depression Disorder Data</h3>
+                 <table>
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Country</th>
+                            <th>Depression Disorders - Male (%)</th>
+                            <th>Depression Disorders - Female (%)</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2024</td>
+                            <td>India</td>
+                            <td>5.4</td>
+                            <td>6.2</td>
+                            <td>1.426 billion</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>Australia</td>
+                            <td>4.7</td>
+                            <td>5.2</td>
+                            <td>25 million</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>China</td>
+                            <td>4.0</td>
+                            <td>4.7</td>
+                            <td>1.426 billion</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>America</td>
+                            <td>7.5</td>
+                            <td>9.0</td>
+                            <td>334 million</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>England</td>
+                            <td>6.4</td>
+                            <td>7.8</td>
+                            <td>56 million</td>
+                        </tr>
+                        <tr>
+                            <td>2024</td>
+                            <td>Brazil</td>
+                            <td>5.9</td>
+                            <td>6.5</td>
+                            <td>213 million</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+             </div>
+         </div>
+         {% endif %}
+    </section>
+
+</body>
+
+</html>
+{% endblock %}

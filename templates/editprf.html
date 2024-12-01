@@ -1,0 +1,424 @@
+
+{% extends 'sidebar1.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        .mainedit{
+            width:100%;
+            height:100vh;
+            display: flex;
+            justify-content: center;
+            
+            
+        }
+        .twoinputmain{       
+            width:80%;
+            height: 91vh;
+            /* border: 1px solid black;  */
+            background-color: white;
+            margin-top: 30px;
+            /* margin-bottom: 10px; */
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .twoinput{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            margin-left: 120px;
+            margin-right: 20px;
+        }
+
+        /* Input type css */
+.group {
+    display: flex;
+    line-height: 30px;
+    align-items: center;
+    position: relative;
+    max-width: 400px;
+  }
+  
+  .input1 {
+    width: 90%;
+    height: 45px;
+    line-height: 30px;
+    /* padding: 0 1rem; */
+    padding-left: 3rem;
+    border: 1px solid rgb(130, 130, 174);
+    border-radius: 15px;
+    outline: none;
+    background-color: #fff;
+    color: #0d0c22;
+    transition: .3s ease;
+    
+  }
+  
+  .input1::placeholder {
+    color: #94a3b8;
+  }
+  
+  .input1:focus {
+    outline: none;
+    border:2px solid rgba(129, 140, 248);
+    background-color: #fff;
+    /* box-shadow: 0 0 0 5px rgb(129 140 248 / 30%); */
+     box-shadow: 0 0 5px 2px rgba(129, 140, 248, 0.3);
+  }
+  
+  .icon1 {
+    position: absolute;
+    left: 1rem;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer; 
+  }
+
+  .labelinput{
+    margin-left: 20px;
+  }
+
+
+.ed{
+  text-align: center;
+  margin-top: 30px;
+  font-size: 50px;
+  /* margin-bottom: 10px; */
+}
+
+
+
+.button1 {
+ margin-top: -15px;
+margin-bottom: 20px;
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+.imgcent{
+  display: flex;justify-content:center;gap:50px;align-items: center;margin-bottom: 20px;margin-top: 50px;
+}
+
+
+
+
+
+/* From Uiverse.io by vinodjangid07 */ 
+.cssbuttons-io-button {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0.8em 1.0em 0.8em 1.0em;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em rgb(184, 146, 255);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+}
+
+.cssbuttons-io-button svg {
+  margin-right: 8px;
+}
+
+.cssbuttons-io-button:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em rgb(149, 91, 255);
+}
+
+.cssbuttons-io-button:active {
+  box-shadow: 0 0.3em 1em -0.5em rgb(160, 109, 255);
+}
+
+
+.btndiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-left:340px; */
+  margin-left:-250px;
+  margin-bottom: 20px;
+}
+
+@media (min-width:320px) and (max-width:500px) {
+
+    .mainedit{
+            width:100%;
+            height:150vh;
+            display: flex;
+            justify-content: center;
+        }
+        .twoinputmain{       
+            width:90%;
+            height: 140vh;
+            /* border: 1px solid black;  */
+            background-color: white;
+            margin-top: 50px;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    .twoinput{
+        grid-template-columns:1fr;
+        margin-left: 0px;
+    }
+    .button1 {
+      margin-top: -5px;
+    }
+    .imgcent{
+      margin-top: 20px;
+        margin-bottom: 20px;
+    }
+.divcont{
+  display: none;
+}   
+
+.btndiv{
+  display: flex;
+  justify-content: center;
+  margin-left:0px;
+  margin-bottom: 20px;
+}
+
+}
+
+    </style>
+</head>
+<body>
+
+    <section class="mainedit" style="overflow: hidden;">
+      <div class="twoinputmain" data-aos="flip-left" data-aos-duration="1000" style="overflow: hidden;">
+        <!-- <p class="ed" > Edit Profile</p> -->
+
+        <form action="" method="POST" enctype="multipart/form-data">   
+        {% csrf_token %} 
+<div class="imgcent" >
+  {% if user.image_ed %}
+  <img src="{{user.image_ed.url}}" alt="user image"  id="display-image" width="120px" height="120px" style="background-color: #000;border-radius:50%;margin-bottom:15px;">
+  {% else %}
+   <img src="{%static 'images/robotimg.png' %}"  id="display-image" width="120px" height="120px" style="background-color: #000;border-radius:50%;margin-bottom:15px;">
+  {%endif%}
+        
+        <div class="divcont" >
+        <p style="font-size: 35px;">{{user.username|default_if_none:''}}</p>  
+        <p style="margin-top: -18px;opacity: 0.8;font-size: 14px;">{{user.Address|default_if_none:''}}</p>
+      </div></div>
+
+
+<div class="btndiv">
+  <!-- Hidden file input -->
+  <input type="file" id="file-upload" style="display: none;" name="fs" accept="image/*" />
+
+  <!-- Visible button -->
+
+  <button type="button" class="cssbuttons-io-button" onclick="document.getElementById('file-upload').click()">
+    <svg viewBox="0 0 640 512" fill="white" height="1em" xmlns="http://www.w3.org/2000/svg">
+      <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"></path>
+    </svg>
+    <span>Upload</span>
+  </button>
+</div>
+
+              <div class="twoinput">
+                
+                <!-- Username field -->
+ <div class="labelinput">
+  
+<label>Name</label>
+<div class="group" style="margin-bottom: 20px;">
+  <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+      <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M15.75 7.5c0 2.071-1.679 3.75-3.75 3.75s-3.75-1.679-3.75-3.75S9.929 3.75 12 3.75 15.75 5.429 15.75 7.5zM4.5 19.5c0-3.038 4.962-5.25 7.5-5.25s7.5 2.212 7.5 5.25v.75h-15v-.75z"
+    />
+</svg>
+
+<input class="input1" type="text"  name="usernam" value="{{user.username|default_if_none:''}}" >
+</div>
+</div>
+
+<!-- Email field -->
+<div class="labelinput">
+    <label>Email</label>
+    <div class="group" style="margin-bottom: 20px;">
+        <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+            <path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75zM3 6l8.25 5.25L19.5 6"
+/></svg>   
+    <input class="input1" type="email"  name="email" value="{{user.email}}" readonly>
+    </div>
+    </div>
+
+
+
+     <!-- Phone field -->
+<div class="labelinput">
+    <label>Phone No</label>
+    <div class="group" style="margin-bottom: 20px;">
+        <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1" width="48" height="48" >
+            <path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M22 16.92V21a2 2 0 0 1-2.18 2 19.91 19.91 0 0 1-8.63-3.07 19.78 19.78 0 0 1-6-6A19.91 19.91 0 0 1 3 4.18 2 2 0 0 1 5 2h4.09a2 2 0 0 1 2 1.72l.5 3.17a2 2 0 0 1-1.07 2.18l-2.22 1.11a16 16 0 0 0 6 6l1.11-2.22a2 2 0 0 1 2.18-1.07l3.17.5a2 2 0 0 1 1.72 2z"
+/>
+      </svg>
+          
+          
+          
+    
+    <input class="input1" type="text"  name="phone" value="{{user.phone_no|default_if_none:''}}">
+    </div>
+    </div>
+
+
+    <!-- Address field -->
+<div class="labelinput">
+    <label>Address</label>
+    <div class="group" style="margin-bottom: 20px;">
+      <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+          <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        />
+    </svg>
+    
+    <input class="input1" type="text"  name="address" value="{{user.Address|default_if_none:''}}">
+    </div>
+    </div>
+
+
+    <!-- PinCode field -->
+<div class="labelinput">
+    <label>Pincode</label>
+    <div class="group" style="margin-bottom: 20px;">
+      <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+          <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+        />
+    </svg>
+    
+    <input class="input1" type="text"  name="pincode" value="{{user.pincode_no|default_if_none:''}}">
+    </div>
+    </div>
+
+    <!-- DOB field -->
+<div class="labelinput">
+    <label>DOB</label>
+    <div class="group" style="margin-bottom: 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon1" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="18" rx="2" ry="2" stroke-width="2"/>
+            <path d="M2 8h20" stroke-width="2"/>
+            <path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 16h.01M10 16h.01M14 16h.01M18 16h.01" stroke-width="2"/>
+          </svg>
+          
+    
+    <input class="input1" type="date"  name="dob" value="{{user.date_of_birth|default_if_none:''}}">
+    </div>
+    </div>
+
+    <!-- Bio field -->
+<div class="labelinput">
+    <label>About</label>
+    <div class="group" style="margin-bottom: 20px;">
+      <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+          <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+           d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        
+    </svg>
+    
+    <input class="input1" type="text"  name="about" value="{{user.Bio|default_if_none:''}}">
+    </div>
+    </div>
+
+
+
+
+
+              </div>
+
+              <div style="display: flex;width:100%;justify-content: center;margin-top: 10px;">
+                <a href="#" style="text-decoration: none;"><button class="button1" >
+                    Save
+                    <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                       <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+                     </svg>
+                     
+                   </button></a>
+                </div>
+      </div>
+    </form>
+
+    <div  style="position: absolute;">
+      {% include 'chatbot.html' %}
+  </div>
+    </section>
+</body>
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+
+<script>
+  document.getElementById('file-upload').addEventListener('change', function(event) {
+    var displayImage = document.getElementById('display-image');
+    var file = event.target.files[0];
+
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        displayImage.src = e.target.result;
+      }
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+<script>
+  AOS.init();
+</script>
+</html>
+{% endblock %}

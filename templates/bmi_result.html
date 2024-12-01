@@ -1,0 +1,314 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Result</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    <style>
+        
+        .section1{
+            width:100%;
+            height:100vh;
+            overflow-y: hidden;
+            overflow: hidden;
+        }
+        .ressec{
+           
+           
+         
+            height:100vh;
+            /* background-color: antiquewhite; */
+            display: grid;
+            grid-template-columns: 0.75fr 1.25fr;
+            margin-left: 80px;
+            gap:50px;
+        }
+        .contdiv{
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            gap:10px;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdiv2{
+            margin-left: 30px;
+            margin-top:70px;
+            padding-top: 30px;
+            margin-right: 30px;
+            display: flex;
+           
+            flex-direction: column;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdivsty2{
+            /* margin-left: 100px; */
+            /* padding-left: 70px; */
+        }
+
+
+        /* BUtton start */
+        .button1 {
+
+margin-bottom: 40px;
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+.bmicont{
+  width:90%;
+}
+
+.smbtn{
+  display: none;
+}
+       
+@media  (max-width:600px) {
+
+  .section1{
+    /* margin-top: 50px; */
+    overflow: hidden;
+    overflow-y:hidden;
+    overflow-x: hidden;
+    width:320px;
+  }
+  .ressec{ 
+           /* overflow: hidden; */
+           height:150vh;
+           /* background-color: antiquewhite; */
+           display:flex;
+           flex-direction:column;
+           align-items: center;
+           justify-content: center;
+           margin-left: 10px;
+           margin-top: 70px;
+           margin-right:10px;
+           width:300px;
+           padding: 20px;
+           
+       }
+       .contdiv{
+        padding: 10px;
+        display: none;
+
+       }
+
+       .contdiv2{
+        margin-top: 0px;
+       }
+
+       .bmicont{
+  width:90%;
+  margin: 15px;
+}
+
+.orangebmi{
+  display:none;
+}
+
+.largebtn{
+  display: none;
+}
+
+.smbtn{
+  display: block;
+  margin-left: 30px;
+}
+      
+}
+    </style>
+</head>
+<body >
+   
+    <section  >
+       <section class="section1">
+        
+        <h1 class="orangebmi" style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+        margin-left: auto; margin-right: auto;
+        padding: 8px;
+        color: #F17732;
+        font-weight: 700;
+        " data-aos="zoom-in" data-aos-duration="1000">Your BMI Result</h1>
+   <div class="ressec" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 15px;height:80vh;margin-right: 50px;">
+ <div class="contdiv" data-aos="zoom-in" data-aos-duration="1000" >
+    <img src="data:image/png;base64,{{ graph }}" alt="BMI Gauge" ><br>
+    
+</div>
+<div >
+<div class="contdiv2" data-aos="zoom-in" data-aos-duration="1000">
+    <div class="contdivsty2">
+        <div class="bmicont" style="background-color:white;display: flex;align-items: center;flex-direction: column;border-radius: 10px;color:#000066;padding-top: 20px;padding-bottom: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
+
+        
+    <div style="display: flex;gap:80px;font-size: 20px;">
+    <p style="font-weight: 700;">Height :</p>
+    
+    <p style="color:#4A4A4A"> {{feet}}' {{inches}}'' </p>
+</div>
+
+<div style="display: flex;gap:90px;font-size: 20px;">
+    <p style="font-weight: 700;">Weight :</p>
+   
+    <p style="color:#4A4A4A">{{weight}}</p>
+</div>
+
+
+    <hr style="width:90%;text-align: center;background:black;">
+
+
+    <div class="contdivsty2"> 
+ <div style="display:flex;gap:100px;font-size: 20px;align-items: center;justify-content: center;background-color: rgb(209, 227, 242);width:300px;">
+   <p style="font-weight: 700;margin-top:10px;">Your BMI :</p>
+  
+   <p style="color:#4A4A4A;margin-top: 10px;">{{ bmi }}</p>
+</div>
+
+<div style="display: flex;gap:30px;font-size: 20px;justify-content: center;">
+    <p style="font-weight: 700;">Category  :</p>
+   
+    <p style="color:#4A4A4A">{{ category }}</p>
+
+</div>
+</div>
+</div>
+
+<div class="largebtn" style="display: flex;width:100%;justify-content: center;align-items: center;margin-top: 50px;gap:20px">
+  
+    <button class="button1 largebtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background: #F17732;box-shadow: none;border-radius: 0px;">
+      Tips & Suggestions
+    </button>
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 largebtn" style="background:#000066;box-shadow: none;border-radius: 0px;" >
+    Back to Home
+    <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+       <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+     </svg>
+     
+   </button></a>  
+</div>
+
+
+<div >
+  <button class="button1 smbtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:80%;background: #F17732;box-shadow: none;border-radius: 0px;margin-bottom: 10px;">
+    Tips & Suggestions
+  </button>
+
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 smbtn" style="width:80%;background:#000066;box-shadow: none;border-radius: 0px;" >
+  Back to Home
+  <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+   </svg>
+   
+ </button></a>
+</div>
+
+  
+</div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1000-" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Tips & Suggestions</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            
+            <h3 style="color: #000066;margin-bottom: 20px;">Food and Diet recommendations:</h3>
+            
+            <!-- <h1>BMI Table</h1> -->
+            <img src="{% static 'images/bmitab.png' %}" alt="" width="450px" style="margin-top:-50px;">
+            <h4 style="text-align: center;margin-bottom: 20px;color: #F17732;">For Underweight (BMI < 18.5):</h4>
+            <ul>
+                <li><b>Increase Caloric Intake:</b> Focus on calorie-dense foods like nuts, seeds, avocados, and whole grains.</li><br>
+                <li><b>Protein-Rich Foods:</b> Incorporate lean meats, dairy products, legumes, and eggs to build muscle mass.</li><br>
+                <li><b>Healthy Fats:</b> Include sources of healthy fats such as olive oil, nuts, and fatty fish like salmon.</li><br>
+                <li><b>Frequent Meals:</b> Eat smaller, more frequent meals to increase overall calorie intake without feeling too full. </li><br>
+                
+            </ul>
+
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">For Normal Weight (BMI 18.5 - 24.9):</h4>
+            <ul>
+                <li><b>Balanced Diet:</b> Maintain a diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.</li><br>
+                <li><b>Portion Control:</b> Practice mindful eating and portion control to maintain your weight.</li><br>
+                <li><b>Stay Hydrated:</b> Drink plenty of water throughout the day.</li><br>
+                <li><b>Regular Exercise:</b> Combine aerobic exercises with strength training to maintain muscle mass and overall fitness.</li><br>
+                
+            </ul>
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">For Overweight (BMI 25 - 29.9):</h4>
+            <ul>
+                <li><b>Reduce Sugar Intake:</b> Cut down on sugary drinks, snacks, and processed foods.</li><br>
+                <li><b>Eat More Fiber:</b>  Increase your intake of fiber-rich foods like fruits, vegetables, and whole grains to promote satiety.</li><br>
+                <li><b> Lean Proteins: </b>Opt for lean protein sources such as chicken, turkey, fish, and legumes to help with muscle maintenance while losing fat.</li><br>
+                <li><b> Healthy Snacking:</b> Choose healthy snacks like nuts, yogurt, or fruits to avoid overeating during meals.</li><br>
+              
+            </ul>
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">For Obese (BMI ≥ 30):</h4>
+            <ul>
+                <li><b>Low-Calorie Diet: </b> Focus on low-calorie, nutrient-dense foods such as leafy greens, lean proteins, and whole grains.</li><br>
+                <li><b>Limit Carbohydrates: </b>Reduce intake of refined carbs like white bread, pasta, and sugary snacks.</li><br>
+                <li><b>Healthy Fats:</b> Use healthy fats like avocado, olive oil, and nuts in moderation.</li><br>
+                <li><b>Regular Physical Activity:</b>  Incorporate both cardio and strength training exercises to support weight loss and improve cardiovascular health.</li><br>
+               
+            </ul>
+          
+       <img src="{% static 'images/bmiable.jpg'%}" alt="" width="450px">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+</body>
+</html>
+{% endblock %}

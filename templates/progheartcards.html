@@ -1,0 +1,175 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Prognosis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <style>
+        .progheartcardsmain {
+            width: 100%;
+            padding: 40px 0;
+            /* background-color: #f3f6fa; */
+        }
+
+        .divide {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+            transition: all 0.3s ease-in-out;
+            width: 80%;
+            overflow: hidden;
+             /* background: linear-gradient(to right, rgba(223, 223, 244,0.5), rgba(171, 127, 210, 0.5));; */
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .heartarrow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .heartarrow a {
+            color: #dc3545;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .heartarrow a:hover {
+            color: #d9534f;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .heromsec {
+            font-size: 40px;
+            color: #5d5fe9;
+            font-weight: 700;
+            background-image: url("{% static 'images/blueline.png' %}");
+            width: fit-content;
+            padding: 6px;
+            margin: 0 auto 40px auto;
+            text-align: center;
+        }
+
+        /* Footer style */
+        .card-footer {
+            background-color: transparent;
+            border-top: none;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .card-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 30px;
+                width: 100%;
+            }
+
+            .heartarrow a {
+                font-size: 1.5rem;
+            }
+
+            .heromsec {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="progheartcardsmain">
+        <p class="heromsec"  data-aos="flip-up" data-aos-duration="1000">Heart Prognosis</p>
+        <div class="container">
+            <div class="row divide">
+                <div class="col-md-6" data-aos="zoom-out-up" data-aos-duration="1200">
+                    <div class="card">
+                        <img src="{% static 'images/heartabt.jpg' %}" class="card-img-top" alt="Heart Disease Prediction">
+                        <div class="card-body">
+                            <div class="heartarrow">
+                                <h5 class="card-title">Heart Disease Prediction</h5>
+                                <a href="{% url 'predictheart' %}">
+                                    <i class="fas fa-arrow-right ia fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="card-footer">
+                            <a href="{% url 'predictheart' %}">Learn more about Heart Disease Prediction</a>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="col-md-6" data-aos="zoom-out-up" data-aos-duration="1500">
+                    <div class="card">
+                        <img src="{% static 'images/graphabt4.jpg' %}" class="card-img-top" alt="Exploratory Data Analysis">
+                        <div class="card-body">
+                            <div class="heartarrow">
+                                <h5 class="card-title">Exploratory Data Analysis</h5>
+                                <a href="{% url 'eda' %}">
+                                    <i class="fas fa-arrow-right ia fa-2x"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- <div class="card-footer">
+                            <a href="{% url 'eda' %}">Learn more about Data Analysis</a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+<script>
+    AOS.init();
+  </script>
+</html>
+{% endblock %}

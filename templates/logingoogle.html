@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   
+<link rel="stylesheet" href="{%static 'css/login.css' %}">
+<link rel="stylesheet" href="{%static 'css/base.css' %}">
+
+</head>
+<body>
+
+
+ 
+
+  <!--Login section  --> 
+   <section class="loginmain"  style="background-image: url('static/images/line-bg2.png');">
+
+       
+<div class="logincen" style="display: flex;justify-content: center;align-items: center;margin-top: 30px;">
+        <!-- Login form start -->
+        <div class="container cont" data-aos="zoom-in-down" data-aos-duration="1000">
+            <div class="heading">Sign In</div>
+
+            {% if msg %}
+            <div class="alert alert-danger" role="alert">
+             {{msg}}
+            </div>
+                       
+            {% endif %}
+            <form class="forml" action="" method="POST">
+              {% csrf_token %}
+              <!-- Email field -->
+              <div class="group" style="margin-bottom: 20px;">
+                <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
+                    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-15A2.25 2.25 0 012.25 17.25V6.75zM3 6l8.25 5.25L19.5 6"
+    />
+              </svg>
+              <input class="input1" type="email" placeholder="Email" name="email" required>
+              </div>
+<!-- Password field -->
+             
+              <div class="group">
+                <svg
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon1"
+                  onclick="togglePasswordVisibility()"
+                >
+                  <!-- Closed Lock Icon -->
+                  <path
+                    class="closed-lock"
+                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  ></path>
+                  <!-- Open Lock Icon -->
+                  <path
+      class="open-lock"
+      style="display: none"
+      d="M7 10V6.75a5 5 0 019.9-.25M18 10h-12a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2z"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    ></path>
+                </svg>
+                <input class="input1" type="password" placeholder="Password" id="passwordInput" name="passw" required/>
+              </div>        
+              <span class="forgot-password"><a href="{%url 'forgotpass' %}" style="font-weight: 200;">Forgot Password ?</a></span>
+              <!-- <input value="Sign In" type="submit" class="login-button" /> -->
+              <button  class="login-button" type="submit">Signin</button>
+            </form>
+            <div class="social-account-container" style="margin-top: 2px;">
+              <span class="title">Or Sign in with</span>
+              <div class="social-accounts">
+                
+                
+                <a href="{% url 'google_login' %}" style="text-decoration: none;"> <button class="button2" style="margin-top: 10px;">
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262" class="svg1">
+                    <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
+                    <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
+                    <path fill="#FBBC05" d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"></path>
+                    <path fill="#EB4335" d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"></path>
+                  </svg>
+                    Continue with Google
+                  </button> </a>   
+              </div>
+            </div>
+<div class="account" style="display: flex;align-items: center;justify-content: center;gap:5px;padding-top: 20px;">
+            <p style="font-size: 13px;">Don't have an Account?</p>
+         <a href="{%url 'signup' %}" style="text-decoration: none;"><p class="signup">Signup</p></a>
+        </div>
+
+        
+          
+<!-- Login form ends -->
+</div>
+</div>
+   </section>
+    
+
+
+
+
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+    <script>
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("passwordInput");
+    const closedLockIcon = document.querySelector(".closed-lock");
+    const openLockIcon = document.querySelector(".open-lock");
+
+    // Toggle input type between password and text
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      closedLockIcon.style.display = "none";
+      openLockIcon.style.display = "block";
+    } else {
+      passwordInput.type = "password";
+      closedLockIcon.style.display = "block";
+      openLockIcon.style.display = "none";
+    }
+  }
+
+
+</script>
+</body>
+</html>
+{% endblock %}

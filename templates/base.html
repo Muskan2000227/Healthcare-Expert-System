@@ -1,0 +1,871 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Expert system</title>
+    <link rel="icon" href="{% static 'images/healthcare.png' %}" type="image/png">
+        <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{%static 'css/base.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .sticky-icon {
+    position: fixed; /* Make it fixed so it stays in place */
+    left: 20px; /* Adjust as needed */
+    top: 670px; /* Adjust as needed */
+    z-index: 1000; /* Ensure it's on top of other content */
+
+}
+
+.sticky-icon img {
+    width: 40px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; 
+}
+
+/* .navbar-light .navbar-nav .nav-link {
+    color: #1f2278;
+} */
+
+a.nav-link{
+    color:#000080;
+    font-weight: bold;
+}
+
+a.nav-link:hover{
+    color:#F17732;
+}
+.container-fluid{
+    width:100%;
+    /* display: flex;
+    justify-content: space-between; */
+    margin:20px;
+}
+
+
+.musnav{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    background-color: #9393c4;
+    
+}
+
+@media (min-width:990px) {
+    nav.navbar.navbar-expand-lg.navbar-light.navbar-custom.fixed-top{
+padding: 0px 80px;
+}
+}
+
+.buttonuj {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253); */
+  cursor: pointer;
+  transition-duration: 500ms;
+  overflow: hidden;
+  position: relative;
+}
+
+.svgIconuj {
+  width: 12px;
+  transition-duration: 0.3s;
+}
+
+.svgIconuj path {
+  fill: white;
+}
+
+.buttonuj :hover{
+    transform: rotate(360deg);
+
+}
+
+
+/* Loader styling */
+.loader14 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255); /* Semi-transparent background */
+  /* background-image: url(https://slidescorner.com/wp-content/uploads/2022/10/01-Medical-Blue-Heart-Beat-Abstract-Lines-free-PPT-Background-by-SlidesCorner-.jpg); */
+  background-image: url(https://slidescorner.com/wp-content/uploads/2022/10/02-Medical-Blue-Heart-Beat-Abstract-Lines-free-PPT-Background-by-SlidesCorner--1024x576.jpg.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1500; /* Ensure it stays on top */
+  /* overflow: hidden; */
+}
+
+.loader {
+    display: none; 
+   
+    /* Your loader styles here */
+}
+
+/* Show loader when .show class is added */
+.loader.show {
+    display: block;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+    /* Additional animation styles */
+}
+  
+/* From Uiverse.io by codingzemigle */ 
+.content1 {
+  width: 50vmin;
+  height: 50vmin;
+  background: #fff0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pill1 {
+  background: #fff0;
+  width: 15vmin;
+  height: 40vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: rotate(180deg);
+  animation: spin 4s linear 0s infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(-540deg);
+  }
+}
+
+.pill1 .side {
+  background: #f7c340;
+  position: relative;
+  overflow: hidden;
+  width: 11vmin;
+  height: 15vmin;
+  border-radius: 6vmin 6vmin 0 0;
+}
+
+.pill1 .side + .side {
+  background: #d9680c;
+  border-radius: 0 0 6vmin 6vmin;
+  border-top: 1vmin solid #621e1a;
+  animation: open 2s ease-in-out 0s infinite;
+}
+
+@keyframes open {
+  0%,
+  20%,
+  80%,
+  100% {
+    margin-top: 0;
+  }
+  30%,
+  70% {
+    margin-top: 10vmin;
+  }
+}
+
+.pill1 .side:before {
+  content: "";
+  position: absolute;
+  width: 2vmin;
+  height: 10vmin;
+  bottom: 0;
+  right: 1.5vmin;
+  background: #fff2;
+  border-radius: 1vmin 1vmin 0 0;
+  animation: shine 1s ease-out -1s infinite alternate-reverse;
+}
+
+.pill1 .side + .side:before {
+  bottom: inherit;
+  top: 0;
+  border-radius: 0 0 1vmin 1vmin;
+}
+
+.pill1 .side:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  border-radius: 6vmin 6vmin 0 0;
+  border: 1.75vmin solid #00000022;
+  border-bottom-color: #fff0;
+  border-bottom-width: 0vmin;
+  border-top-width: 1vmin;
+  animation: shadow 1s ease -1s infinite alternate-reverse;
+}
+
+.pill1 .side + .side:after {
+  bottom: inherit;
+  top: 0;
+  border-radius: 0 0 6vmin 6vmin;
+  border-top-color: #fff0;
+  border-top-width: 0vmin;
+  border-bottom-width: 1vmin;
+}
+
+@keyframes shine {
+  0%,
+  46% {
+    right: 1.5vmin;
+  }
+  54%,
+  100% {
+    right: 7.5vmin;
+  }
+}
+
+@keyframes shadow {
+  0%,
+  49.999% {
+    transform: rotateY(0deg);
+    left: 0;
+  }
+  50%,
+  100% {
+    transform: rotateY(180deg);
+    left: -3vmin;
+  }
+}
+
+.medicine1 {
+  position: absolute;
+  width: calc(100% - 6vmin);
+  height: calc(100% - 12vmin);
+  background: #fff0;
+  border-radius: 5vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.medicine1 .i1 {
+  width: 1vmin;
+  height: 1vmin;
+  background: #47c;
+  border-radius: 100%;
+  position: absolute;
+  animation: medicine-dust 1.75s ease 0s infinite alternate;
+}
+
+.medicine1 .i1:nth-child(2n + 2) {
+  width: 1.5vmin;
+  height: 1.5vmin;
+  margin-top: -5vmin;
+  margin-right: -5vmin;
+  animation-delay: -0.2s;
+}
+
+.medicine1 .i1:nth-child(3n + 3) {
+  width: 2vmin;
+  height: 2vmin;
+  margin-top: 4vmin;
+  margin-right: 3vmin;
+  animation-delay: -0.33s;
+}
+
+.medicine1 .i1:nth-child(4) {
+  margin-top: -5vmin;
+  margin-right: 4vmin;
+  animation-delay: -0.4s;
+}
+
+.medicine1 .i1:nth-child(5) {
+  margin-top: 5vmin;
+  margin-right: -4vmin;
+  animation-delay: -0.5s;
+}
+
+.medicine1 .i1:nth-child(6) {
+  margin-top: 0vmin;
+  margin-right: -3.5vmin;
+  animation-delay: -0.66s;
+}
+
+.medicine1 .i1:nth-child(7) {
+  margin-top: -1vmin;
+  margin-right: 7vmin;
+  animation-delay: -0.7s;
+}
+
+.medicine1 .i1:nth-child(8) {
+  margin-top: 6vmin;
+  margin-right: -1vmin;
+  animation-delay: -0.8s;
+}
+
+.medicine1 .i1:nth-child(9) {
+  margin-top: 4vmin;
+  margin-right: -7vmin;
+  animation-delay: -0.99s;
+}
+
+.medicine1 .i1:nth-child(10) {
+  margin-top: -6vmin;
+  margin-right: 0vmin;
+  animation-delay: -1.11s;
+}
+
+.medicine1 .i1:nth-child(1n + 10) {
+  width: 0.6vmin;
+  height: 0.6vmin;
+}
+
+.medicine1 .i1:nth-child(11) {
+  margin-top: 6vmin;
+  margin-right: 6vmin;
+  animation-delay: -1.125s;
+}
+
+.medicine1 .i1:nth-child(12) {
+  margin-top: -7vmin;
+  margin-right: -7vmin;
+  animation-delay: -1.275s;
+}
+
+.medicine1 .i1:nth-child(13) {
+  margin-top: -1vmin;
+  margin-right: 3vmin;
+  animation-delay: -1.33s;
+}
+
+.medicine1 .i1:nth-child(14) {
+  margin-top: -3vmin;
+  margin-right: -1vmin;
+  animation-delay: -1.4s;
+}
+
+.medicine1 .i1:nth-child(15) {
+  margin-top: -1vmin;
+  margin-right: -7vmin;
+  animation-delay: -1.55s;
+}
+
+
+/* Hide scrollbar */
+body {
+  overflow: hidden; /* Prevent scrolling */
+}
+
+@keyframes medicine-dust {
+  0%,
+  100% {
+    transform: translate3d(0vmin, 0vmin, -0.1vmin);
+  }
+  25% {
+    transform: translate3d(0.25vmin, 5vmin, 0vmin);
+  }
+  75% {
+    transform: translate3d(-0.1vmin, -4vmin, 0.25vmin);
+  }
+}
+
+
+
+
+ 
+
+
+    </style>
+
+
+<script>
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // This makes the scroll smooth
+        });
+    } 
+</script>
+
+
+
+</head>
+<body> 
+ 
+    <section id="loader" class="loader14 loader" >
+     
+        <div class="content1">
+            <div class="pill1" style="position: relative;z-index:2">
+              <div class="medicine1" >
+                <i class="i1"></i>
+                <i class="i1"></i>
+                <i class="i1"></i>
+                <i class="i1"></i>
+                <i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i
+                ><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i><i class="i1"></i>
+                
+              </div>
+              <div class="side" style="position: relative;z-index:2"></div>
+              <div class="side" style="position: relative;z-index:2"></div>
+            </div>
+          </div>
+         
+    </section>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("loader");
+    
+        // Show loader when a link is clicked
+        document.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", event => {
+            // Skip links that:
+            // 1. Open in a new tab (_blank).
+            // 2. Are dropdown toggles (but include dropdown menu items).
+            if (
+              link.target === "_blank" || 
+              link.classList.contains("dropdown-toggle")
+            ) {
+              return;
+            }
+    
+            // Allow navigation only for links that go forward (not back)
+            if (window.location.href !== link.href) {
+              event.preventDefault(); // Prevent immediate navigation to allow loader to show
+    
+              // Show loader and wait before navigating
+              loader.classList.add("show");
+    
+              // Hide loader before navigation starts
+              window.addEventListener("beforeunload", () => {
+                loader.classList.remove("show");
+              });
+    
+              setTimeout(() => {
+                window.location.href = link.href; // Navigate after delay
+              }, 2000); // Adjust the time (in milliseconds) as needed
+            }
+          });
+        });
+    
+        // Hide loader after page loads (on the new page load)
+        window.addEventListener("load", () => {
+          loader.classList.remove("show"); // Ensure loader is removed after page load
+        });
+      });
+    </script>
+    
+
+    <!-- <script type="text/javascript">
+      (function() {
+          // Function to prevent back navigation
+          var preventBack = function() {
+              window.history.forward();
+          };
+  
+          // Modify the browser history state when the page loads
+          window.onload = function() {
+              preventBack(); // Prevent backward navigation on page load
+  
+              // Push a state to override the current page in history, so back won't work
+              window.history.pushState(null, null, window.location.href);
+          };
+  
+          // Re-apply history push on page show if page was cached
+          window.onpageshow = function(evt) {
+              if (evt.persisted) {
+                  window.history.pushState(null, null, window.location.href);
+              }
+          };
+  
+          // Ensure the page can't be unloaded via back navigation
+          window.onunload = function() {};
+      })();
+  </script> -->
+   
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const loader = document.getElementById("loader");
+    
+        // Show loader when a link is clicked
+        document.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", event => {
+                // Skip links that:
+                // 1. Open in a new tab (_blank).
+                // 2. Are dropdown toggles (but include dropdown menu items).
+                if (
+                    link.target === "_blank" || 
+                    link.classList.contains("dropdown-toggle")
+                ) {
+                    return;
+                }
+    
+                event.preventDefault(); // Prevent immediate navigation
+                
+                // Show loader and wait before navigating
+                loader.classList.add("show");
+                setTimeout(() => {
+                    window.location.href = link.href; // Navigate to the link after delay
+                }, 2000); // Adjust the time (in milliseconds) as needed
+            });
+        });
+    
+        // Hide loader after page loads
+        window.addEventListener("load", () => {
+            loader.classList.remove("show"); // Ensure loader is removed after page load
+        });
+    });
+</script> -->
+    
+    
+    <!-- <script>
+        // JavaScript to hide loader and restore scrolling
+window.addEventListener('load', function () {
+  const loader = document.querySelector('.loader14');
+
+  setTimeout(() => {
+    loader.style.display = 'none'; // Hide loader
+    document.body.style.overflow = 'auto'; // Restore scrolling
+  }, 2000); // 5000 milliseconds = 5 seconds
+});
+
+      </script> -->
+
+      <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const loader = document.querySelector('.loader14');
+      
+          setTimeout(() => {
+            loader.style.display = 'none'; // Hide loader
+            document.body.style.overflow = 'auto'; // Restore scrolling
+          }, 2000); // 2000 milliseconds = 2 seconds
+        });
+      </script> -->
+      
+      
+
+      
+
+
+    
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top" style="overflow: hidden;margin-bottom: 50px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{%url 'index'%}">
+                <img src="{% static 'images/healthcare.png' %}" width="40px" height="40px" alt="..">
+                <span style="font-size: 25px;font-weight: bold;color:#000080;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" data-aos="fade-out">MedExpert</span>
+            </a>
+    
+            
+            <button class="navbar-toggler collapsed border-0" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                <span class="icon-toggle">
+                  
+                    <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    
+                    <svg id="close-icon" class="d-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </span>
+            </button>
+            <!-- <button class="navbar-toggler collapsed border-0" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+              <span class="navbar-toggler-icon"></span>
+              <div class="close-icon py-1">✖</div>
+          </button> -->
+    
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-auto d-flex justify-content-evenly">
+                   
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}" style="text-decoration: none;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}" style="text-decoration: none;">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'drug' %}" style="text-decoration: none;">Drugs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'supplement' %}" style="text-decoration: none;">Supplements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'blogs' %}" style="text-decoration: none;">Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'news' %}" style="text-decoration: none;">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}" style="text-decoration: none;">Contact Us</a></li>
+                </ul>
+    
+               
+                <div class="d-flex social-icons" style="gap:20px">
+                    <a class="btn" href="{% url 'logingoogle' %}" style="background-color: #F17732; color: #fff; padding: 10px 20px; border-radius: 8px;">Login</a>
+                    <!-- <a class="btn" href="{% url 'login' %}" style="background-color: #F17732; color: #fff; padding: 10px 20px; border-radius: 8px;">Login</a> -->
+                    <a class="btn" href="{% url 'signup' %}" style="background-color: #000080; color: #fff; padding: 10px 20px; border-radius: 8px;">Signup</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+   
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.getElementById('navbarNav');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const closeIcon = document.getElementById('close-icon');
+    
+        toggler.addEventListener('click', function () {
+            
+            navbarCollapse.classList.toggle('show');
+    
+          
+            if (navbarCollapse.classList.contains('show')) {
+                hamburgerIcon.classList.add('d-none');
+                closeIcon.classList.remove('d-none');
+            } else {
+                hamburgerIcon.classList.remove('d-none');
+                closeIcon.classList.add('d-none');
+            }
+        });
+    });
+    </script>
+    
+    
+    
+    <style>
+        .btn:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 6px 10px;
+            opacity: 0.9;
+        }
+    </style>
+    
+    
+   
+        
+
+
+
+    <div style="position: absolute;z-index:1100 ; ">
+        {% include 'chatbotnav.html' %}
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+
+    <!-- Navbar -->
+    <!-- <div class="sticky-icon"  onclick="scrollToTop()">
+        <img src="{% static 'images/scrolltop.png' %}" alt="Icon">
+    </div> -->
+
+ <div class="sticky-icon"  onclick="scrollToTop()">
+   
+    <button class="buttonuj">
+      <svg class="svgIconuj" viewBox="0 0 384 512">
+        <path
+          d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+        ></path>
+      </svg>
+    </button>
+    
+    </div>   
+
+
+
+<!-- Footer -->
+
+<footer class="footer">
+   
+    <!-- Html for wavy line starts -->
+      <div class="wavy-line-container" style="background-color: #fff;">
+        <svg class="wavy-line-svg" viewBox="0 0 100 20" preserveAspectRatio="none">
+          <path d="M0,10 
+                   C2.5,0 7.5,0 10,10 
+                   S15,20 20,10 
+                   S25,0 30,10 
+                   S35,20 40,10 
+                   S45,0 50,10 
+                   S55,20 60,10 
+                   S65,0 70,10 
+                   S75,20 80,10 
+                   S85,0 90,10 
+                   S95,20 100,10"
+                stroke="#cacaf7" fill="none" stroke-width="2" class="path1" />
+        </svg>
+      </div>
+       <!-- Html for wavy line ends-->
+      
+    <div class="footer-background" style="background-image: url({%static 'images/bg2.jpg' %});overflow:hidden">
+        <div class="container">
+        <div class="row foot1">
+            <div class="col-md-3 foot" style="overflow: hidden;">
+            <p style="font-size: 25px;font-weight:700;color:#1F2278;margin: 0;">MedExpert Medical &<br>
+                Healthcare </p>
+                <img src="{%static 'images/blueback.png' %}" width="70px"  style="margin-left: 70px;">
+                  <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/location.png' %}" width="15px" height="15px"  ></div>
+              <a href="https://www.google.co.in/maps/place/Sant+Nagar,+Verka,+Amritsar,+Punjab+143501/@31.662081,74.9161665,15z/data=!3m1!4b1!4m6!3m5!1s0x391962e154419897:0x17bb5195949a3d03!8m2!3d31.6620819!4d74.9264662!16s%2Fg%2F11f2sn60sd?entry=ttu" 
+              style="text-decoration: none;" target="_blank" ><p class="footerbata" >Batala Road,Amritsar</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/emailwh.png' %}" width="15px" height="15px"  ></div>
+              <a href="mailto:sainimuskan731@gmail.com" 
+              style="text-decoration: none;" target="_blank" ><p class="footerbata" >sainimuskan731@gmail.com</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;">
+                    <div class="footermail">
+                    <img src="{%static 'images/phone.png' %}" width="15px" height="15px"  ></div>
+              <a href="tel:+91 77173-99046" 
+              style="text-decoration: none;" target="_blank" ><p  class="footerbata">+91-7717399046</p></a>
+                </div>
+                
+                  
+
+            </div>
+            <div class="col-md-2 foot">
+                <p style="font-size: 22px;font-weight:700;color:#1F2278;margin: 0px;"  >Quick Links</p>
+                
+                <img src="{%static 'images/blueback.png' %}" width="50px"  style="margin-left: 20px;">
+                <div class="iconfoot" style="padding-top: 10px;font-size: 17px;">
+                    <div class="footerback " >
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'index' %}" style="text-decoration: none;" ><p  class="footerbata">Home</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'about'%}" style="text-decoration: none;" ><p class="footerbata" >About</p></a>
+                </div>
+                
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'news'%}" style="text-decoration: none;" ><p class="footerbata" >News</p></a>
+                </div>
+
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'blogs'%}" style="text-decoration: none;" ><p class="footerbata" >Blogs</p></a>
+                </div>
+
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px"  ></div>
+              <a href="{%url 'contact' %}" style="text-decoration: none;" ><p class="footerbata" >Contact</p></a>
+                </div>
+                       
+                
+            </div>
+
+
+            <div class="col-md-2 foot">
+                <p style="font-size: 25px;font-weight:700;color:#1F2278;margin: 0;">Our Services</p>
+                <img src="{%static 'images/blueback.png' %}" width="50px"  style="margin-left: 20px;">
+                <div class="iconfoot" style="padding-top: 10px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="{%url 'drug'%}" style="text-decoration: none;" ><p  class="footerbata">Drugs</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="{%url 'supplement'%}" style="text-decoration: none;" ><p   class="footerbata">Supplements</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="{%url 'signup'%}" style="text-decoration: none;" ><p   class="footerbata">Health Navigator</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+                    
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="{%url 'signup'%}" style="text-decoration: none;" ><p  class="footerbata">Prediction</p></a>
+                </div>
+                <div class="iconfoot" style="padding-top: 5px;font-size: 17px;">
+                    <div class="footerback">
+
+                    <img src="{%static 'images/back.png' %}" width="18px" height="12px" ></div>
+              <a href="{%url 'signup'%}" style="text-decoration: none;" ><p   class="footerbata">Calculators</p></a>
+                </div>
+            </div>
+            <div class="col-md-4 foot">
+                <p style="font-size: 40px;font-weight:700;color:#1F2278;">Want to Explore ?</p>
+               
+                <p style="font-size: 16px;font-weight:500;color:#274760;">Discover expert insights and the latest health  <br> news</p>
+                
+            
+               
+              <a href="{%url 'signup'%}" style="text-decoration: none;">  <button class="custom-btnf btn-foot ">Signup</button> </a>
+
+              <br><br>
+                <div class="iconfoot">
+                    <p style="color:black;margin-top: 2px;">Follow Us :</p>
+                    <div >
+                        <a href="https://www.facebook.com/profile.php?id=100075785425879" target="_blank"><img src="{%static 'images/facebook2.png' %}" width="30px" height="30px" class="img9"></a>  
+                           </div> 
+                    <div  >
+                    <a href="https://www.instagram.com/muskan_saini_27/?next=%2F" target="_blank"><img src="{%static 'images/instagram2.png' %}" width="30px" height="30px" class="img91"></a>  
+                       </div> 
+                        <div  >
+                           <a href="https://github.com/muskansaini27" target="_blank"><img src="{%static 'images/twitter2.png' %}" width="30px" height="30px" class="img92"  >  </a>
+                    </div>
+                    <div  >
+                    <a href="https://www.linkedin.com/in/muskan--saini/" target="_blank"> <img src="{%static 'images/linkedin2.png' %}" width="30px" height="30px"  class="img93" ></a>  
+                    </div>
+                    <div  >
+                    <a href="mailto:sainimuskan731@gmail.com" target="_blank"> <img src="{%static 'images/mail2.png' %}" width="30px" height="30px" class="img94"  >  </a>   
+                    </div>
+                    
+                    
+                    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+   
+<br>
+    
+    <div style="background: #1F2278;" class="pt-4 pb-2"  >
+    <div class="container"  >
+        <div class="row" >
+            
+            <div class="col-md-12">
+                <p style="color:white;text-align: center;">Copyright © 2024 Med Expert. All rights reserved.</p>
+                
+                
+            </div>
+            
+</div>
+        
+        </div>
+           </div>
+   
+    
+    </div>
+
+    
+    
+</footer>
+
+
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+    </body>
+</html>

@@ -1,0 +1,348 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: Montserrat, sans-serif;
+    scroll-behavior: smooth;
+}
+ 
+
+
+.navbar-custom {
+    
+    background: #F7F7FF;
+    background-image: url(' static/images/aboutbg.jpg');
+    background-size: cover;
+    box-shadow: 0 4px 2px -2px rgba(211, 210, 210, 0.5);
+    /* width:100%; */
+      
+   }
+
+   .navbar-brand {
+       display: flex;
+       align-items: center;
+   }
+
+   
+   .navbar-brand img {
+       margin-right: 10px;
+       object-fit: cover;
+   }
+
+   .nav-link {
+       font-weight: 550;
+       font-size: 15px;
+       margin-right: 15px;
+       color: #1F2278;
+       margin-bottom: 2px;
+   }
+
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    position: relative;
+  }
+  
+  .inputnav {
+    border-style: none;
+    height: 50px;
+    width: 50px;
+    padding: 9px;
+    outline: none;
+    border-radius: 50%;
+    transition: 0.5s ease-in-out;
+    background-color: #1557c0;
+    box-shadow: 0px 0px 3px #1557c0;
+    padding-right: 40px;
+    color: #fff;
+  }
+
+ 
+  
+  .inputnav::placeholder,
+  .inputnav{
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+    font-size: 17px;
+  }
+  
+  .inputnav::placeholder {
+    color: #8f8f8f;
+  }
+  
+
+ 
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    outline: none;
+    border-style: none;
+    border-radius: 50%;
+    pointer-events: painted;
+    background-color: transparent;
+    transition: 0.2s linear;
+  }
+  
+  .icon:focus ~ .inputnav,
+  .inputnav:focus {
+    box-shadow: none;
+    width: 250px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 3px solid #1557c0;
+    transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+  }
+  
+
+  @media (max-width: 991.98px) {
+    .social-icons {
+       margin-bottom: 20px;
+    }
+    .nav-link:hover {
+           text-decoration: underline;
+           color: #F17732;
+           border-bottom: 2px solid #F17732;
+          
+           overflow: hidden;
+           transition: all 0.2s ease-in-out;
+       }
+    
+      
+    }
+    
+    @media (min-width: 992px) {
+    .navbar-custom {
+    height:65px;
+     padding: 0 5rem;
+    }
+    .nav-link:hover {
+           text-decoration: underline;
+           color:#F17732 ;
+           border-bottom: 2px solid #F17732;
+           transform: scale(1.1) ;
+           overflow: hidden;
+           transition: all 0.2s ease-in-out;
+       }
+      
+    }
+    
+
+  @media (max-width: 600px) {
+    .input-wrapper {
+      display: none;
+    }
+  }
+
+
+
+
+
+
+/* Footer */
+.footer {
+    overflow-x: hidden;
+}
+
+.foot{
+  padding-top: 50px;
+}
+/* Background styling */
+.footer-background {
+    /* background-image: url(' static/images/bg2.jpg'); */
+    height: auto; /* Adjust height to fit content */
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     /* Add some padding */
+}
+
+
+
+.iconfoot {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+}
+
+.inpem::placeholder{
+  color:#8f8f8f;
+  
+}
+
+
+/* Button CSS */
+.custom-btnf {
+  width: 130px;
+  height: 50px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+              7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+              4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 15px;
+}
+
+.btn-foot {
+  background: #F17732;
+  background: linear-gradient(0deg, #1F2278 0%, #1F2278 100%);
+  border: none;
+}
+
+.custom-btnf:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+              inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+              inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+/* Button CSS end */
+
+
+.footermail{
+  background-color:#1F2278;border-radius: 50%;height:20px;width:20px;display: flex;align-items: center;justify-content: center;
+}
+
+.footerbata{
+  color: #274760;line-height: 20px;font-size: 14px;
+}
+
+.footerback{
+  background-color:#1F2278;border-radius: 50%;height:16px;width:15px;display: flex;align-items: center;justify-content: center
+}
+
+.iconfoot:hover .footermail {
+  background: #F17732; 
+  transform:scale(0.9);
+  transition:all ease 200ms;
+}
+
+.iconfoot:hover .footerback {
+  background: #F17732; 
+  transform:scale(0.9);
+  transition:all ease 200ms;
+}
+
+.iconfoot:hover .footerbata {
+  color: #EE7633; 
+  transform:scale(0.98);
+  transition:all ease 200ms;
+
+}
+
+.img9:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img91:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+.img92:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img93:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+.img94:hover{
+  transform: scale(1.2) rotate(5deg);
+filter: brightness(1.2);
+opacity: 0.9;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+transition: all 0.3s ease-in-out;
+}
+
+
+
+
+/* Css for wavy line */
+.wavy-line-container {
+  width: 100%;
+  height: 40px; /* Adjust height based on wave size */
+  overflow: hidden; /* Ensures no overflow in case of large waves */
+  background-color: #F7F7FF;
+  
+}
+
+.wavy-line-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.wavy-line-svg .path1 {
+  stroke: #cacaf7; /* Change color as needed */
+  stroke-width: 2; /* Adjust thickness */
+  fill: none; /* No fill inside the waves */
+}
+
+
+
+
+/* Scrollbar */
+
+body {
+  --sb-track-color: #f7fdff;
+  --sb-thumb-color: #1f2278;
+  --sb-size: 6px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 19px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 19px;
+  border: 1px solid #121212;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color)
+                     var(--sb-track-color);
+  }
+}
+
+

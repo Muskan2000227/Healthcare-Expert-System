@@ -1,0 +1,280 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+      </script>
+    <style>
+  
+        .mainn{
+            width: 100%;
+            height: 100vh;
+            /* overflow: hidden; */
+            background-color: #F5F0FF;
+           
+        }
+       .disdisorder {
+   
+    display: flex;
+    align-items: center;
+    justify-content: center; /* This centers the content vertically and horizontally */
+}
+
+.analy {
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    color: #00A8CC;
+    margin-bottom: 50px;
+    margin-top: 20px;
+    letter-spacing: 2px;  /* Adds spacing between letters */
+    text-transform: uppercase;  /* Makes the text uppercase */
+    background: linear-gradient(90deg, #9370DB, #6F4C9A);  /* Adds a gradient */
+    -webkit-background-clip: text;  /* Clips the gradient to the text */
+    -webkit-text-fill-color: transparent;  /* Makes the text itself transparent to show gradient */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);  /* Adds a subtle shadow for depth */
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* Centers the cards horizontally */
+    gap: 20px; /* Optional: Adds space between cards */
+}
+
+.card-circle {
+    margin: 20px; /* Optional: Adjust spacing around the cards */
+   
+}
+
+
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap');
+
+.card-circle{
+    text-align:center;
+     margin-top:50px;
+     /* background:#27496D;     */
+     background:#9370DB;    
+     border:10px solid transparent;
+     color:#fff;
+     Font-family: Montserrat;
+     padding:50px;
+     border-radius:50%;
+     /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+ .card-circle .card-title{
+    font-weight:600;
+     font-size:26px;
+}
+ .card-circle .card-text{
+    font-weight:400;
+}
+ .card-circle .card-icon i{
+     font-size:60px;
+     display:block;
+}
+ .card-circle:nth-child(2){
+    /* background:#6F4C9A ; */
+    background:#fff;
+    color:black;
+    /* border:1px solid #9370DB; */
+}
+.card-circle .btn {
+    font-family: Montserrat;
+    background: transparent;
+    border: 1px solid #fff;
+    text-transform: uppercase;
+    padding: 5px 30px;
+    border-radius: 0px;
+    font-weight: 600;
+}
+
+.card-circle .btn2 {
+    border: 1px solid #9370DB;
+    
+}
+
+.card-circle .btn,
+.card-circle .card-icon i,
+.card-circle {
+    transition: all ease-in-out 0.2s;
+}
+
+.card-circle:hover .btn {
+    background: #fff;
+    color: #000;
+    border: 1px solid transparent;
+}
+
+.card-circle:hover .btn2 {
+    background: #6F4C9A; /* Darker shade on hover */
+    color: #fff;
+    border: 1px solid transparent #6F4C9A;
+}
+
+ .card-circle .btn:hover{
+    transform: scale(1.1);
+}
+ .card-circle:hover{
+    border:10px solid #6F4C9A ;
+}
+ .card-circle:hover i {
+   text-shadow: 0px -1px 10px #6F4C9A ;
+    transform:scale(1.2)rotate(20deg);
+}
+
+.card-circle:nth-child(1):hover i, 
+.card-circle:nth-child(3):hover i {
+    text-shadow: 0px -1px 10px #fff;
+    transform: scale(1.2) rotate(20deg);
+
+    
+}
+
+.card-circle:nth-child(1):hover, 
+.card-circle:nth-child(3):hover {
+    z-index: 2; 
+    
+}
+
+
+
+.card-circle:nth-child(2) {
+    z-index: 1; 
+}
+
+
+
+ @media only screen and (min-width: 1200px) {
+     .card-circle:nth-child(3){
+         margin-left:-40px;
+         z-index:0;
+    }
+     .card-circle{
+         width:400px;
+         height:400px;
+    }
+     .card-circle:nth-child(2){
+         margin-left:-20px;
+         box-shadow: 1px 2px 20px 8px rgba(241, 235, 235, 0.12);
+         transform: scale(1.2);
+         z-index:1;
+    }
+   .card-circle .card-icon i{
+      margin-top: 20px;
+     }
+}
+@media only screen and (min-width: 991px) and (max-width: 1200px) {
+   .card-circle{
+         width:340px;
+         height:340px;
+        
+    }
+  .card-circle .card-icon i{
+     font-size:50px;
+   }
+  .card-circle .card-icon i{
+      margin-top: -25px;
+     }
+   .card-circle:nth-child(3){
+         margin-left:-50px;
+         z-index:0;
+    }
+   .card-circle:nth-child(2){
+         margin-left:-20px;
+         z-index:1;
+    }
+}
+
+@media (max-width: 600px) {
+    .card-circle {
+       width:300px;
+        margin: 10px auto; /* Center cards on small screens */
+    }
+    .card-circle .card-icon i {
+        font-size: 30px;
+    }
+    .card-circle .btn {
+        font-size: 12px;
+        padding: 5px 15px;
+    }
+    [data-aos=zoom-in] {
+        transform: none !important; 
+        opacity: 1 !important; 
+    }
+}
+
+    </style>
+</head>
+<body>
+<section class="mainn">
+    <p class="analy" data-aos="zoom-in-down" data-aos-duration="1000">Analysis</p>
+<section class="disdisorder">
+
+    <div class="container">
+        <div class="row">
+          <!-- card1 -->
+           <div class="card card-circle" data-aos="zoom-in" data-aos-duration="1000">
+              <div class="card-icon">
+                 <i class="fas fa-heart ab"></i>
+              </div>
+              <div class="card-body">
+                 <h5 class="card-title">Disease Analysis</h5>
+                 <p class="card-text">Gain comprehensive insights into disease trends, causes, and their global impact through data analysis</p>
+                 <a href="{%url 'diseasecards'%}" class="btn btn-primary">Analysis</a>
+              </div>
+           </div>
+           <!-- card2 -->
+           <div class="card card-circle" >
+              <div class="card-icon">
+                 <i class="fas fa-brain bc"></i>
+              </div>
+              <div class="card-body">
+                 <h5 class="card-title">Disorder Analysis</h5>
+                 <p class="card-text">Examine patterns and contributing factors associated with various mental health disorders.</p>
+                 <a href="{%url 'disordercards'%}" class="btn btn2">Analysis</a>
+              </div>
+           </div>
+           <!-- card3 -->
+           <div class="card card-circle " data-aos="zoom-in" data-aos-duration="1000">
+              <div class="card-icon">
+                 <i class="fas fa-dollar-sign"></i>
+                
+              </div>
+              <div class="card-body">
+                 <h5 class="card-title">Health Expense</h5>
+                 <p class="card-text">Assess the financial impact of healthcare services and the allocation of health resources.</p>
+                 <a href="{%url 'healthexpense' %}" class="btn btn-primary">Analysis</a>
+              </div>
+           </div>
+        </div>
+     </div>
+
+
+
+</section>
+</section>
+</body>
+</html>
+{% endblock %}
+
+
+
+
+
+

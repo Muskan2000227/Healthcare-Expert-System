@@ -1,0 +1,564 @@
+{% extends 'sidebar1.html' %}
+
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Expert system</title>
+    <link rel="icon" href="{% static 'images/healthcare.png' %}" type="image/png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+     <style>
+        .dash {
+            width: 100%;
+            height: 100vh;
+            /* overflow-x: hidden; */
+        }
+
+        .heading {
+            margin-left: 60px;
+            margin-top: 30px;
+            text-transform: capitalize;
+            color: #D80027;
+            font-weight: bold;
+        }
+.divide{
+    display: flex;
+    flex-wrap: wrap;
+}
+        .cards {
+            width: 100%;;
+            display: grid;
+            grid-template-columns: repeat(3, 240px);
+            /* background-color: black; */
+            gap: 20px;
+            /* height: 150px; */
+            margin-left: 40px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            margin-right: 10px;
+
+
+        }
+
+        .graph{
+            background: #fff;
+            width:750px;
+            margin-left: 40px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height:380px;
+        }
+
+        .sidediv{
+            background-color: #fff;
+            height:600px;
+            width:420px;
+            margin-top: 20px;
+            border-radius: 20px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+           
+        }
+
+        .videodiv{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .heartdet{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            align-items: center;
+            justify-items: center;
+        }
+       
+
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+            gap: 0px; /* Space between cards */
+            width: 80%;
+            max-width: 800px; /* Maximum width for large screens */
+            margin: 10px; /* Margin around the grid */
+        }
+
+        .heartcard {
+            display: grid; /* Ensure each card uses grid for internal layout */
+            align-items: center;
+            justify-items: center;
+            margin: 10px;
+            margin-top: 15px;
+        }
+
+        .hbody {
+            background: #F8989D; /* Background color of the card */
+            border-radius: 10px; /* Rounded corners */
+            width: 180px; /* Width of each card */
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; /* Box shadow */
+            height: 50px; /* Fixed height for the card */
+            display: flex; /* Flexbox for icon and text */
+            align-items: center; /* Center items vertically */
+            justify-content: center; /* Center items horizontally */
+            padding: 10px; /* Padding inside the card */
+        }
+
+        .hbody i {
+            margin-right: 10px; /* Space between icon and text */
+            font-size: 20px; /* Size of the icon */
+            color: #fff; /* Icon color */
+        }
+
+        .hbody span {
+            font-size: 16px; /* Font size for the text */
+            color: #fff; /* Text color */
+        }
+
+        .videoheart{
+            border-radius: 20px;
+            width:350px;
+        }
+        .graphs{
+            display: none;
+        }
+        .card{
+            display: block;
+        }
+
+        .cardwh{
+            display: none;
+        }
+
+        .hidecard{
+            display: none;
+        }
+
+        
+
+        
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+        gap: 15px;
+        overflow-y: hidden;
+    }
+
+    .graph {
+        display: none;/* Adjusted height for smaller screens */
+    }
+
+    .sidediv {
+        height: 300px !important; /* Reduced height */
+        width: 90%;
+        margin: 10px;
+    }
+
+    .videodiv video {
+        width: 80%; /* Adjust video size */
+        /* height: auto; */
+    }
+
+    .heartcard {
+        max-width: 150px; /* Smaller cards on mobile */
+    }
+
+    .hbody {
+        width: 140px; /* Adjust width of cards */
+    }
+    
+}
+
+@media screen and (max-width: 480px) {
+
+    .dash{
+        overflow-x: hidden;
+        /* overflow: hidden; */
+        margin-left: 10px;
+    }
+
+    .heading{
+        margin-top: 20px;
+    }
+    .cards {
+        
+        display: none;
+    }
+
+    .heartcard {
+        max-width: 120px; /* Even smaller cards */
+    }
+
+    .hbody {
+        width: 120px; /* Adjust width of cards for small screens */
+    }
+
+    .graph {
+        height: 150px; /* Smaller graph size for very small screens */
+    }
+
+    .videodiv video {
+        width: 80%;
+        height: auto;
+    }
+    .hands{
+        display: none;
+    }
+
+    .videoheart{
+            border-radius: 20px;
+            width:0px;
+        }
+
+        .cardwh{
+            width:250px;
+            display: block;
+        }
+
+        .graphs{
+            display: block;
+        }
+        .heartcard1{
+            display: none;
+        }
+
+        .hidecard{
+            display: block;
+        }
+
+        .card-container{
+           margin-top: -10px;
+        }
+
+
+}
+
+        
+    </style> 
+<!-- <style>
+    .dash {
+    width: 100%;
+    height: 100vh;
+}
+
+.heading {
+    margin-left: 60px;
+    margin-top: 30px;
+    text-transform: capitalize;
+    color: #D80027;
+    font-weight: bold;
+}
+
+.divide {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Adjusting for better layout */
+    gap: 10px;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.graph {
+    background: #fff;
+    width: 100%;
+    margin-left: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* Reduced height */
+}
+
+.sidediv {
+    background-color: #fff;
+    height: 500px; /* Adjusted height */
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 10px;
+}
+
+.videodiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 10px;
+}
+
+.heartcard {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    margin: 10px;
+    margin-top: 15px;
+    max-width: 180px;
+}
+
+.hbody {
+    background: #F8989D;
+    border-radius: 10px;
+    width: 160px; /* Reduced width */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.hbody i {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+}
+
+.hbody span {
+    font-size: 16px;
+    color: #fff;
+}
+
+
+
+</style> -->
+
+<script type="text/javascript">
+    (function() {
+        var preventBack = function() {
+            window.history.forward();
+        };
+        
+        window.onload = function() {
+            preventBack();
+        };
+        
+        window.onpageshow = function(evt) {
+            if (evt.persisted) {
+                preventBack();
+            }
+        };
+
+        window.onunload = function() {};
+    })();
+</script>
+</head>
+
+<body>
+    <section class="dash">
+        <h1 class="heading" data-aos="flip-right" data-aos-duration="1000">Overview of your Health</h1>
+        <div class="divide">
+        <div>
+        <div class="cards" style="overflow: hidden;">
+            <div class="cardw"  data-aos="flip-left" data-aos-duration="1000"
+                style="background-color:#BAEAFE; border-radius: 20px;padding: 30px;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;overflow: hidden;">
+                <div
+                    style="background-color: #fff;width:50px;height:50px;border-radius: 15px;display: flex;justify-content: center;align-items: center;">
+                    <img src="{%static 'images/heart-beat-alt.svg'%}" alt="" height="30px">
+                </div>
+                <p style="margin-top: 20px;font-weight:800;font-size: 20px;word-spacing: 5px;letter-spacing: 1.5px;">
+                    Heart Rate</p>
+                <p style="margin-top: -10px;font-size: 14px;font-weight: 500;margin-bottom: -10px;">80 BPM</p>
+            </div>
+
+            <div class="cardw"  data-aos="flip-left" data-aos-duration="1000"
+                style="background-color:#BCCCFF; border-radius: 20px;padding: 30px;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;overflow: hidden;">
+                <div
+                    style="background-color: #fff;width:50px;height:50px;border-radius: 15px;display: flex;justify-content: center;align-items: center;">
+                    <!-- <img src="{%static 'images/heart-beat-alt.svg'%}" alt="" height="30px"> -->
+                    <i class="fas fa-tint fa-2x"></i>
+                </div>
+                <p style="margin-top: 20px;font-weight:800;font-size: 20px;word-spacing: 5px;letter-spacing: 1.5px;">
+                    Blood Pressure</p>
+                <p style="margin-top: -10px;font-size: 14px;font-weight: 500;margin-bottom: -10px;">120/80 mmHg</p>
+            </div>
+
+            <div class="cardw"  data-aos="flip-left" data-aos-duration="1000"
+                style="background-color:#F4C7FF; border-radius: 20px;padding: 30px;box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;overflow: hidden;">
+                <div
+                    style="background-color: #fff;width:50px;height:50px;border-radius: 15px;display: flex;justify-content: center;align-items: center;">
+                    <!-- <img src="{%static 'images/heart-beat-alt.svg'%}" alt="" height="30px"> -->
+                    <i class="fas fa-vial fa-2x"></i>
+                </div>
+                <p style="margin-top: 20px;font-weight:800;font-size: 20px;word-spacing: 5px;letter-spacing: 1.5px;">
+                    Glucose Level</p>
+                <p style="margin-top: -10px;font-size: 14px;font-weight: 500;margin-bottom: -10px;">60 - 80 mg/dl</p>
+            </div>
+
+
+        </div>
+   
+        
+<!-- Small Screen  -->
+        <div class="cardwh hidecard" style="display: flex; justify-content: space-between; padding: 10px;gap:10px">
+            <div class="cardw hidecard" style="background-color:#BAEAFE; border-radius: 15px; padding: 10px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; flex: 1; min-width: 80px; max-width: 120px;height:110px"  data-aos="flip-left" data-aos-duration="1000">
+                <div style="background-color: #fff; width: 25px; height: 25px; border-radius: 15px; display: flex; justify-content: center; align-items: center;">
+                    <img src="{% static 'images/heart-beat-alt.svg' %}" alt="" height="18px">
+                </div>
+                <p style="margin-top: 10px; font-weight: 800; font-size: 10px; word-spacing: 5px; letter-spacing: 1.5px; text-align: center;">
+                    Heart Rate</p>
+                <p style="margin-top: -10px; font-size: 10px; font-weight: 500; margin-bottom: -10px; text-align: center;">80 BPM</p>
+            </div>
+        
+            <div class="cardw hidecard"  data-aos="flip-left" data-aos-duration="1000" style="background-color:#BCCCFF; border-radius: 15px; padding: 10px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; flex: 1; min-width: 100px; max-width: 120px;height:110px">
+                <div style="background-color: #fff; width: 25px; height: 25px; border-radius: 15px; display: flex; justify-content: center; align-items: center;">
+                    <i class="fas fa-tint fa-1x"></i>
+                </div>
+                <p style="margin-top: 10px; font-weight: 800; font-size: 10px; word-spacing: 5px; letter-spacing: 1.5px; text-align: center;">
+                    Blood Pressure</p>
+                <p style="margin-top: -10px; font-size: 10px; font-weight: 500; margin-bottom: -10px; text-align: center;">120/80 mmHg</p>
+            </div>
+        
+            <div class="cardw hidecard"  data-aos="flip-left" data-aos-duration="1000" style="background-color:#F4C7FF; border-radius: 15px; padding: 10px; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; flex: 1; min-width: 100px; max-width: 120px;height:110px;">
+                <div style="background-color: #fff; width: 25px; height: 25px; border-radius: 15px; display: flex; justify-content: center; align-items: center;">
+                    <i class="fas fa-vial fa-1x"></i>
+                </div>
+                <p style="margin-top: 10px; font-weight: 800; font-size: 10px; word-spacing: 5px; letter-spacing: 1.5px; text-align: center;">
+                    Glucose Level</p>
+                <p style="margin-top: -10px; font-size: 10px; font-weight: 500; margin-bottom: -10px; text-align: center;">60 - 80 mg/dl</p>
+            </div>
+        </div>
+        
+
+        <div class="graph" style="margin-top: -40px;" data-aos="zoom-in" data-aos-duration="1000" >
+            <div>
+                
+                <video  height="340" autoplay loop muted style="border-radius: 20px;" >
+                    <!-- <source src="{% static 'images/heart3.mp4' %}" type="video/mp4"> -->
+                    <source src="{% static 'images/graph2.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                  
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    
+    <div>
+
+        <div class="hands" style="display: flex; margin-top: -60px; margin-bottom: 30px;position: absolute;right:70px;gap:10px" >
+            
+            
+           
+       
+                <img class="hands" src="{% static 'images/healthcare.png' %}" width="60px" height="60px" style=" border-radius: 50%; margin-bottom: 15px;" >
+       
+
+         
+        
+
+        </div>
+        
+
+    <div class="sidediv" data-aos="zoom-in-down" data-aos-duration="1000">
+
+
+
+
+        <div class="videodiv">
+        <video class="videoheart"  height="340" autoplay loop muted >
+            <!-- <source src="{% static 'images/heart3.mp4' %}" type="video/mp4"> -->
+            <source src="{% static 'images/heart3.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+   
+        <div class="heartdet" style="font-weight: bold;">
+            <div><p style="color:rgb(183, 183, 14);">Low</p></div>
+          <div ><p style="color:green">Average</p></div>       
+          <div><p style="color:red;">High</p></div>
+        </div>
+
+        <div class="heartdet">
+            <div ><p style="font-size: 25px;">48&nbsp;<span style="font-size: 13px;">BPM</span> </p></div>
+            <div><p style="font-size: 25px;">98&nbsp;<span style="font-size: 13px;">BPM</span></p></div>
+            <div><p style="font-size: 25px;">118 &nbsp;<span style="font-size: 13px;">BPM</span></p></div>
+          </div>
+
+
+          <div class="card-container">
+            <div class="heartcard">
+                <div class="hbody">
+                <a href="{%url 'uprofile'%}" style="text-decoration: none;">   <i class="fa fa-user"></i> <span>Profile</span></a> 
+                </div>
+            </div>
+            <div class="heartcard">
+                <div class="hbody">
+                    <a href="{%url 'anxiety'%}" style="text-decoration: none;">    <i class="fa fa-heart"></i> <span>Tests</span></a>
+                </div>
+            </div>
+            <div class="heartcard heartcard1">
+                <div class="hbody">
+                    <a href="{%url 'calculator'%}" style="text-decoration: none;">   <i class="fas fa-calculator"></i> <span>Calculators</span></a>
+                </div>
+            </div>
+            
+            <div class="heartcard heartcard1" >
+                <div class="hbody"  >
+                    <a href="{%url 'predictionmain'%}" style="text-decoration: none;" >      <i class="fas fa-chart-line"></i> <span>Prediction</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+    </div>
+
+    <div class="graphs" style="width:100px;">
+        <div>
+            
+            <video  autoplay loop muted style="border-radius: 20px;width:300px;" >
+                <!-- <source src="{% static 'images/heart3.mp4' %}" type="video/mp4"> -->
+                <source src="{% static 'images/graph2.mp4' %}" type="video/mp4" style="height:500px">
+                Your browser does not support the video tag.
+              </video>
+              
+        </div>
+
+
+    </div>
+
+      <!-- Chatbox Section -->
+      
+        <div  style="position: absolute;">
+            {% include 'chatbot.html' %}
+        </div>
+    
+    </section>
+    
+</body>
+
+<script>
+    AOS.init();
+  </script>
+</html>
+{% endblock %}

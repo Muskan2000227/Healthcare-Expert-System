@@ -1,0 +1,282 @@
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Result</title>
+
+    <style>
+       
+        .section1{
+            width:100%;
+            height:100vh;
+            overflow-y: hidden;
+        }
+        .ressec{
+           
+           
+            /* overflow-y: scroll; */
+            height:100vh;
+            /* background-color: antiquewhite; */
+            display: grid;
+            grid-template-columns: 0.75fr 1.25fr;
+            margin-left: 80px;
+        }
+        .contdiv{
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdiv2{
+            margin-left: 50px;
+            margin-top: 150px;
+            padding-top: 30px;
+            margin-right: 30px;
+            display: flex;
+           
+            flex-direction: column;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdivsty2{
+            margin-left: 50px;
+            /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+        }
+
+
+        /* BUtton start */
+        .button1 {
+
+margin-bottom: 40px;
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+
+.smbtn{
+  display: none;
+}
+
+.riskdiv{
+  display:flex;flex-direction: column;justify-content: center;align-items: center;font-size: 20px;background-color: rgb(209, 227, 242);width:350px;padding-left: 10px;margin-left: -40px;
+}
+
+@media  (max-width:600px) {
+
+.section1{
+  /* margin-top: 50px; */
+  overflow: hidden;
+  overflow-y:hidden;
+  overflow-x: hidden;
+  width:320px;
+}
+.ressec{ 
+         /* overflow: hidden; */
+         height:150vh;
+         /* background-color: antiquewhite; */
+         display:flex;
+         flex-direction:column;
+         align-items: center;
+         justify-content: center;
+         margin-left: 10px;
+         margin-top: 70px;
+         margin-right:10px;
+         width:300px;
+         padding: 20px;
+         
+     }
+     .contdiv{
+      padding: 10px;
+      display: none;
+
+     }
+
+     .contdiv2{
+      margin-top: 0px;
+     }
+
+     .bmicont{
+width:280px;
+margin-left: -70px;
+/* margin: 15px; */
+}
+
+.riskdiv{
+  display:flex;flex-direction: column;justify-content: center;align-items: center;font-size: 15px;background-color: rgb(209, 227, 242);width:280px;padding-left: 10px;margin-left: -50px;
+}
+.orangebmi{
+display:none;
+}
+
+.largebtn{
+display: none;
+}
+
+.smbtn{
+display: block;
+margin-left: 30px;
+}
+    
+}
+    </style>
+</head>
+<body >
+   
+    <section  >
+       <section class="section1">
+        <h1 class="orangebmi" style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+        margin-left: auto; margin-right: auto;
+        padding: 8px;
+        color: #F17732;
+        font-weight: 700;
+        ">Blood Pressure</h1>
+   <div class="ressec" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 15px;height:80vh;margin-right: 50px;">
+ <div class="contdiv" style="margin-left: 20px;">
+    
+    <img src="{% static 'images/bprange.jpg' %}" alt="" height="500px" width="500px" style="border-radius:10px;"> <br>
+    
+</div>
+<div >
+<div class="contdiv2" >
+    <div class="contdivsty2">
+        <div  class="bmicont" style="display:flex;flex-direction: column;font-size: 20px;align-items: center;justify-content: center;background-color:#fff;padding: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;;color:#000066;">
+      
+        
+    
+<div class="contdivsty2"> 
+    <div class="riskdiv">
+      <p style="font-weight: 700;margin-bottom:5px;margin-top: 10px;">Your Blood Pressure  Risk is : </p>
+      <hr style="width:90%;text-align: center;background:black;">
+      <p style="margin-top:-10px;font-weight: bold;margin-left: 70px;">{{ classification }}</p>
+   </div>
+   
+   </div>
+</div>
+
+<div class="largebtn" style="display: flex;width:100%;justify-content: center;align-items: center;margin-top: 50px;gap:20px">
+  
+  <button class="button1 largebtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background: #F17732;box-shadow: none;border-radius: 0px;">
+    Tips & Suggestions
+  </button>
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 largebtn" style="background:#000066;box-shadow: none;border-radius: 0px;" >
+  Back to Home
+  <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+   </svg>
+   
+ </button></a>  
+</div>
+
+
+<div >
+<button class="button1 smbtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:100%;background: #F17732;box-shadow: none;border-radius: 0px;margin-bottom: 10px;margin-left: -40px;">
+  Tips & Suggestions
+</button>
+
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 smbtn" style="width:100%;background:#000066;box-shadow: none;border-radius: 0px;margin-left: -40px;" >
+Back to Home
+<svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+   <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+ </svg>
+ 
+</button></a>
+</div>
+
+</div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+</section>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1000-" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Tips & Suggestions</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            
+            <h3 style="color: #000066;margin-bottom: 20px;">Recommendations:</h3>
+            
+            <!-- <h1>BMI Table</h1> -->
+           
+            <h4 style="text-align: center;margin-bottom: 20px;color: #F17732;">High Blood Pressure (Hypertension) :</h4>
+            <ul>
+                <li><b>Increase Fluid Intake: </b> Drink more water to increase blood volume and prevent dehydration, which can help raise blood pressure.</li><br>
+                <li><b>Eat Small, Frequent Meals:</b> Eating smaller, more frequent meals can prevent sudden drops in blood pressure that can occur after large meals.</li><br>
+                <li><b>Avoid Sudden Position Changes: </b>When standing up, do so slowly to prevent dizziness or fainting. Use handrails and take your time.</li><br>
+            </ul>
+
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Low Blood Pressure (Hypotension):</h4>
+            <ul>
+                <li><b>Balanced Diet:</b> Maintain a diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.</li><br>
+                <li><b>Portion Control:</b> Practice mindful eating and portion control to maintain your weight.</li><br>
+                <li><b>Stay Hydrated:</b> Drink plenty of water throughout the day.</li><br>
+               
+                
+            </ul>
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Normal Blood Pressure :</h4>
+            <ul>
+                <li><b>Maintain a Balanced Diet:</b> Continue to eat a diet rich in fruits, vegetables, whole grains, and lean proteins to support overall cardiovascular health.</li><br>
+                <li><b>Stay Active: </b>  Keep up with regular physical activity to maintain a healthy blood pressure level and overall well-being.</li><br>
+                <li><b> Regular Check-ups: </b>Monitor your blood pressure regularly through routine check-ups to ensure it remains within the normal range and to catch any potential changes early.</li><br>
+                
+              
+            </ul>
+
+
+            <p>Each set of tips is aimed at maintaining or improving blood pressure levels, supporting overall health, and preventing potential complications.</p>
+
+      
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+</body>
+</html>
+{% endblock %}

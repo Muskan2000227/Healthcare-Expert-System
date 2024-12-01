@@ -1,0 +1,370 @@
+
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Result</title>
+
+    <style>
+        
+        .section1{
+            width:100%;
+            height:100vh;
+            overflow-y: hidden;
+        }
+        .ressec{
+           
+           
+            /* overflow-y: scroll; */
+            height:100vh;
+            /* background-color: antiquewhite; */
+            display: grid;
+            grid-template-columns: 0.75fr 1.25fr;
+            margin-left: 80px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .contdiv{
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdiv2{
+            margin-left: 30px;
+            margin-top: 50px;
+            padding-top: 30px;
+            margin-right: 30px;
+            display: flex;
+           
+            flex-direction: column;
+            /* justify-content: center; */
+            /* align-items: center; */
+        }
+        .contdivsty2{
+            margin-left: 50px;
+            /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+        }
+
+
+        /* BUtton start */
+        .button1 {
+
+margin-bottom: 40px;
+  width: 180px;
+  height: 40px;
+  background: linear-gradient(0deg, rgb(120, 47, 255) 0%, rgb(185, 132, 255) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(139, 113, 255);
+  transition-duration: .3s;
+}
+
+.arrowIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.arrowIcon path {
+  fill: white;
+}
+
+.button1:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(139, 113, 255);
+  padding-bottom: 1px;
+}
+        /* BUtton end */
+.smbtn{
+  display: none;
+}
+
+.bmicont{
+  width:400px;
+}
+
+.genderdiv{
+  font-size: 20px;
+  display: flex;
+  gap:170px;
+}
+
+.heightdiv{
+  display: flex;gap:190px;font-size: 20px;
+}
+
+.weightdiv{
+  display: flex;gap:170px;font-size: 20px;
+}
+
+.agediv{
+  display: flex;gap:160px;font-size: 20px;
+}
+
+.activitydiv{
+  display: flex;gap:75px;font-size: 20px;
+}
+
+.caldiv{
+  font-size: 20px;
+}
+        @media  (max-width:600px) {
+
+.section1{
+  /* margin-top: 50px; */
+  overflow: hidden;
+  overflow-y:hidden;
+  overflow-x: hidden;
+  width:320px;
+  /* height:700px; */
+}
+.ressec{ 
+         /* overflow: hidden; */
+         height:180vh;
+         /* background-color: antiquewhite; */
+         display:flex;
+         flex-direction:column;
+         align-items: center;
+         justify-content: center;
+         margin-left: 10px;
+         margin-top: 0px;
+         margin-right:10px;
+         /* width:200px; */
+         padding: 20px;
+         box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 0px;
+         
+     }
+     .contdiv{
+      padding: 10px;
+      display: none;
+
+     }
+
+     .contdiv2{
+      margin-top: 120px;
+     }
+
+     .bmicont{
+/* width:80%; */
+width:300px;
+margin: 15px;
+}
+
+
+.genderdiv{
+  font-size: 15px;
+  display: flex;gap:100px;
+}
+
+.heightdiv{
+  display: flex;gap:100px;font-size: 15px;
+}
+
+.weightdiv{
+  display: flex;gap:90px;font-size: 15px;
+}
+
+.agediv{
+  display: flex;gap:50px;font-size: 15px;
+}
+
+.activitydiv{
+  display: flex;gap:35px;font-size: 15px;
+}
+
+.caldiv{
+  font-size: 15px;
+  margin-left: 40px;
+}
+.orangebmi{
+display:none;
+}
+
+.largebtn{
+display: none;
+}
+
+.smbtn{
+display: block;
+margin-left: 50px;
+}
+
+.bmresshow{
+  width:250px;
+}
+    
+}
+    </style>
+</head>
+<body >
+   
+    <section  >
+       <section class="section1">
+        <h1 class="orangebmi"  style="margin-top: 30px;margin-bottom: 20px ;background-image: url('static/images/orangeline.png');width:fit-content; text-align: center;
+        margin-left: auto; margin-right: auto;
+        padding: 8px;
+        color: #F17732;
+        font-weight: 700;
+        ">Daily Calorie Intake</h1>
+   <div class="ressec" style="border-radius: 15px;height:80vh;margin-right: 50px;">
+ <div class="contdiv">
+    <!-- <img src="data:image/png;base64,{{ graph }}" alt="BMI Gauge" ><br> -->
+    <img src="data:image/png;base64,{{ graph }}" alt="Calorie Graph" style="margin-left: 20px;"> <br>
+    
+</div>
+<div >
+<div class="contdiv2" >
+    <div class="contdivsty2">
+        <div class="bmicont" style="display:flex;flex-direction: column;font-size: 20px;align-items: center;justify-content: center;background-color:#fff;padding: 20px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;border-radius: 10px;;color:#000066;">
+      
+        <div class="genderdiv">
+            <p style="font-weight: 700;">Gender : </p>
+            
+            <p style="color:#4A4A4A"> {{ gender }} </p>
+        </div>
+
+
+    <div class="heightdiv" >
+    <p style="font-weight: 700;">Height :  </p>
+   
+    <p style="color:#4A4A4A"> {{feet}}' {{inches}}'' </p>
+</div>
+
+<div class="weightdiv" >
+    <p style="font-weight: 700;">Weight : </p>
+  
+    <p style="color:#4A4A4A">{{weight}} kg</p>
+</div>
+
+<div class="agediv">
+    <p style="font-weight: 700;">Age : </p>
+  
+    <p style="color:#4A4A4A">&nbsp;&nbsp;&nbsp;{{age}} years</p>
+</div>
+
+<div class="activitydiv" >
+    <p style="font-weight: 700;">Activity Level : </p>
+   
+    <p style="color:#4A4A4A">{{ level }}</p>
+</div>
+
+
+
+
+    <hr style="width:90%;text-align: center;background:black;">
+
+
+    <div class="contdivsty2"> 
+ <div class="caldiv" style="display:flex;gap:80px;background-color: rgb(209, 227, 242);width:350px;padding-left: 10px;margin-left: -40px;padding-top: 10px;">
+   <p style="font-weight: 700;">Calorie Intake : </p>
+   
+   <p style="color:#4A4A4A">{{ daily_calories }}</p>
+</div>
+
+</div>
+</div>
+
+<div class="largebtn" style="display: flex;width:100%;justify-content: center;align-items: center;margin-top: 50px;gap:20px">  
+  <button class="button1 largebtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="background: #F17732;box-shadow: none;border-radius: 0px;">
+    Tips & Suggestions
+  </button>
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 largebtn" style="background:#000066;box-shadow: none;border-radius: 0px;" >
+  Back to Home
+  <svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+     <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+   </svg>
+   
+ </button></a>  
+</div>
+
+
+<div >
+<button class="button1 smbtn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width:80%;background: #F17732;box-shadow: none;border-radius: 0px;margin-bottom: 10px;margin-left: 30px;margin-top: -20px;">
+  Tips & Suggestions
+</button>
+
+<a href="{% url 'calculator' %}" style="text-decoration: none;"><button class="button1 smbtn" style="width:80%;background:#000066;box-shadow: none;border-radius: 0px;margin-left: 30px;" >
+Back to Home
+<svg class="arrowIcon" viewBox="0 0 24 24" width="50" height="50" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+   <path d="M12 2L10.59 3.41L17.17 10H2V12H17.17L10.59 18.59L12 20L22 10L12 2Z" />
+ </svg>
+ 
+</button></a>
+</div>
+
+</div>
+
+    </div>
+</div>
+    </div>
+</div>
+
+</section>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="1000-" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Tips & Suggestions</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            
+            <h3 style="color: #000066;margin-bottom: 20px;">Recommendations:</h3>
+            
+            <!-- <h1>BMI Table</h1> -->
+           
+            <h4 style="text-align: center;margin-bottom: 20px;color: #F17732;">Food Recommendations :</h4>
+            <ul>
+                <li><b>Lean Proteins: </b> Chicken breast, fish, tofu, and legumes provide high-quality protein without excess calories.</li><br>
+                <li><b>Whole Grains:</b>  Opt for brown rice, quinoa, and whole wheat bread for sustained energy and fiber.</li><br>
+                <li><b>Fruits and Vegetables:</b> Incorporate a variety of colorful fruits and vegetables to ensure a broad spectrum of nutrients and antioxidants.</li><br>
+                <li><b>Healthy Fats:</b>Include sources like avocados, nuts, seeds, and olive oil for essential fatty acids and satiety.</li><br>
+                
+            </ul>
+
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Diet Recommendations :</h4>
+            <ul>
+                <li><b>Balanced Meals:</b> Maintain a diet rich in fruits, vegetables, whole grains, lean proteins, and healthy fats.</li><br>
+                <li><b>Portion Control:</b> Practice mindful eating and portion control to maintain your weight.</li><br>
+                <li><b>Stay Hydrated:</b> Drink plenty of water throughout the day.</li><br>
+                <li><b>Regular Eating Schedule: </b> CEat at regular intervals to maintain steady energy levels and prevent excessive hunger or overeating.</li><br>
+                
+            </ul>
+
+            <h4 style="text-align: center;margin-bottom: 20px;color:#F17732">Exercise Recommendations :</h4>
+            <ul>
+                <li><b>Cardio Exercise: </b> Engage in activities like brisk walking, jogging, or cycling to boost calorie expenditure and cardiovascular health.</li><br>
+                <li><b>Strength Training: </b>   Incorporate weight lifting or bodyweight exercises to build muscle, which can increase your resting metabolic rate.</li><br>
+                <li><b> Flexibility and Balance: </b>Include exercises like yoga or stretching to improve flexibility, balance, and overall functional fitness.</li><br>
+                <li><b> Consistency:</b> Aim for at least 150 minutes of moderate-intensity exercise per week, or 75 minutes of vigorous activity, along with muscle-strengthening activities on two or more days.</li><br>
+              
+            </ul>
+
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+</body>
+</html>
+{% endblock %}

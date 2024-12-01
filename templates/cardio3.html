@@ -1,0 +1,324 @@
+
+
+
+
+
+
+
+{% extends 'sidebar1.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiovascular Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #8e9eab, #eef2f3);
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+        }
+        .dashboard {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 100px;
+    margin-top: -100px;
+}
+
+        .form-container {
+            flex: 2;
+            max-width: 350px;
+            padding: 30px;
+            /* height:570px; */
+            margin-right: 20px;
+            background-color:#9C96EA;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            color: #495057;
+            background-color: #f8f9fa;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color:#D80027;
+            /* background-color:#333333; */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color:#D80027;
+            color: white;
+            transform: scale(1.04);
+        }
+        .graph-container {
+           
+            /* margin: 0 auto; Center horizontally */
+            flex: 1;
+            background-color: #ffffff;
+            /* padding: 10px; */
+            padding-bottom: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+            
+        }
+  .card{
+   
+    margin-top: 10px;
+  }
+        .graph-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .no-data {
+            text-align: center;
+            padding: 50px 0;
+            color: #888;
+        }
+        .header {
+    text-align: center;
+    padding: 20px;
+    background-color: #5c4e91;  /* Change this to your desired header color */
+    border-bottom: 2px solid #007bff;  /* You can also change this color */
+}
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #ffffff;  /* Change this color for the header text */
+}
+
+.info-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .info-table th, .info-table td {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            text-align: center;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .info-table th {
+            background-color: #1F2278;  /* Header color */
+            color: white;
+            font-weight: bold;
+            border-bottom: 2px solid #0056b3; /* Darker bottom border */
+        }
+        .info-table tr:hover td {
+            background-color: #f1f1f1; /* Light hover effect */
+        }
+        .info-table td {
+            background-color: #f8f9fa; /* Light background for table cells */
+            color: #333;
+        }
+        .info-table tr:nth-child(even) td {
+            background-color: #e9ecef; /* Zebra stripe effect */
+        }
+        .info-table tr:nth-child(odd) td {
+            background-color: #fdfdfd; /* Slightly different color for odd rows */
+        }
+.arrow56{
+    margin-top: 50px;
+}
+
+        
+        /* Media Queries for Responsive Design */
+    @media (max-width: 1200px) {
+
+body{
+    overflow: auto;
+}
+.dashboard {
+    padding: 20px 50px;
+}
+.arrow56{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+}
+
+@media (max-width: 992px) {
+body{
+    overflow: auto;
+}
+.dashboard {
+    flex-direction: column;
+    padding: 20px;
+}
+.form-container {
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+.graph-container {
+    margin: 0;
+    width: 100%;
+}
+.arrow56{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+}
+
+@media (max-width: 768px) {
+body{
+    overflow: auto;
+}
+.dashboard {
+    padding: 10px;
+}
+.form-container, .graph-container {
+    padding: 20px;
+}
+.arrow56{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+}
+
+@media (max-width: 576px) {
+body{
+    overflow: auto;
+}
+.dashboard {
+    padding: 5px;
+}
+.form-container, .graph-container {
+    padding: 15px;
+}
+.arrow56{
+    margin-top: 50px;
+    margin-bottom: 100px;
+    
+}
+}
+
+    </style>
+
+
+<script>
+    function validateForm() {
+        var country = document.getElementById("country").value;
+
+        if (country === "") {
+            alert("Please select a valid year!");
+            return false;  // Prevent form submission
+        }
+
+        return true;  // Allow form submission
+    }
+</script>
+</head>
+<body>
+    <div class="container-fluid">
+        
+        <a href="{% url 'diseaseanalysis' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" alt="" class="arrow56"></a> 
+        <div class="row dashboard">
+            <!-- Form Sidebar -->
+            <div class="form-container">
+                <h2 style="color: #fff;">Select Year</h2>
+                <form action="" method="POST" onsubmit="return validateForm()">
+                    {% csrf_token %}
+                    
+
+                    <select name="year" id="country">
+                        <option selected disabled value="">Select Year</option>
+                        {% for i in nyear %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn ">Submit</button>
+                </form>
+<!-- Info Table -->
+<table class="info-table">
+    <thead>
+        <tr>
+            <th>Statistic</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Total Deaths from Cardiovascular Diseases (2023)</td>
+            <td>17.9 million</td>
+        </tr>
+        <tr>
+            <td>Percentage of Global Deaths</td>
+            <td>32%</td>
+        </tr>
+        <tr>
+            <td>Estimated People Affected</td>
+            <td>500 million</td>
+        </tr>
+        <tr>
+            <td>Leading Risk Factor</td>
+            <td>High Blood Pressure</td>
+        </tr>
+    </tbody>
+</table>
+               
+            </div>
+
+            <!-- Graph Container -->
+            <div class="graph-container">
+                {% if graph %}
+               
+                <div class="card">
+                    
+                    {{ graph|safe }}
+                </div>
+                {% else %}
+                <div class="no-data">
+                    <h3>No data selected yet.</h3>
+                    <p>Please select a country to view the data.</p>
+                    
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %} 
+
+
+
+
+
+
+
+
+

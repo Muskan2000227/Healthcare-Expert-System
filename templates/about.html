@@ -1,0 +1,666 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us Page</title>
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   
+<link rel="stylesheet" href="{%static 'css/contactus.css' %}">
+<link rel="stylesheet" href="{%static 'css/base.css' %}">
+<link rel="stylesheet" href="{%static 'css/index.css' %}">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+   
+    <!-- Bootstrap core CSS -->
+    <!-- <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+       
+        <!--font-awesome.min.css-->
+        <link rel="stylesheet" href="static/assets/css/font-awesome.min.css">
+
+		<!--flat icon css-->
+		<!-- <link rel="stylesheet" href="static/assets/css/flaticon.css"> -->
+
+		
+		<!-- bootsnav -->
+		<!-- <link rel="stylesheet" href="static/assets/css/bootsnav.css" >	 -->
+        
+        <!--style.css-->
+        <link rel="stylesheet" href="static/assets/css/style.css">
+        
+        <!--responsive.css-->
+        <link rel="stylesheet" href="static/assets/css/responsive.css">
+
+        <link rel="stylesheet" href="static/assets/css/templatemo-digimedia-v1.css">
+
+        <link rel="stylesheet" href="static/assets/css/animated.css">
+    <link rel="stylesheet" href="static/assets/css/owl.css">
+    <!-- fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<style>
+
+        #message {
+            display: none;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+        }
+
+        .feature-list {
+    list-style-type: none;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.feature-list li {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.feature-list li i {
+    margin-right: 10px;
+    color: #007BFF;
+}
+
+.ht{
+  margin-left:50px ;
+}
+
+@media (max-width:600px) {
+  
+
+.Feautes{
+  height:1150px;
+}
+}
+
+/* Extra-Small Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+ 
+
+  .left-text h4 {
+    font-size: 0.9rem;
+  }
+
+  .ticks-list span {
+    font-size: 0.7rem;
+  }
+
+  .right-image img {
+    width: 90%;
+    margin: 10px auto;
+    /* float: right; */
+  }
+  .services ul.nacc li.active{
+    padding: 10px 10px 10px 20px;
+  }
+
+  .services .naccs .menu div{
+    width:30%;
+    font-size: 0px;
+  }
+
+  .services ul.nacc li .right-image img{
+    float:left;
+  }
+  .ht{
+    margin-left: 0px;
+  }
+}
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+  <section class="contussec" style="background-image: url('static/images/bg1.jpg');margin-top: 50px;">
+    <div class="contusmain">
+    <p class="contus" data-aos="zoom-in-down" data-aos-duration="700" >About Us</p>   
+</div>
+  </section>
+
+  <!-- Html for wavy line starts -->
+  <div class="wavy-line-container1">
+    <svg class="wavy-line-svg" viewBox="0 0 100 20" preserveAspectRatio="none">
+      <path d="M0,10 
+               C2.5,0 7.5,0 10,10 
+               S15,20 20,10 
+               S25,0 30,10 
+               S35,20 40,10 
+               S45,0 50,10 
+               S55,20 60,10 
+               S65,0 70,10 
+               S75,20 80,10 
+               S85,0 90,10 
+               S95,20 100,10"
+            stroke="#cacaf7" fill="none" stroke-width="2" class="path1" />
+    </svg>
+  </div>
+   <!-- Html for wavy line ends--> 
+
+<!-- 1st sec -->
+   <section class="about_us" style="background-image: url('/static/images/bg2.jpg');background-size: cover;">
+    <div class="container">
+        <div class="hero_icon" style="position: absolute; right: 30px; top: 500px; z-index: 1;">
+            <img src="{%static 'images/sqdot.png' %}" style="z-index: -1;">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 15px; top: 500px; z-index: 1;">
+            <img src="{%static 'images/square.png' %}" style="z-index: -1;">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 355px; top: 160px; z-index: 1;">
+            <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 1200px; top: 100px; z-index: 1;">
+            <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="hero_icon" style="position: absolute; left: 650px; top: 900px; z-index: 1;">
+            <img src="{%static 'images/circle.png' %}" style="z-index: -1;" >
+        </div>
+        <div class="row aboutsec" style="overflow: hidden;">
+           
+            <div class="col-md-6">
+                <div class="row " style="overflow: hidden;">
+
+                <div class="col-12 col-md-5  " style="overflow: hidden;">
+                    <ul class="image-list"><li style="padding-top: 70px;overflow: hidden;">
+                                  <img  src="{%static 'images/abt1.jpg' %}" style="border-radius: 0 80px 80px;border-style: none;
+                                 
+                                  width: 100%;
+                                  vertical-align: middle;padding-bottom: 20px;" data-aos="zoom-in-up"></li>
+                               <li class="hide" style="padding-left: 50px;overflow: hidden;"> <img src="{%static 'images/abt3.jpg' %}" style="border-radius:50px 50px 50px 0;border-style: none;
+                                  height: auto;
+                                  max-width: 100%;
+                                  vertical-align: middle;" data-aos="zoom-in-up"></li>
+                                  </ul>
+                                  </div>
+
+                                  <div class="col-md-7">
+                                    <ul class="image-list hide" ><li style="padding-bottom: 50px;overflow: hidden;">
+                                    <img src="{%static 'images/abt2.jpg' %}" style="border-radius:60px 0 60px 60px;border-style: none;
+                                    height:300px;
+                                    max-width: 100%;
+                                    vertical-align: middle;" data-aos="zoom-in-up">
+                                    </li>
+                                 <li style="overflow: hidden;"> <img src="{%static 'images/dentist.jpg' %}" style="border-radius: 30px 30px 0 30px;border-style: none;
+                                    height: auto;
+                                    max-width: 120%;
+                                    vertical-align: middle;" data-aos="zoom-in-up">
+                                    </li>                                </ul>
+                                    </div>                
+            </div></div>
+            <div class="col-md-6 pt-4">
+                <p class="aboutus" style=" background-image: url('static/images/orangeline.png');" data-aos="flip-up">About Us</p>
+                <p class="place">The Great Place Of Medical Hospital Center</p>
+                <p style="color:rgb(68, 67, 67);line-height: 24px;">We provide the special tips and advice’s of heath care treatment and high level of best technology involve in the our hospital.</p>
+               <div class="row" style="padding-top: 40px;">
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(226, 207, 243); padding: 5px; " data-aos="fade-right"
+                        data-aos-offset="300"
+                        data-aos-easing="ease-in-sine">
+                            <img src="{% static 'images/graph.png' %}" >
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;" >
+                           Analysis
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgba(86, 200, 220, 0.5); padding: 5px; " data-aos="fade-right"
+                        data-aos-offset="300"
+                        data-aos-easing="ease-in-sine">
+                            <img src="{% static 'images/iconsmedicine.png' %}" >
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 10px; display: flex; align-items: center; font-weight: bold; font-size: 14px;">
+                           Drugs & Supplements
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row" style="padding-top: 20px;">
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(238, 207, 207); padding: 5px; ">
+                            <img src="{% static 'images/testtube.png' %}" data-aos="fade-right"
+                            data-aos-offset="300"
+                            data-aos-easing="ease-in-sine">
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;">
+                           Tests
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-5 hide">
+                    <div class="row" style="background-color: white; border: 1px solid rgba(86, 200, 220, 0.9); border-radius: 10px; width: 95%; padding: 0;">
+                        
+                        <!-- Image Section (Reduced Space) -->
+                        <div class="col-md-3" style="background-color: rgb(215, 247, 227); padding: 5px; ">
+                            <img src="{% static 'images/calculator.png' %}"  data-aos="fade-right"
+                            data-aos-offset="300"
+                            data-aos-easing="ease-in-sine">
+                        </div>
+                        
+                        <!-- Text Section (Increased Space) -->
+                        <div class="col-md-9" style="padding-left: 20px; display: flex; align-items: center; font-weight: bold; font-size: 17px;">
+                           Calculators
+                        </div>
+                        
+                    </div>
+                </div>  
+            </div>
+<br>
+           <a href="{%url 'signup'%}"><button class="custom-btn custom-btn5 btn-2 ">Try Now</button></a> 
+            
+            </div>
+        </div>
+    </div>
+</section> 
+ 
+<!-- 2nd sec -->
+
+
+<div class="hero_icon" style="position: absolute; right: 100px; top: 1200px; z-index: 1;">
+  <img src="{%static 'images/sqdot.png' %}" style="z-index: -1;">
+</div>
+<div class="hero_icon" style="position: absolute; left: 15px; top: 1200px; z-index: 1;">
+  <img src="{%static 'images/square.png' %}" style="z-index: -1;">
+</div>
+<!-- <div class="hero_icon" style="position: absolute; left: 405px; top: 1180px; z-index: 1;">
+  <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+</div> -->
+<div class="hero_icon" style="position: absolute; left: 1200px; top: 1600px; z-index: 1;">
+  <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+</div>
+<div class="hero_icon" style="position: absolute; left: 650px; top: 1500px; z-index: 1;">
+  <img src="{%static 'images/circle.png' %}" style="z-index: -1;" >
+</div>
+<section class="Feautes section" style="background-image: url('/static/images/bg2.jpg');background-size: cover;">
+  <div class="container">
+    <div class="row" style="overflow: hidden;">
+      <div class="col-lg-12" data-aos="fade-up"
+      data-aos-duration="3000" style="overflow: hidden;">
+        <div class="section-title" style="overflow: hidden;">
+          <h1 style="color: #F17732;font-weight: bold;overflow: hidden;" data-aos="zoom-out" data-aos-duration="1000">We Are Always Ready to Help You & Your Family</h1>
+          <img src="{%static 'images/section-img.png' %}" alt="#"  style="margin-bottom: 40px;">
+          <!-- <p style="color: #1F2278;margin-bottom: 50px;">Dedicated to Nurturing Health and Wellness for You and Your Family Every Day.</p> -->
+        </div>
+      </div>
+    </div>
+    <div class="row " style="overflow: hidden;">
+      <div class="col-lg-4 col-12"  data-aos="zoom-out-up" data-aos-duration="1000">
+        <!-- Start Single features -->
+        <div class="single-features">
+          <div class="signle-icon">
+            <!-- <i class="icofont icofont-ambulance-cross i27"></i> -->
+            <i class="fas fa-calculator i27"></i>
+            <!-- <img src="{%static 'images\calculator.png'%}" alt=""> -->
+          </div>
+          <h3 >Calculators</h3>
+          <p>Empowering Your Health Journey with Our Comprehensive Calculators for BMI, BMR, Diabetes, and More!</p>
+        </div>
+        <!-- End Single features -->
+      </div>
+      <div class="col-lg-4 col-12" data-aos="zoom-out-up" data-aos-duration="1000">
+        <!-- Start Single features -->
+        <div class="single-features">
+          <div class="signle-icon">
+            <!-- <i class="icofont icofont-medical-sign-alt i27"></i> -->
+            <i class="fas fa-pills i27"></i>
+          </div>
+          <h3>Enriched Pharmacy</h3>
+          <p>Discover Medications Easily: Search and Explore Various Medicines Alphabetically for Quick and Convenient Access!</p>
+        </div>
+        <!-- End Single features -->
+      </div>
+      <div class="col-lg-4 col-12" data-aos="zoom-out-up" data-aos-duration="1000">
+        <!-- Start Single features -->
+        <div class="single-features last">
+          <div class="signle-icon">
+            <i class="fas fa-stethoscope i27"></i>
+          </div>
+          <h3>Medical Predictions</h3>
+          <p>Empowering Health Insights: Get Personalized Predictions for Heart Disease, Lung Cancer, and More!</p>
+        </div>
+        <!-- End Single features -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 3rd sec -->
+ <section>
+  <div class="hero_icon" style="position: absolute; left: 100px; top: 1800px; z-index: 1;">
+    <img src="{%static 'images/sqdot.png' %}" style="z-index: -1;">
+  </div>
+  <div class="hero_icon" style="position: absolute; right: 15px; top: 2200px; z-index: 1;">
+    <img src="{%static 'images/square.png' %}" style="z-index: -1;">
+  </div>
+  <!-- <div class="hero_icon" style="position: absolute; left: 405px; top: 1180px; z-index: 1;">
+    <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+  </div> -->
+  <div class="hero_icon" style="position: absolute; left: 430px; top: 2300px; z-index: 1;">
+    <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+  </div>
+  <div class="hero_icon" style="position: absolute; left: 650px; top: 3000px; z-index: 1;">
+    <img src="{%static 'images/circle.png' %}" style="z-index: -1;">
+  </div>
+
+
+<div id="services" class="services section">
+  <div class="container">
+    <div class="row" style="overflow: hidden;">
+    
+      <div class="col-lg-12" >
+        <!-- <h1 style="position:relative;z-index: 1;">Services</h1> -->
+        <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
+           <!-- <h6>Our Services</h6> -->
+          <!-- <h4>What Our Agency <em>Provides</em></h4>  -->
+          <div class="line-dec"></div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="naccs">
+          <div class="grid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="menu">
+                  <div class="first-thumb active" data-aos="flip-down" data-aos-duration="1500">
+                    <div class="thumb">
+                      <span class="icon1"><img src="{% static 'assets\images\service-icon-01.png'%}" alt=""></span><br>
+                      Predictions
+                    </div>
+                  </div>
+                  <div  data-aos="flip-down" data-aos-duration="1500">
+                    <div class="thumb">                 
+                      <span class="icon1"><img src="{% static 'assets\images\service-icon-02.png'%}" alt=""></span><br>
+                      Health Evaluation
+                    </div>
+                  </div>
+                  <div  data-aos="flip-down" data-aos-duration="1500">
+                    <div class="thumb">                 
+                      <span class="icon1"><img src="{% static 'assets\images\service-icon-03.png'%}" alt=""></span><br>
+                      Health Navigator
+                    </div>
+                  </div>
+                  <div  data-aos="flip-down" data-aos-duration="1500">
+                    <div class="thumb">                 
+                      <span class="icon1"><img src="{% static 'assets\images\service-icon-04.png'%}" alt=""></span><br>
+                      Prognosis
+                    </div>
+                  </div >
+                  <div class="last-thumb" data-aos="flip-down" data-aos-duration="1500">
+                    <div class="thumb">                 
+                      <span class="icon1"><img src="{% static 'assets\images\service-icon-01.png'%}" alt=""></span><br>
+                      Analysis
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <div class="col-lg-12" data-aos="zoom-in" data-aos-duration="1700">
+                <ul class="nacc">
+                  <li class="active">
+                    <div>
+                      <div class="thumb">
+                        <div class="row">
+                          <div class="col-lg-6 align-self-center">
+                            <div class="left-text">
+                              <h4>Health Risk Analysis</h4>
+                              <p>Explore comprehensive insights on disease trends, causes, and their global impact, while examining patterns in mental health disorders and assessing the financial implications of healthcare services.</p>
+                              <div class="ticks-list"><span><i class="fa fa-heartbeat"></i> Neurological Predictions</span> <span><i class="fa fa-heartbeat"></i> Cardiovascular Predictions</span> <span><i class="fa fa-heartbeat"></i> Anxiety Disorder</span>
+                                <span><i class="fa fa-heartbeat ht" ></i> Healthcare Expense Prediction</span> 
+                                <!-- <span><i class="fa fa-check"></i> SEO Analysis</span> <span><i class="fa fa-check"></i> Optimized Template</span> -->
+                              </div>
+                              <p> Gain insights into the likelihood of various diseases and health conditions.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 align-self-center">
+                            <div class="right-image">
+                              <!-- <img src="assets/images/services-image.jpg" alt=""> -->
+                              <img src="{% static 'assets/images/services-image.jpg'%}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="thumb">
+                        <div class="row">
+                          <div class="col-lg-6 align-self-center">
+                            <div class="left-text">
+                              <h4>Health Evaluation</h4>
+                              <p>Evaluate your mental health by assessing anxiety and depression levels, helping you understand and manage emotional well-being effectively.</p>
+                              <div class="ticks-list"><span><i class="fa fa-heartbeat"></i> Anxiety Test</span> <span><i class="fa fa-heartbeat" style="margin-left: 0px;"></i> Depression Test</span> <span><i class="fa fa-heartbeat" style="margin-left: 10px;"></i> BMI</span>
+                                <span><i class="fa fa-heartbeat"></i>BMR</span> <span><i class="fa fa-heartbeat ht" ></i>Ideal Body Weight </span> <span><i class="fa fa-heartbeat"></i>Blood Pressure</span></div>
+                              <p>Monitor key indicators of your physical and mental well-being to maintain a balanced, healthier lifestyle.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 align-self-center">
+                            <div class="right-image">
+                              
+                              <img src="{% static 'assets/images/services-image-02.jpg'%}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="thumb">
+                        <div class="row">
+                          <div class="col-lg-6 align-self-center">
+                            <div class="left-text">
+                              <h4>Health Navigation</h4>
+                              <p>The interactive body map allows users to explore health information in a highly visual and user-friendly manner.</p>
+                              <div class="ticks-list"><span><i class="fa fa-heartbeat"></i>Identify Symptoms</span> <span><i class="fa fa-heartbeat"></i> Explore Related Diseases</span> <span><i class="fa fa-heartbeat"></i> Detailed Information</span>
+                               </div>
+                              <p>This interactive tool serves as a guide for individuals seeking to learn more about their health in a visually intuitive and accessible way.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 align-self-center">
+                            <div class="right-image">
+                            
+                              <img src="{% static 'assets/images/services-image-03.jpg'%}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="thumb">
+                        <div class="row">
+                          <div class="col-lg-6 align-self-center">
+                            <div class="left-text">
+                              <h4>Forecast and Outlook</h4>
+                              <p>Explore prognosis insights for heart disease and lung cancer, helping you understand outcomes, survival rates, and potential treatment paths based on medical data.</p>
+                              <div class="ticks-list"><span><i class="fa fa-heartbeat"></i> Heart Disease Prediction</span> <span><i class="fa fa-heartbeat"></i>Lung Cancer Prediction</span> </div>
+                              <p>Heart and Lung Cancer Prognosis: Understanding Outlook and Survival Rates.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 align-self-center">
+                            <div class="right-image">
+                              
+                              <img src="{% static 'assets/images/services-image-04.jpg'%}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div class="thumb">
+                        <div class="row">
+                          <div class="col-lg-6 align-self-center">
+                            <div class="left-text">
+                              <h4>Analysis</h4>
+                              <p>Explore comprehensive evaluations of health conditions, including risk factors and potential outcomes. Our tools provide insights into disease patterns, guiding informed healthcare decisions.</p>
+                              <div class="ticks-list"><span><i class="fa fa-heartbeat"></i> Disease Analysis</span> <span><i class="fa fa-heartbeat ht" ></i> Disorder Analysis</span> <span><i class="fa fa-heartbeat"></i> Health Expense Analysis</span>
+                                </div>
+                              <p> Identify and understand the key risk factors associated with various health issues, empowering you to take proactive measures for better health outcomes.</p>
+                            </div>
+                          </div>
+                          <div class="col-lg-6 align-self-center">
+                            <div class="right-image">
+                              
+                              <img src="{% static 'assets/images/services-image.jpg'%}" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>          
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- 4th sec -->
+
+<div class="hero_icon" style="position: absolute; left: 105px; top: 2880px; z-index: 1;">
+    <img src="{%static 'images/orngcircle.png' %}" style="z-index: -1;" width="50px">
+  </div>
+  <div class="hero_icon" style="position: absolute; right: 30px; top: 2800px; z-index: 1;">
+    <img src="{%static 'images/zigzagbl.png' %}" style="z-index: -1;" >
+  </div>
+<section id="portfolio" class="portfolio" style="background-image: url('/static/images/bg2.jpg');background-size: cover;">
+  <div class="portfolio-details">
+    <div class="section-heading text-center">
+      <h2 style="font-size: 50px;font-weight: bold;color:#1F2278;" data-aos="flip-left" data-aos-duration="1000">Our Gallery</h2>
+    </div>
+    <div class="container">
+      <div class="portfolio-content">
+        <div class="isotope">
+          <div class="row">
+
+            <div class="col-sm-4">
+              <div class="item">
+                <img  data-aos="zoom-in-up" data-aos-duration="1000" src="{% static 'images/lungn105.jpeg' %}" alt="portfolio image" style="height: 300px;"/>
+                <div class="isotope-overlay">
+                  
+                  <p style="color:white;"> Lung Cancer Detection</p> 
+                  
+                </div>
+              </div>
+              <div class="item">
+                <img data-aos="zoom-in-up" data-aos-duration="1000"  src="{% static 'images/pillsabt.webp' %}" alt="portfolio image" style="height: 300px;"/>
+                <div class="isotope-overlay">
+                 
+                  <p style="color:white;"> Drugs & Supplements</p> 
+                
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="item">
+                <img data-aos="zoom-in-up" data-aos-duration="1000"  src="{% static 'images\body4.png'%}" alt="portfolio image" style="height:630px;background-color:rgb(237, 209, 237) ;"/>
+                <div class="isotope-overlay">
+                  <p style="color:white;">Health Navigator</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="item">
+                <img data-aos="zoom-in-up" data-aos-duration="1000"  src="{% static 'images\graphabt4.jpg'%}" alt="portfolio image" style="height:300px"/>
+                <div class="isotope-overlay">
+                  <p style="color:white;">Prediction & Analysis</p>
+                </div>
+              </div>
+              <div class="item">
+                <img data-aos="zoom-in-up" data-aos-duration="1000"  src="{% static 'images\heartabt.jpg'%}" alt="portfolio image" style="height:300px;"/>
+                <div class="isotope-overlay">
+                  <p style="color:white;">Heart Disease Prognosis</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section> 
+ 
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<!-- {% if msg %}
+<script>
+  alert("{{msg|escapejs}}")
+</script>
+{% endif %} -->
+
+<div id="message">{{ msg|escape }}</div>
+<script>
+    window.onload = function() {
+        var message = document.getElementById('message');
+        if (message.innerText) {
+            alert(message.innerText);
+            message.style.display = 'block';
+        }
+    };
+</script>
+
+ <!-- Scripts -->
+ <script src="static/vendor/jquery/jquery.min.js"></script>
+ <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <script src="static/assets/js/owl-carousel.js"></script>
+ <script src="static/assets/js/animation.js"></script>
+ <script src="static/assets/js/imagesloaded.js"></script>
+ <script src="static/assets/js/custom.js"></script>
+ <script>
+  AOS.init();
+</script>
+
+</html>
+
+{% endblock %}
+
+
+
+

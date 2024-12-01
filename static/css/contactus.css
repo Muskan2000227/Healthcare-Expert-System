@@ -1,0 +1,455 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif; */
+    font-family: Montserrat, sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+.contussec{
+ width:100%;
+ height:40vh;
+background-color: #F8F8FF;
+ /* background-image: url('images/bg1.jpg'); */
+ background-size: cover;
+}
+
+.contusmain{
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    flex-direction: column;
+}
+
+
+.contus{
+    font-size: 55px;
+    font-weight: 900;
+    color: #1F2278;
+    
+}
+
+
+/* Css for wavy line */
+.wavy-line-container1 {
+    width: 100%;
+    height: 40px; /* Adjust height based on wave size */
+    overflow: hidden; /* Ensures no overflow in case of large waves */
+    z-index:100;
+    /* background-color:#F7F7FF; */
+    /* background-image: url('images/bg1.jpg');
+    background-size: contain; */
+    margin-top: -20px;
+  }
+  
+  .wavy-line-svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .wavy-line-svg .path1 {
+    stroke: #cacaf7; /* Change color as needed */
+    stroke-width: 2; /* Adjust thickness */
+    fill: none; /* No fill inside the waves */
+  }
+  /* ends */
+
+
+
+  /* Contact sec */
+.contactSec {
+    height: 100vh;
+    width: 100vw;
+    /* background-image: url("images/aboutbg.jpg"); */
+    background-size: contain;
+     /* margin-top: -120px;  */
+  }
+  .container1 {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+  }
+  
+  .contactContainer {
+    width: 70vw;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    border-radius: 20px;
+    /* background-color: rgba(49, 124, 196, 0.2); */
+    background-color: #F3F3FF;
+    /* background-image: url('images/bg2.jpg'); */
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow-y: hidden;
+  }
+  
+  .contadHeading {
+    font-size: 55px;
+    text-align: center;
+    /* margin-bottom: 10px; */
+    margin-top: 10px;
+    color:#2A2D7F;
+    font-weight: 900;
+
+  }
+  
+  .form1 {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    padding: 20px;
+    gap: 20px;
+    margin-left: 20px;
+    
+  }
+  
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .title {
+    font-size: 20px;
+  }
+  
+  .subtitle {
+    font-weight: 600;
+    font-size: 15px;
+    color: #5f5d6b;
+  }
+  
+  .input_field {
+    width: 90%;
+    height: 42px;
+    padding: 0 0 0 12px;
+    border-radius: 10px;
+    outline: none;
+    color:#2a2d7f;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+  }
+  .txtarea {
+    width: 90%;
+    
+    color:#2a2d7f;
+    padding: 5px 0 0 12px;
+    border-radius: 10px;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+  }
+  .txtarea:focus {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 0px 1px #2A2D7F;
+    background-color: transparent;
+  }
+  
+  .input_field:focus {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 0px 1px #2A2D7F;
+    background-color: transparent;
+  }
+  
+ 
+  .contactImg{
+      width: 450px;
+      object-fit: contain;
+  }
+  
+  
+  /* responsive  */
+  
+  @media(min-width:320px) and (max-width:425px){
+      .contactSec {
+          height: fit-content;
+          width: 100%;
+  
+        }
+  
+      .container1 {
+          display: flex;
+          height: 100%;
+          padding-top: 20px;
+          padding-bottom: 20px;
+         
+        }
+  
+      .contactContainer {
+          width: 90vw;
+          height: fit-content;
+          display: grid;
+          grid-template-columns: 1fr;
+          overflow-y: auto;
+        }
+  
+      .contadHeading {
+          font-size: 20px;
+          text-align: center;
+          margin-top: 15px;
+          font-weight: 900;
+        } 
+  
+        .contactImg{
+          width: 300px;
+          object-fit: contain;
+      }
+  }
+
+
+ 
+
+
+/* Button CSS */
+.custom-btn {
+    width: 130px;
+    height: 50px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+                7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+                4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    outline: none;
+    font-size: 15px;
+}
+
+.btn-2 {
+    background: #F17732;
+    background: linear-gradient(0deg, #F17732 0%, #F17732 100%);
+    border: none;
+}
+
+.custom-btn:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),
+                -4px -4px 6px 0 rgba(116, 125, 136, 0.5),
+                inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+                inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+}
+/* Button CSS end */
+
+
+.valuereview{
+   
+    background-image: url('images/orangeline.png');
+    width: fit-content;
+    padding: 5px;
+    color: #F17732;
+    font-weight: 700;
+    font-size: 18px;
+    
+}
+
+
+
+.valrev{
+    /* background-color: red; */
+    padding-top: 30px;
+}
+
+
+
+
+/* contacticon */
+.contusicon{
+    width:100%;
+    height:50vh;
+    background-image: url('images/aboutbg.jpg');
+    background-size: cover;
+}
+
+.contus2{
+    display:flex;
+   
+}
+
+.attract{
+    padding-top: 150px;
+    padding-left: 50px;
+}
+
+.attr{
+    margin: 0;
+}
+
+.attrbord1{
+    border:1px solid #e2c4ff;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px 0 rgba(31, 34, 120, .08);
+    padding: 10px;
+    text-align: center;
+    width:75%
+    
+}
+
+.attrbord2{
+    border:1px solid #ffbdbc;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px 0 rgba(31, 34, 120, .08);
+    padding: 10px;
+    text-align: center;
+    width:75%
+    
+}
+
+.attrbord3{
+    border:1px solid #a4fcc4;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 30px 0 rgba(31, 34, 120, .08);
+    padding: 10px;
+    text-align: center;
+    width:75%
+    
+}
+
+.attr1{
+  color:#1F2278;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.attr2{
+    font-size: 15px;
+    
+}
+
+
+
+
+
+
+
+/* Responsiveness */
+
+@media (max-width: 576px) {
+    
+
+    .contus{
+        font-size: 45px;
+        text-align: center;
+    }
+
+    .wavy-line-container1{
+        display: none;
+    }
+    .hero_icon{
+        display: none;
+    }
+    
+    .animate-rotate{
+        display: none;
+    }
+        
+
+    .contusicon{
+        height: 100vh;
+    }
+
+    .attract{
+        padding-top: 50px;
+        padding-left: 50px;
+    }
+    
+    .attrbord1{
+        margin-bottom: 10px;
+    }
+    .attrbord2{
+        margin-bottom: 10px;
+    }
+
+    }
+
+
+    /* Animations */
+/* Updown  */
+.hero_icon, .hero_img {
+    animation: action 1s infinite alternate;
+}
+
+@keyframes action {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* Rotate */
+@keyframes rotation{
+
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+    }
+    }
+    
+    
+    
+    .animate-rotate {
+        -webkit-animation: rotation 20s linear infinite;
+        animation: rotation 20s linear infinite;
+    }
+
+
+
+
+
+ /* Scrollbar */
+
+body {
+    --sb-track-color: #f7fdff;
+    --sb-thumb-color: #1f2278;
+    --sb-size: 6px;
+  }
+  
+  body::-webkit-scrollbar {
+    width: var(--sb-size)
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 19px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 19px;
+    border: 1px solid #121212;
+  }
+  
+  @supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color)
+                       var(--sb-track-color);
+    }
+  }   

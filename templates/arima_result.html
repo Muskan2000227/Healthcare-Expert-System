@@ -1,0 +1,88 @@
+
+{% extends 'sidebar1.html' %} 
+{% block content %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Disease Detection</title>
+    <style>
+      .predmain{
+        width:100%;
+        height:100vh;
+      }
+        .pred{
+          width:100%;
+          height:100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa; /* Light background for the whole page */
+        }
+        .arima_cardio{
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for card effect */
+            padding: 20px;
+            width: 80%; /* Adjust width of the card */
+            max-width: 1200px;
+            margin: auto;
+            border: 1px solid #ddd; /* Light border around the card */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow56{
+            margin-top: 50px;
+            margin-left:40px;
+            position: absolute;
+            z-index: 1;
+        }
+
+    </style>
+  </head>
+  <body>
+    <section class="predmain">
+      <!-- <a href="{% url 'cdisease_prediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>  -->
+      {% if name == "resp" %}
+      <a href="{% url 'rprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "dk" %}
+      <a href="{% url 'dkprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "dig" %}
+      <a href="{% url 'digprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "neuro" %}
+      <a href="{% url 'nprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+
+      {% elif name == "cardio" %}
+      <a href="{% url 'cdisease_prediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "health" %}
+      <a href="{% url 'healthprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "mental" %}
+      <a href="{% url 'mentalprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "anx" %}
+      <a href="{% url 'anxietyprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+      {% elif name == "depress" %}
+      <a href="{% url 'depressprediction' %}">  <img src="{%static 'images/icons8-back-to-64.png' %}" class="arrow56" alt=""></a>
+
+
+
+
+
+
+
+
+      {% endif %} 
+      <section class="pred">
+       
+        <div class="arima_cardio">
+          {{graph|safe}}
+          <figure>{{ fig }}</figure>
+        </div>
+      </section>
+    </section>
+  </body>
+</html>
+{% endblock %}

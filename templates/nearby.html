@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Nearby Hospitals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e1f5fe;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Nearby Hospitals</h1>
+    <form id="addressForm">
+        <label for="address">Enter Address:</label>
+        <input type="text" id="address" name="address" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="results" class="result"></div>
+
+    <script>
+        document.getElementById('addressForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const address = document.getElementById('address').value;
+
+            try {
+                // Get latitude and longitude from OpenStreetMap
+                const geocodeResponse = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`);
+                const geocodeData = await geocodeResponse.json();
+                if (geocodeData.length === 0) {
+                    throw new Error('Address not found.');
+                }
+
+                const { lat, lon } = geocodeData[0];
+
+                // Find nearby hospitals from Overpass API
+                const placesResponse = await fetch(`https://overpass-api.de/api/interpreter?data=[out:json];node["amenity"="hospital"](around:5000,${lat},${lon});out;`);
+                const placesData = await placesResponse.json();
+
+                if (placesData.elements.length === 0) {
+                    document.getElementById('results').innerHTML = '<p>No hospitals found nearby.</p>';
+                } else {
+                    const hospitals = placesData.elements.map(hospital => `<p>${hospital.tags.name || 'Unnamed'} located at (${hospital.lat}, ${hospital.lon})</p>`).join('');
+                    document.getElementById('results').innerHTML = hospitals;
+                }
+            } catch (error) {
+                document.getElementById('results').innerHTML = `<p class="error">${error.message}</p>`;
+            }
+        });
+    </script>
+
+</body>
+</html>

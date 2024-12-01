@@ -1,0 +1,1107 @@
+{% block content %} 
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chatbot in JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="{%static 'bootstrap-5.3.3-dist\css\bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.chatbot-toggler {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  outline: none;
+  border: none;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #724ae8;
+  transition: all 0.2s ease;
+}
+body.show-chatbot .chatbot-toggler {
+  transform: rotate(90deg);
+}
+.chatbot-toggler span {
+  color: #fff;
+  position: absolute;
+}
+.chatbot-toggler span:last-child,
+body.show-chatbot .chatbot-toggler span:first-child  {
+  opacity: 0;
+}
+body.show-chatbot .chatbot-toggler span:last-child {
+  opacity: 1;
+}
+.chatbot {
+  position: fixed;
+  right: 35px;
+  bottom: 90px;
+  width: 420px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5);
+  transform-origin: bottom right;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+              0 32px 64px -48px rgba(0,0,0,0.5);
+  transition: all 0.1s ease;
+}
+body.show-chatbot .chatbot {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.chatbot header {
+  padding: 16px 0;
+  position: relative;
+  text-align: center;
+  color: #fff;
+  background: #724ae8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.chatbot header span {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  display: none;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+header h2 {
+  font-size: 1.4rem;
+}
+.chatbot .chatbox {
+  overflow-y: auto;
+  height: 510px;
+  padding: 30px 20px 100px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
+  width: 6px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 25px;
+}
+.chatbot :where(.chatbox, textarea)::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 25px;
+}
+.chatbox .chat {
+  display: flex;
+  list-style: none;
+}
+.chatbox .outgoing {
+  margin: 20px 0;
+  justify-content: flex-end;
+}
+.chatbox .incoming span {
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  cursor: default;
+  text-align: center;
+  line-height: 32px;
+  align-self: flex-end;
+  background: #724ae8;
+  border-radius: 4px;
+  margin: 0 10px 7px 0;
+}
+.chatbox .chat p {
+  white-space: pre-wrap;
+  padding: 12px 16px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 75%;
+  color: #fff;
+  font-size: 0.95rem;
+  background: #724ae8;
+}
+.chatbox .incoming p {
+  border-radius: 10px 10px 10px 0;
+}
+.chatbox .chat p.error {
+  color: #721c24;
+  background: #f8d7da;
+}
+.chatbox .incoming p {
+  color: #000;
+  background: #f2f2f2;
+}
+.chatbot .chat-input {
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 3px 20px;
+  border-top: 1px solid #ddd;
+}
+.chat-input textarea {
+  height: 55px;
+  width: 70%;
+  border: none;
+  outline: none;
+  resize: none;
+  max-height: 180px;
+  padding: 15px 15px 15px 0;
+  font-size: 0.95rem;
+}
+.chat-input span {
+  align-self: flex-end;
+  color: #724ae8;
+  cursor: pointer;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  font-size: 1.35rem;
+}
+.chat-input textarea:valid ~ span {
+  visibility: visible;
+}
+
+/* Dark theme styles */
+.chatbot.dark-theme {
+  background: #1E1E1E; /* Darker chatbot background */
+}
+
+.chatbot.dark-theme header {
+  /* background: #5C6BC0; Dark header color */
+  background: #724ae8; /* Dark header color */
+}
+
+.chatbot.dark-theme .chatbox .chat p {
+  background: #3D3D3D; /* Dark chat message background */
+  color: #fff; /* Light text color */
+}
+
+.chatbot.dark-theme .chatbox .incoming p {
+  background: #424242; /* Incoming message background */
+  color: #fff; /* Incoming text color */
+}
+
+.chatbot.dark-theme .chat-input {
+  background: #424242; /* Dark chat input background */
+  border-top: 1px solid #555; /* Dark border color */
+}
+
+.chatbot.dark-theme .chat-input textarea {
+  background: #424242; /* Dark textarea background */
+  color: #fff; /* Light textarea text color */
+}
+
+.chatbot.dark-theme .chat-input span {
+  color: #fff; /* Light send button color */
+}
+
+
+/* Copy Button */
+.copy-btn {
+  color: #724ae8; /* Same color as the theme */
+  font-size: 1rem; /* Adjust size if needed */
+  transition: color 0.3s;
+}
+
+.copy-btn:hover {
+  color: #5C6BC0; /* Change color on hover for better UX */
+}
+
+
+
+
+
+@media (max-width: 490px) {
+  .chatbot-toggler {
+    right: 20px;
+    bottom: 20px;
+  }
+  .chatbot {
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot .chatbox {
+    height: 90%;
+    padding: 25px 15px 100px;
+  }
+  .chatbot .chat-input {
+    padding: 5px 15px;
+  }
+  .chatbot header span {
+    display: block;
+  }
+}
+    </style>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <button class="chatbot-toggler">
+      <span class="material-symbols-rounded" style="overflow: hidden;">mode_comment</span>
+      <span class="material-symbols-outlined" style="overflow: hidden;">close</span>
+    </button>
+
+    
+    <div class="chatbot">
+      <header>
+        <div style="display: flex;justify-content: center;">
+            <img src="{%static 'images/healthcare.png'%}" alt="" height="40px">
+        <h2 style="margin-top: 10px;">Med Ai</h2>
+    </div>
+        
+        <span class="close-btn material-symbols-outlined">close</span>
+      </header>
+      <ul class="chatbox">
+        <li class="chat incoming">
+          <span class="material-symbols-outlined" style="overflow: hidden;">smart_toy</span>
+          <p>Hi there <br>How can I help you today?</p>
+        </li>
+      </ul>
+      <div class="chat-input" style="overflow: hidden;">
+        <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+        <span id="send-btn" class="material-symbols-rounded" style="overflow: hidden;">send</span>
+        <p class="material-symbols-outlined" id="stop-audio-btn" title="Stop Audio" style="margin-top: 15px;cursor: pointer;color:  #724ae8;overflow: hidden;" >stop</p> 
+      
+            <p id="theme-toggle-button" class="material-symbols-rounded" style="margin-top: 15px;cursor: pointer;color:  #724ae8;overflow: hidden;">light_mode</p>
+            <p id="delete-chat-button" class="material-symbols-rounded" style="margin-top: 15px;cursor: pointer;color:  #724ae8;overflow: hidden;">delete</p>
+           
+            <p id="speak-btn" class="material-symbols-rounded" style="margin-top: 15px;cursor: pointer;color:  #724ae8;overflow: hidden;">mic</p>
+              
+         
+      </div>
+      
+    
+      
+     
+    </div>
+
+  </body>
+  
+
+ <!-- Without audio -->
+ <!-- <script>
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+    const closeBtn = document.querySelector(".close-btn");
+    const chatbox = document.querySelector(".chatbox");
+    const chatInput = document.querySelector(".chat-input textarea");
+    const sendChatBtn = document.querySelector(".chat-input span");
+    
+    let userMessage = null; // Variable to store user's message
+    const inputInitHeight = chatInput.scrollHeight;
+    
+    // API configuration
+    const API_KEY = "AIzaSyCGJwPp5y2hzNDVzqNoZXetxKGTM5CHCmY"; // Your API key here
+    const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+    
+    // Create chat list item function
+    const createChatLi = (message, className) => {
+      const chatLi = document.createElement("li");
+      chatLi.classList.add("chat", `${className}`);
+    
+      let chatContent = className === "outgoing" 
+          ? `<p></p>` 
+          : `<span class="material-symbols-outlined">smart_toy</span><p></p><span class="copy-btn material-symbols-rounded" style="cursor: pointer; margin-left: 10px;">content_copy</span>`;
+      
+      chatLi.innerHTML = chatContent;
+      chatLi.querySelector("p").textContent = message;
+    
+      // Add event listener for the copy button, only for incoming messages
+      if (className === "incoming") {
+        chatLi.querySelector(".copy-btn").addEventListener("click", () => copyMessage(chatLi));
+      }
+      
+      return chatLi; // return chat <li> element
+    }
+    
+    // Function to copy message text to the clipboard
+    const copyMessage = (chatLi) => {
+      const messageText = chatLi.querySelector("p").innerText; // Get the message text from the <p>
+    
+      navigator.clipboard.writeText(messageText).then(() => {
+          const copyBtn = chatLi.querySelector(".copy-btn");
+          copyBtn.innerText = "done"; // Change icon to done
+          setTimeout(() => copyBtn.innerText = "content_copy", 1000); // Revert icon after 1 second
+      }).catch(err => {
+          console.error('Could not copy text: ', err);
+      });
+    }
+    
+    // Generate response from API
+    const generateResponse = async (chatElement) => {
+      const messageElement = chatElement.querySelector("p");
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          contents: [{ 
+            role: "user", 
+            parts: [{ text: userMessage }] 
+          }] 
+        }),
+      }
+    
+      try {
+        const response = await fetch(API_URL, requestOptions);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error.message);
+        messageElement.textContent = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
+      } catch (error) {
+        messageElement.classList.add("error");
+        messageElement.textContent = error.message;
+      } finally {
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+      }
+    }
+    
+    // Handle user input and message sending
+    const handleChat = () => {
+      userMessage = chatInput.value.trim();
+      if (!userMessage) return;
+    
+      chatInput.value = "";
+      chatInput.style.height = `${inputInitHeight}px`;
+    
+      chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+    
+      setTimeout(() => {
+        const incomingChatLi = createChatLi("Thinking...", "incoming");
+        chatbox.appendChild(incomingChatLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+        generateResponse(incomingChatLi);
+      }, 600);
+    }
+    
+    chatInput.addEventListener("input", () => {
+      chatInput.style.height = `${inputInitHeight}px`;
+      chatInput.style.height = `${chatInput.scrollHeight}px`;
+    });
+    
+    chatInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+        e.preventDefault();
+        handleChat();
+      }
+    });
+    
+    // Theme toggle functionality
+    const toggleThemeButton = document.getElementById("theme-toggle-button");
+    const chatbot = document.querySelector(".chatbot"); // Select the chatbot
+    
+    let isDarkTheme = false; // Initial theme state
+    
+    // Toggle between light and dark themes
+    toggleThemeButton.addEventListener("click", () => {
+      isDarkTheme = !isDarkTheme; // Toggle the theme state
+      chatbot.classList.toggle("dark-theme", isDarkTheme); // Toggle dark-theme on chatbot
+      toggleThemeButton.innerText = isDarkTheme ? "light_mode" : "dark_mode"; // Update button text
+    });
+    
+    // Delete chat functionality
+    const deleteChatButton = document.getElementById("delete-chat-button");
+    
+    deleteChatButton.addEventListener("click", () => {
+      if (confirm("Are you sure you want to delete all the chats?")) {
+        chatbox.innerHTML = ""; // Clear chatbox content
+      }
+    });
+    
+    // Event listeners for buttons
+    sendChatBtn.addEventListener("click", handleChat);
+    closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+    chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+    
+    </script> -->
+    
+
+<!-- With Audio -->
+<!-- <script>
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+        const closeBtn = document.querySelector(".close-btn");
+        const chatbox = document.querySelector(".chatbox");
+        const chatInput = document.querySelector(".chat-input textarea");
+        const sendChatBtn = document.querySelector(".chat-input span");
+        
+        let userMessage = null; // Variable to store user's message
+        const inputInitHeight = chatInput.scrollHeight;
+        
+        // API configuration
+        const API_KEY = "AIzaSyCGJwPp5y2hzNDVzqNoZXetxKGTM5CHCmY"; // Your API key here
+        const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+        
+        // Create chat list item function
+        const createChatLi = (message, className) => {
+            const chatLi = document.createElement("li");
+            chatLi.classList.add("chat", `${className}`);
+        
+            let chatContent = className === "outgoing" 
+                ? `<p></p>` 
+                : `<span class="material-symbols-outlined">smart_toy</span><p></p><span class="copy-btn material-symbols-rounded" style="cursor: pointer; margin-left: 10px;">content_copy</span>`;
+            
+            chatLi.innerHTML = chatContent;
+            chatLi.querySelector("p").textContent = message;
+        
+            // Add event listener for the copy button, only for incoming messages
+            if (className === "incoming") {
+                chatLi.querySelector(".copy-btn").addEventListener("click", () => copyMessage(chatLi));
+            }
+            
+            return chatLi; // return chat <li> element
+        }
+        
+        // Function to copy message text to the clipboard
+        const copyMessage = (chatLi) => {
+            const messageText = chatLi.querySelector("p").innerText; // Get the message text from the <p>
+        
+            navigator.clipboard.writeText(messageText).then(() => {
+                const copyBtn = chatLi.querySelector(".copy-btn");
+                copyBtn.innerText = "done"; // Change icon to done
+                setTimeout(() => copyBtn.innerText = "content_copy", 1000); // Revert icon after 1 second
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+        
+        // Function to speak a given text
+        const speakText = (text) => {
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = "en-US"; // Set the language
+            speech.rate = 1; // Set the speaking rate
+            speech.pitch = 1; // Set the pitch
+            window.speechSynthesis.speak(speech);
+        }
+    
+        // Generate response from API
+        const generateResponse = async (chatElement) => {
+            const messageElement = chatElement.querySelector("p");
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    contents: [{ 
+                        role: "user", 
+                        parts: [{ text: userMessage }] 
+                    }] 
+                }),
+            }
+        
+            try {
+                const response = await fetch(API_URL, requestOptions);
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error.message);
+                const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
+                messageElement.textContent = responseText;
+                speakText(responseText); // Speak the response text
+            } catch (error) {
+                messageElement.classList.add("error");
+                messageElement.textContent = error.message;
+            } finally {
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            }
+        }
+        
+        // Handle user input and message sending
+        const handleChat = () => {
+            userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+        
+            chatInput.value = "";
+            chatInput.style.height = `${inputInitHeight}px`;
+        
+            chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        
+            setTimeout(() => {
+                const incomingChatLi = createChatLi("Thinking...", "incoming");
+                chatbox.appendChild(incomingChatLi);
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+                generateResponse(incomingChatLi);
+            }, 600);
+        }
+        
+        chatInput.addEventListener("input", () => {
+            chatInput.style.height = `${inputInitHeight}px`;
+            chatInput.style.height = `${chatInput.scrollHeight}px`;
+        });
+        
+        chatInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+                e.preventDefault();
+                handleChat();
+            }
+        });
+        
+        // Theme toggle functionality
+        const toggleThemeButton = document.getElementById("theme-toggle-button");
+        const chatbot = document.querySelector(".chatbot"); // Select the chatbot
+        
+        let isDarkTheme = false; // Initial theme state
+        
+        // Toggle between light and dark themes
+        toggleThemeButton.addEventListener("click", () => {
+            isDarkTheme = !isDarkTheme; // Toggle the theme state
+            chatbot.classList.toggle("dark-theme", isDarkTheme); // Toggle dark-theme on chatbot
+            toggleThemeButton.innerText = isDarkTheme ? "light_mode" : "dark_mode"; // Update button text
+        });
+        
+        // Delete chat functionality
+        const deleteChatButton = document.getElementById("delete-chat-button");
+        
+        deleteChatButton.addEventListener("click", () => {
+            if (confirm("Are you sure you want to delete all the chats?")) {
+                chatbox.innerHTML = ""; // Clear chatbox content
+            }
+        });
+        
+        // Event listeners for buttons
+        sendChatBtn.addEventListener("click", handleChat);
+        closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+        chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+    </script> -->
+
+    <!-- with audio and stop btn  -->
+    <!-- <script>
+        const chatbotToggler = document.querySelector(".chatbot-toggler");
+const closeBtn = document.querySelector(".close-btn");
+const chatbox = document.querySelector(".chatbox");
+const chatInput = document.querySelector(".chat-input textarea");
+const sendChatBtn = document.querySelector(".chat-input span");
+const stopAudioBtn = document.getElementById("stop-audio-btn");
+const toggleThemeButton = document.getElementById("theme-toggle-button");
+const chatbot = document.querySelector(".chatbot"); // Select the chatbot
+
+let userMessage = null; // Variable to store user's message
+const inputInitHeight = chatInput.scrollHeight;
+
+// API configuration
+const API_KEY = "AIzaSyCGJwPp5y2hzNDVzqNoZXetxKGTM5CHCmY"; // Your API key here
+const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+
+const synth = window.speechSynthesis; // Initialize speech synthesis
+let speaking = false; // Track whether speech is ongoing
+
+// Create chat list item function
+const createChatLi = (message, className) => {
+const chatLi = document.createElement("li");
+chatLi.classList.add("chat", `${className}`);
+
+let chatContent = className === "outgoing"
+    ? `<p></p>`
+    : `<span class="material-symbols-outlined">smart_toy</span><p></p><span class="copy-btn material-symbols-rounded" style="cursor: pointer; margin-left: 10px;">content_copy</span>`;
+
+chatLi.innerHTML = chatContent;
+chatLi.querySelector("p").textContent = message;
+
+// Add event listener for the copy button, only for incoming messages
+if (className === "incoming") {
+    chatLi.querySelector(".copy-btn").addEventListener("click", () => copyMessage(chatLi));
+}
+
+return chatLi; // return chat <li> element
+}
+
+// Function to copy message text to the clipboard
+const copyMessage = (chatLi) => {
+const messageText = chatLi.querySelector("p").innerText; // Get the message text from the <p>
+
+navigator.clipboard.writeText(messageText).then(() => {
+    const copyBtn = chatLi.querySelector(".copy-btn");
+    copyBtn.innerText = "done"; // Change icon to done
+    setTimeout(() => copyBtn.innerText = "content_copy", 1000); // Revert icon after 1 second
+}).catch(err => {
+    console.error('Could not copy text: ', err);
+});
+}
+
+// Function to speak a message
+const speakMessage = (message) => {
+if (synth.speaking) {
+    console.error('Speech synthesis is already speaking.');
+    return;
+}
+
+const utterance = new SpeechSynthesisUtterance(message);
+utterance.onend = () => {
+    speaking = false; // Reset speaking status
+};
+utterance.onerror = (e) => {
+    console.error('Speech synthesis error: ', e);
+};
+
+synth.speak(utterance);
+speaking = true; // Update speaking status
+};
+
+// Function to stop audio
+const stopAudio = () => {
+if (synth.speaking) {
+    synth.cancel(); // Stop the speech synthesis
+    speaking = false; // Reset speaking status
+}
+};
+
+// Generate response from API
+const generateResponse = async (chatElement) => {
+const messageElement = chatElement.querySelector("p");
+const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        contents: [{
+            role: "user",
+            parts: [{ text: userMessage }]
+        }]
+    }),
+}
+
+try {
+    const response = await fetch(API_URL, requestOptions);
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error.message);
+    const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
+
+    messageElement.textContent = responseText; // Set text content
+    speakMessage(responseText); // Speak the response
+} catch (error) {
+    messageElement.classList.add("error");
+    messageElement.textContent = error.message;
+} finally {
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+}
+}
+
+// Handle user input and message sending
+const handleChat = () => {
+userMessage = chatInput.value.trim();
+if (!userMessage) return;
+
+chatInput.value = "";
+chatInput.style.height = `${inputInitHeight}px`;
+
+chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+chatbox.scrollTo(0, chatbox.scrollHeight);
+
+setTimeout(() => {
+    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    chatbox.appendChild(incomingChatLi);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+    generateResponse(incomingChatLi);
+}, 600);
+}
+
+chatInput.addEventListener("input", () => {
+chatInput.style.height = `${inputInitHeight}px`;
+chatInput.style.height = `${chatInput.scrollHeight}px`;
+});
+
+chatInput.addEventListener("keydown", (e) => {
+if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    e.preventDefault();
+    handleChat();
+}
+});
+
+// Theme toggle functionality
+let isDarkTheme = false; // Initial theme state
+
+// Toggle between light and dark themes
+toggleThemeButton.addEventListener("click", () => {
+isDarkTheme = !isDarkTheme; // Toggle the theme state
+chatbot.classList.toggle("dark-theme", isDarkTheme); // Toggle dark-theme on chatbot
+toggleThemeButton.innerText = isDarkTheme ? "light_mode" : "dark_mode"; // Update button text
+});
+
+// Delete chat functionality
+const deleteChatButton = document.getElementById("delete-chat-button");
+
+deleteChatButton.addEventListener("click", () => {
+if (confirm("Are you sure you want to delete all the chats?")) {
+    chatbox.innerHTML = ""; // Clear chatbox content
+}
+});
+
+// Event listeners for buttons
+sendChatBtn.addEventListener("click", handleChat);
+closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+stopAudioBtn.addEventListener("click", stopAudio); // Event listener for the stop audio button
+
+    </script> -->
+
+   
+        
+  
+ 
+      <!-- with audio stop and resume btn -->
+       <script>
+            const chatbotToggler = document.querySelector(".chatbot-toggler");
+            const closeBtn = document.querySelector(".close-btn");
+            const chatbox = document.querySelector(".chatbox");
+            const chatInput = document.querySelector(".chat-input textarea");
+            const sendChatBtn = document.querySelector(".chat-input span");
+            const toggleAudioBtn = document.getElementById("stop-audio-btn"); // Change ID for clarity
+            const toggleThemeButton = document.getElementById("theme-toggle-button");
+            const chatbot = document.querySelector(".chatbot"); // Select the chatbot
+            
+            let userMessage = null; // Variable to store user's message
+            const inputInitHeight = chatInput.scrollHeight;
+            
+            // API configuration
+            const API_KEY = "AIzaSyCGJwPp5y2hzNDVzqNoZXetxKGTM5CHCmY"; // Your API key here
+            const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${API_KEY}`;
+            
+            const synth = window.speechSynthesis; // Initialize speech synthesis
+            let speaking = false; // Track whether speech is ongoing
+            let currentUtterance; // Store current utterance
+            
+            // Create chat list item function
+            const createChatLi = (message, className) => {
+                const chatLi = document.createElement("li");
+                chatLi.classList.add("chat", `${className}`);
+            
+                let chatContent = className === "outgoing"
+                    ? `<p></p>`
+                    : `<span class="material-symbols-outlined">smart_toy</span><p></p><span class="copy-btn material-symbols-rounded" style="cursor: pointer; margin-left: 10px;">content_copy</span>`;
+            
+                chatLi.innerHTML = chatContent;
+                chatLi.querySelector("p").textContent = message;
+            
+                // Add event listener for the copy button, only for incoming messages
+                if (className === "incoming") {
+                    chatLi.querySelector(".copy-btn").addEventListener("click", () => copyMessage(chatLi));
+                }
+            
+                return chatLi; // return chat <li> element
+            }
+
+
+
+
+// // 1Get the speak button
+// const speakBtn = document.getElementById("speak-btn");
+
+// // Check for speech recognition support
+// const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+// const recognition = new SpeechRecognition();
+
+// // Configure speech recognition
+// recognition.lang = 'en-US'; // Set the language
+// recognition.interimResults = false; // Set to true for interim results
+// recognition.maxAlternatives = 1; // Number of alternatives to return
+
+// // Function to show a temporary popup message
+// const showPopupMessage = (message) => {
+//     // Create a popup element
+//     const popup = document.createElement('div');
+//     popup.textContent = message;
+//     popup.style.position = 'fixed';
+//     popup.style.bottom = '20px';
+//     popup.style.right = '20px';
+//     popup.style.padding = '10px';
+//     popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+//     popup.style.color = 'white';
+//     popup.style.borderRadius = '5px';
+//     popup.style.zIndex = '1000'; // Ensure it appears on top
+
+//     // Append the popup to the body
+//     document.body.appendChild(popup);
+
+//     // Remove the popup after 2 seconds
+//     setTimeout(() => {
+//         popup.remove();
+//     }, 2000);
+// };
+
+// // Function to handle speech input
+// const handleSpeechInput = () => {
+//     showPopupMessage('Listening...'); // Show popup message
+//     recognition.start(); // Start recognition
+// };
+
+// // Event listener for speech recognition results
+// recognition.addEventListener('result', (event) => {
+//     const transcript = event.results[0][0].transcript; // Get the recognized speech
+//     chatInput.value = transcript; // Set the textarea value to the recognized speech
+//     handleChat(); // Automatically send the message
+//     showPopupMessage('Speech recognized!'); // Show popup message
+// });
+
+// // Error handling for speech recognition
+// recognition.addEventListener('error', (event) => {
+//     console.error('Speech recognition error:', event.error);
+//     showPopupMessage('Error occurred: ' + event.error); // Show popup message on error
+// });
+
+// // Add event listener for the speak button
+// speakBtn.addEventListener("click", handleSpeechInput);
+
+
+// 2Get the speak button
+const speakBtn = document.getElementById("speak-btn");
+
+// Check for speech recognition support
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+
+// Configure speech recognition
+recognition.lang = 'en-US'; // Set the language
+recognition.interimResults = false; // Set to true for interim results
+recognition.maxAlternatives = 1; // Number of alternatives to return
+
+// Variable to track listening state
+let isListening = false;
+
+// Function to show a temporary popup message
+const showPopupMessage = (message) => {
+    // Create a popup element
+    const popup = document.createElement('div');
+    popup.textContent = message;
+    popup.style.position = 'fixed';
+    popup.style.bottom = '20px';
+    popup.style.right = '20px';
+    popup.style.padding = '10px';
+    popup.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    popup.style.color = 'white';
+    popup.style.borderRadius = '5px';
+    popup.style.zIndex = '1000'; // Ensure it appears on top
+
+    // Append the popup to the body
+    document.body.appendChild(popup);
+
+    // Remove the popup after 2 seconds
+    setTimeout(() => {
+        popup.remove();
+    }, 2000);
+};
+
+// Function to start speech recognition
+const startListening = () => {
+    showPopupMessage('Listening...'); // Show popup message
+    recognition.start(); // Start recognition
+    isListening = true;
+};
+
+// Function to stop speech recognition
+const stopListening = () => {
+    recognition.stop(); // Stop recognition
+    showPopupMessage('Stopped listening'); // Show popup message
+    isListening = false;
+};
+
+// Function to handle speech input
+const handleSpeechInput = () => {
+    if (!isListening) {
+        startListening();
+    } else {
+        stopListening();
+    }
+};
+
+// Event listener for speech recognition results
+recognition.addEventListener('result', (event) => {
+    const transcript = event.results[0][0].transcript; // Get the recognized speech
+    chatInput.value = transcript; // Set the textarea value to the recognized speech
+    handleChat(); // Automatically send the message
+    showPopupMessage('Speech recognized!'); // Show popup message
+    stopListening(); // Automatically stop after recognition
+});
+
+// Error handling for speech recognition
+recognition.addEventListener('error', (event) => {
+    console.error('Speech recognition error:', event.error);
+    showPopupMessage('Error occurred: ' + event.error); // Show popup message on error
+    stopListening(); // Automatically stop on error
+});
+
+// Add event listener for the speak button
+speakBtn.addEventListener("click", handleSpeechInput);
+
+
+
+
+
+
+
+
+            
+            // Function to copy message text to the clipboard
+            const copyMessage = (chatLi) => {
+                const messageText = chatLi.querySelector("p").innerText; // Get the message text from the <p>
+            
+                navigator.clipboard.writeText(messageText).then(() => {
+                    const copyBtn = chatLi.querySelector(".copy-btn");
+                    copyBtn.innerText = "done"; // Change icon to done
+                    setTimeout(() => copyBtn.innerText = "content_copy", 1000); // Revert icon after 1 second
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+            }
+            
+            // Function to speak a message by bot
+            const speakMessage = (message) => {
+                if (synth.speaking) {
+                    console.error('Speech synthesis is already speaking.');
+                    return;
+                }
+            
+                currentUtterance = new SpeechSynthesisUtterance(message);
+                currentUtterance.onend = () => {
+                    speaking = false; // Reset speaking status
+                    toggleAudioBtn.textContent = "play_arrow"; // Set button to play
+                    toggleAudioBtn.style.color = "#4CAF50"; // Green for play
+                };
+                currentUtterance.onerror = (e) => {
+                    console.error('Speech synthesis error: ', e);
+                };
+            
+                synth.speak(currentUtterance);
+                speaking = true; // Update speaking status
+                toggleAudioBtn.textContent = "stop"; // Set button to stop
+                toggleAudioBtn.style.color = "#f44336"; // Red for stop
+            };
+            
+            // Function to toggle audio (stop/resume)
+            const toggleAudio = () => {
+                if (speaking) {
+                    synth.cancel(); // Stop the speech synthesis
+                    speaking = false; // Reset speaking status
+                    toggleAudioBtn.textContent = "play_arrow"; // Change button to play
+                    toggleAudioBtn.style.color = "#4CAF50"; // Green for play
+                } else if (currentUtterance) {
+                    synth.speak(currentUtterance); // Resume speaking
+                    speaking = true; // Update speaking status
+                    toggleAudioBtn.textContent = "stop"; // Change button to stop
+                    toggleAudioBtn.style.color = "#f44336"; // Red for stop
+                }
+            };
+            
+            // Generate response from API
+            const generateResponse = async (chatElement) => {
+                const messageElement = chatElement.querySelector("p");
+                const requestOptions = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        contents: [{
+                            role: "user",
+                            parts: [{ text: userMessage }]
+                        }]
+                    }),
+                }
+            
+                try {
+                    const response = await fetch(API_URL, requestOptions);
+                    const data = await response.json();
+                    if (!response.ok) throw new Error(data.error.message);
+                    const responseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
+            
+                    messageElement.textContent = responseText; // Set text content
+                    speakMessage(responseText); // Speak the response
+                } catch (error) {
+                    messageElement.classList.add("error");
+                    messageElement.textContent = error.message;
+                } finally {
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                }
+            }
+            
+            // Handle user input and message sending
+            const handleChat = () => {
+                userMessage = chatInput.value.trim();
+                if (!userMessage) return;
+            
+                chatInput.value = "";
+                chatInput.style.height = `${inputInitHeight}px`;
+            
+                chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+                chatbox.scrollTo(0, chatbox.scrollHeight);
+            
+                setTimeout(() => {
+                    const incomingChatLi = createChatLi("Thinking...", "incoming");
+                    chatbox.appendChild(incomingChatLi);
+                    chatbox.scrollTo(0, chatbox.scrollHeight);
+                    generateResponse(incomingChatLi);
+                }, 600);
+            }
+            
+            chatInput.addEventListener("input", () => {
+                chatInput.style.height = `${inputInitHeight}px`;
+                chatInput.style.height = `${chatInput.scrollHeight}px`;
+            });
+            
+            chatInput.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+                    e.preventDefault();
+                    handleChat();
+                }
+            });
+            
+            // Theme toggle functionality
+            let isDarkTheme = false; // Initial theme state
+            
+            // Toggle between light and dark themes
+            toggleThemeButton.addEventListener("click", () => {
+                isDarkTheme = !isDarkTheme; // Toggle the theme state
+                chatbot.classList.toggle("dark-theme", isDarkTheme); // Toggle dark-theme on chatbot
+                toggleThemeButton.innerText = isDarkTheme ? "light_mode" : "dark_mode"; // Update button text
+            });
+            
+            // Delete chat functionality
+            const deleteChatButton = document.getElementById("delete-chat-button");
+            
+            deleteChatButton.addEventListener("click", () => {
+                if (confirm("Are you sure you want to delete all the chats?")) {
+                    chatbox.innerHTML = ""; // Clear chatbox content
+                }
+            });
+            
+            // Event listeners for buttons
+            sendChatBtn.addEventListener("click", handleChat);
+            closeBtn.addEventListener("click", () => document.body.classList.remove("show-chatbot"));
+            chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+            toggleAudioBtn.addEventListener("click", toggleAudio); // Event listener for the toggle audio button
+            
+            </script> 
+            
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
+  
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css" rel="stylesheet" /> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"></script>
+
+
+<script src="{%static 'bootstrap-5.3.3-dist\js\bootstrap.bundle.min.js' %}" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  </html>
+{% endblock %}
+

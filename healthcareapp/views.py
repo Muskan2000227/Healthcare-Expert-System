@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import plotly.express as px
 import itertools
-import statsmodels.api as sm
+
 
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage

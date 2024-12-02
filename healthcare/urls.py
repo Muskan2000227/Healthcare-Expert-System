@@ -178,14 +178,6 @@ urlpatterns = [
     path('news',views.news,name="news"),
     path('identify_pill', views.identify_pill, name='identify_pill'),
     path('pill-search', views.pill_search, name='pill_search'),
-
-
-
-    
-  
-
-
-    
    
 ]
 

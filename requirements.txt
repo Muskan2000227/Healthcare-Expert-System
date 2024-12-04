@@ -1,0 +1,12 @@
+Django
+pandas
+numpy
+matplotlib
+plotly
+statsmodels
+tensorflow
+joblib
+seaborn
+newsapi-python
+social-auth-app-django
+requests

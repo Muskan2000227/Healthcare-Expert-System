@@ -1,9 +1,15 @@
+echo "BUILD START"
 
+# Create the static_build directory if it doesn't exist
+mkdir -p staticfiles_build
 
-echo "Running collectstatic to gather static files..."
-python3.12 manage.py collectstatic --noinput || exit 1
+# Install dependencies from the requirements.txt file
+python3.12 -m pip install -r requirements.txt
 
-echo "Creating the staticfiles_build directory..."
-mkdir -p staticfiles_build || exit 1
+# Run the collectstatic command to gather all static files into the staticfiles_build directory
+python3.12 manage.py collectstatic --noinput --clear
 
-echo "Build process completed successfully."
+# Optionally, move static files into the staticfiles_build directory if needed
+mv static/* staticfiles_build/ || { echo "Error: Failed to move static files"; exit 1; }
+
+echo "BUILD END"

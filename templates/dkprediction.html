@@ -464,16 +464,8 @@ line {
             const country = $("#country").val();
             const years = $("#yearsInput").val();
   
-            if (!country) {
-                alert("Please select a country.");
-                event.preventDefault();
-                return;
-            }
-  
-            if (!years || years <= 0) {
-                alert("Please enter a valid number of years.");
-                return;
-            }
+           
+           
   
             // Show the full-screen overlay with spinner
             $("#loadingOverlay").show();

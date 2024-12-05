@@ -6040,11 +6040,11 @@ def news(request):
 
     # Fetch articles from the past 29 days
     json_data = newsapi.get_everything(
-        q='smart medical',
+        q='medical',
         language='en',
         from_param=(datetime.today() - timedelta(days=29)).strftime('%Y-%m-%d'),
         to=datetime.today().strftime('%Y-%m-%d'),
-        page_size=30,
+        page_size=12,
         page=2,
         sort_by='relevancy'
     )

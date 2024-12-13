@@ -165,7 +165,7 @@ JAZZMIN_SETTINGS = {
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_brand": "Med Expert",
 
-    "site_logo": "images/robotimg.png",
+    "site_logo": "images/robotimg1.jpg",
      "show_ui_builder": True,
 
      # Welcome text on the login screen

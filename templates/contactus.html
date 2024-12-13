@@ -89,10 +89,11 @@
 
             <input
               placeholder="Enter your name"
-              title="Enter your name"
+            
               name="Name"
               type="text"
-              class="input_field" required
+              class="input_field" required pattern="^(?!\s*$)([A-Za-z]+\s*){3,30}$" 
+              title="Name should contain atlest 3 characters."
             />
 
             <input

@@ -194,6 +194,11 @@
 </head>
 <body>
     <section class="lungcancer">
+
+        {% if error_message %}
+    <div class="alert alert-danger">{{ error_message }}</div>
+{% endif %}
+
         <div class="container27">
             <div class="cancermid">
 

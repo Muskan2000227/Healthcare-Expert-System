@@ -44,7 +44,8 @@
                     d="M15.75 7.5c0 2.071-1.679 3.75-3.75 3.75s-3.75-1.679-3.75-3.75S9.929 3.75 12 3.75 15.75 5.429 15.75 7.5zM4.5 19.5c0-3.038 4.962-5.25 7.5-5.25s7.5 2.212 7.5 5.25v.75h-15v-.75z"
                   />
               </svg>
-              <input class="input1" type="text" placeholder="Username" name="username" required>
+              <input class="input1" type="text" placeholder="Username" name="username" required pattern="^(?!\s*$)([A-Za-z]+\s*){3,30}$" 
+              title="Name should contain atlest 3 characters.">
               </div>
 
               <!-- Email field -->

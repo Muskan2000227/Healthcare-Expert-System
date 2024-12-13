@@ -57,7 +57,7 @@ def logingoogle(request):
             else:
                 return render(request, 'logingoogle.html', {'msg': "Incorrect password"})
         except register_model.DoesNotExist:
-            return render(request, 'logingooogle.html', {'msg': "User does not exist"})
+            return render(request, 'logingoogle.html', {'msg': "User does not exist"})
     else:
         return render(request, 'logingoogle.html')
     
@@ -4103,7 +4103,12 @@ def cdisease_prediction(request):
             marker=dict(size=8, color='#7C00FE', symbol='circle'),  # Dot styling
             fill='tozeroy',  # Fill color to zero on the y-axis
             fillcolor='rgba(124, 0, 254, 0.2)',  # Light transparent fill color
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}"
+        for year, value in zip(y.index.year, y['DALYs (Disability-Adjusted Life Years) - Cardiovascular diseases - Sex: Both - Age: All Ages (Number)'])
+    ]
+
         ))
 
         # Predicted values trace with lines, markers (dots), and fill color
@@ -4116,7 +4121,11 @@ def cdisease_prediction(request):
             marker=dict(size=8, color='#cf2d11', symbol='circle'),  # Dot styling
             fill='tozeroy',  # Fill color to zero on the y-axis
             fillcolor='rgba(207, 45, 17, 0.2)',  # Light transparent fill color
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}"
+        for year, value in zip(pred_uc.predicted_mean.index.year, pred_uc.predicted_mean)
+    ]
         ))
 
 
@@ -4219,7 +4228,9 @@ def nprediction(request):
         # Create the area chart
         fig = go.Figure()
 
-        # Actual values trace with improved styling (Area chart)
+      
+        
+        # Actual values trace with customized hover label
         fig.add_trace(go.Scatter(
             x=y.index,
             y=y['DALYs (Disability-Adjusted Life Years) - Neurological disorders - Sex: Both - Age: All Ages (Number)'],
@@ -4227,10 +4238,21 @@ def nprediction(request):
             name='Actual Value',
             line=dict(color='#7C00FE'),  # Lavender color for actual values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',  # Set hoverinfo to 'text' for custom labels
+            text=[
+                f"Year - {str(year)}<br>People Affected - {value:.2f}"
+                for year, value in zip(y.index.year, y['DALYs (Disability-Adjusted Life Years) - Neurological disorders - Sex: Both - Age: All Ages (Number)'])
+            ],  # Custom hover text
+            hoverlabel=dict(
+                bgcolor="white",
+                font_size=12,
+                font_family="Arial"
+            )
         ))
 
-        # Predicted values trace (Area chart)
+
+
+        # Predicted values trace with customized hover label
         fig.add_trace(go.Scatter(
             x=pred_uc.predicted_mean.index,
             y=pred_uc.predicted_mean,
@@ -4238,8 +4260,20 @@ def nprediction(request):
             name='Predicted Value',
             line=dict(color='#cf2d11'),  # Soft red shade for predicted values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',  # Set hoverinfo to 'text' for custom labels
+            text=[
+                f"Year - {str(year)}<br>People Affected - {value:.2f}"
+                for year, value in zip(pred_uc.predicted_mean.index.year, pred_uc.predicted_mean)
+            ],  # Custom hover text
+            hoverlabel=dict(
+                bgcolor="white",
+                font_size=12,
+                font_family="Arial"
+            )
         ))
+
+
+
 
                 # Update layout for button-triggered animation only
         fig.update_layout(
@@ -4514,7 +4548,11 @@ def digprediction(request):
             name='Actual Value',
             line=dict(color='#7C00FE'),  # Lavender color for actual values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}"
+        for year, value in zip(y.index.year, y['DALYs (Disability-Adjusted Life Years) - Digestive diseases - Sex: Both - Age: All Ages (Number)'])
+    ]
         ))
 
         # Predicted values trace (Area chart)
@@ -4525,7 +4563,11 @@ def digprediction(request):
             name='Predicted Value',
             line=dict(color='#cf2d11'),  # Soft red shade for predicted values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}"
+        for year, value in zip(pred_uc.predicted_mean.index.year, pred_uc.predicted_mean)
+    ]
         ))
 
                 # Update layout for button-triggered animation only
@@ -4699,6 +4741,7 @@ def dkprediction(request):
             hoverinfo='x+y',
             marker_line_color='rgba(0,0,0,0.5)',  # Light border color
             marker_line_width=1.5,
+            hovertemplate='Year: %{x}<br>People Affected: %{y:.2f}k'
             
         ))
 
@@ -4711,6 +4754,7 @@ def dkprediction(request):
             hoverinfo='x+y',
             marker_line_color='rgba(0,0,0,0.5)',
             marker_line_width=1.5,
+            hovertemplate='Year: %{x}<br>People Affected: %{y:.2f}k'
             
         ))
 
@@ -4768,7 +4812,7 @@ def dkprediction(request):
         # Update hover information
         fig.update_traces(
             hoverinfo='text',
-            hovertemplate='Year: %{x}<br>DALYs: %{y:,.0f}'  # Cleaner hover template
+            hovertemplate='Year: %{x}<br>People Affected: %{y:,.0f}'  # Cleaner hover template
         )
 
         # Frames for smooth animation
@@ -4862,28 +4906,25 @@ def rprediction(request):
         # Create the bar chart
         fig = go.Figure()
 
-        # Actual values trace with improved styling
+                # Actual values trace with improved styling and hover template
+        # Actual values trace with improved styling and hover label
         fig.add_trace(go.Bar(
             x=y.index,
             y=y['DALYs (Disability-Adjusted Life Years) - Chronic respiratory diseases - Sex: Both - Age: All Ages (Number)'],
             name='Actual Value',
-            marker_color='#7C00FE ',  
-            hoverinfo='x+y',
-            marker_line_color='rgba(0,0,0,0.5)',  # Light border color
-            marker_line_width=1.5,
-            
+            marker_color='#7C00FE',
+            hoverinfo='x+y',  # Display only the x and y values in the hover label
+            hovertemplate='Year: %{x}<br>People Affected: %{y:.2f}k'  # Custom hover label
         ))
 
-        # Predicted values trace with improved styling
+        # Predicted values trace with improved styling and hover label
         fig.add_trace(go.Bar(
             x=pred_uc.predicted_mean.index,
             y=pred_uc.predicted_mean,
             name='Predicted Value',
             marker_color='#cf2d11',  # Soft red shade
-            hoverinfo='x+y',
-            marker_line_color='rgba(0,0,0,0.5)',
-            marker_line_width=1.5,
-            
+            hoverinfo='x+y',  # Display only the x and y values in the hover label
+            hovertemplate='Year: %{x}<br>People Affected: %{y:.2f}k'  # Custom hover label
         ))
 
         # Update layout for improved design
@@ -4892,31 +4933,29 @@ def rprediction(request):
             xaxis_title="Year",
             yaxis_title="DALYs (Number)",
             legend_title="Legend",
-            # plot_bgcolor='rgba(245, 245, 245, 0)',  # Subtle light background
             height=600,
             width=1000,
-            title_font_size=26,  # Larger title font size
-            
-            font=dict(family="Arial, sans-serif", size=16, color="black"),  # Clean font family
+            title_font_size=26,
+            font=dict(family="Arial, sans-serif", size=16, color="black"),
             title_font=dict(color='darkblue'),
-            title_x=0.5,  # Center the title
+            title_x=0.5,
             xaxis=dict(
-                showgrid=False,  # Remove grid lines for a cleaner look
-                zeroline=False,  # No zero line
+                showgrid=False,
+                zeroline=False,
                 showline=True,
-                linecolor="black",  # Black axis line
+                linecolor="black",
                 tickangle=45  # Tilted ticks for better readability
             ),
             yaxis=dict(
-                showgrid=False,  # Remove grid lines
-                zeroline=False,  # No zero line
+                showgrid=False,
+                zeroline=False,
                 showline=True,
-                linecolor="black"  # Black axis line
+                linecolor="black"
             ),
-            margin=dict(l=70, r=40, t=100, b=40),  # Balanced margins
-            bargap=0.15,  # Smaller gap between bars
-            barmode='group',  # Grouped bars
-            transition_duration=500,  # Slightly slower transitions for smoother effect
+            margin=dict(l=70, r=40, t=100, b=40),
+            bargap=0.15,
+            barmode='group',
+            transition_duration=500,
             updatemenus=[{
                 'buttons': [
                     {'args': [None, {'frame': {'duration': 200, 'redraw': True}, 'fromcurrent': True}],
@@ -4937,37 +4976,28 @@ def rprediction(request):
             }]
         )
 
-        # Update hover information
-        fig.update_traces(
-            hoverinfo='text',
-            hovertemplate='Year: %{x}<br>DALYs: %{y:,.0f}'  # Cleaner hover template
-        )
-
         # Frames for smooth animation
         frames = [go.Frame(
-            data=[
-                go.Bar(
-                    x=y.index[:i],
-                    y=y['DALYs (Disability-Adjusted Life Years) - Chronic respiratory diseases - Sex: Both - Age: All Ages (Number)'][:i],
-                    marker_color='#7C00FE',
-                    name='Actual Value'
-                ),
-                go.Bar(
-                    x=pred_uc.predicted_mean.index[:i],
-                    y=pred_uc.predicted_mean[:i],
-                    marker_color='#cf2d11',
-                    name='Predicted Value'
-                )
-            ],
+            data=[go.Bar(
+                x=y.index[:i],
+                y=y['DALYs (Disability-Adjusted Life Years) - Chronic respiratory diseases - Sex: Both - Age: All Ages (Number)'][:i],
+                marker_color='#7C00FE',
+                name='Actual Value'
+            ),
+            go.Bar(
+                x=pred_uc.predicted_mean.index[:i],
+                y=pred_uc.predicted_mean[:i],
+                marker_color='#cf2d11',
+                name='Predicted Value'
+            )],
             name=str(i)
         ) for i in range(1, len(y) + 1)]
 
         fig.frames = frames  # Add animation frames
 
-        
         # Convert the figure to HTML for rendering in Django template
         graph = fig.to_html()
-        return render(request, 'arima_result.html', {'graph': graph,'name':'resp'})
+        return render(request, 'arima_result.html', {'graph': graph, 'name': 'resp'})
 
     else:
         # Render the country selection form if it's a GET request
@@ -5047,7 +5077,12 @@ def mentalprediction(request):
             name='Actual Value',
             line=dict(color='#7C00FE', width=2),
             marker=dict(size=6),
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}k"
+        for year, value in zip(y.index.year, y['DALYs (Disability-Adjusted Life Years) - Mental disorders - Sex: Both - Age: All Ages (Number)'])
+    ]
+            
         ))
 
         # Trace for predicted values
@@ -5058,7 +5093,11 @@ def mentalprediction(request):
             name='Predicted Value',
             line=dict(color='#cf2d11', width=2),
             marker=dict(size=6),
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}k"
+        for year, value in zip(pred_uc.predicted_mean.index.year, pred_uc.predicted_mean)
+    ]
         ))
 
         # Add frames for animation (loop through actual and predicted data)
@@ -5290,7 +5329,7 @@ def anxietyprediction(request):
         # Update hover information
         fig.update_traces(
             hoverinfo='text',
-            hovertemplate='Year: %{x}<br>DALYs: %{y:,.0f}'  # Cleaner hover template
+            hovertemplate='Year: %{x}<br>People Affected: %{y:,.0f}'  # Cleaner hover template
         )
 
         # Frames for smooth animation
@@ -5399,7 +5438,11 @@ def depressprediction(request):
             name='Actual Value',
             line=dict(color='#7C00FE'),  # Lavender color for actual values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}"
+        for year, value in zip(y.index.year, y['Population'])
+    ]
         ))
 
         # Predicted values trace (Area chart)
@@ -5410,7 +5453,11 @@ def depressprediction(request):
             name='Predicted Value',
             line=dict(color='#cf2d11'),  # Soft red shade for predicted values
             fill='tozeroy',  # Fill area under the line
-            hoverinfo='x+y'
+            hoverinfo='text',
+            text=[
+        f"Year - {str(year)}<br>People Affected - {value:.2f}k"
+        for year, value in zip(pred_uc.predicted_mean.index.year, pred_uc.predicted_mean)
+    ]
         ))
 
                 # Update layout for button-triggered animation only
@@ -5529,6 +5576,8 @@ def healthprediction(request):
         # Filter data for the selected country
         production = df[df['Entity'] == country]
         production = production.loc[:, ['Year', 'public_health_expenditure_pc_gdp']]
+         # Filter for years starting from 1930
+        production = production[production['Year'].dt.year >= 1960]
         production = production.sort_values('Year').set_index('Year')
         y = production
         
@@ -5578,6 +5627,32 @@ def healthprediction(request):
         # Actual values trace (line chart)
         # Actual values trace with lines and markers (dots)
         # Actual values trace with lines, markers (dots), and fill color
+        # fig.add_trace(go.Scatter(
+        #     x=y.index,
+        #     y=y['public_health_expenditure_pc_gdp'],
+        #     name='Actual Value',
+        #     mode='lines+markers',  # Adds both lines and dots
+        #     line=dict(color='#7C00FE'),  # Line color
+        #     marker=dict(size=8, color='#7C00FE', symbol='circle'),  # Dot styling
+        #     fill='tozeroy',  # Fill color to zero on the y-axis
+        #     fillcolor='rgba(124, 0, 254, 0.2)',  # Light transparent fill color
+        #     hoverinfo='x+y'
+        # ))
+
+        # # Predicted values trace with lines, markers (dots), and fill color
+        # fig.add_trace(go.Scatter(
+        #     x=pred_uc.predicted_mean.index,
+        #     y=pred_uc.predicted_mean,
+        #     name='Predicted Value',
+        #     mode='lines+markers',  # Adds both lines and dots
+        #     line=dict(color='#cf2d11'),  # Line color
+        #     marker=dict(size=8, color='#cf2d11', symbol='circle'),  # Dot styling
+        #     fill='tozeroy',  # Fill color to zero on the y-axis
+        #     fillcolor='rgba(207, 45, 17, 0.2)',  # Light transparent fill color
+        #     hoverinfo='x+y'
+        # ))
+
+        # Actual values trace with user-friendly hover info
         fig.add_trace(go.Scatter(
             x=y.index,
             y=y['public_health_expenditure_pc_gdp'],
@@ -5587,10 +5662,11 @@ def healthprediction(request):
             marker=dict(size=8, color='#7C00FE', symbol='circle'),  # Dot styling
             fill='tozeroy',  # Fill color to zero on the y-axis
             fillcolor='rgba(124, 0, 254, 0.2)',  # Light transparent fill color
-            hoverinfo='x+y'
+            hoverinfo='x+y',  # Hover over the x (year) and y (percentage) values
+            hovertemplate='<b>Year:</b> %{x}<br><b>Health Expenditure Share of GDP:</b> %{y:.2f}%'  # Custom hover template
         ))
 
-        # Predicted values trace with lines, markers (dots), and fill color
+        # Predicted values trace with user-friendly hover info
         fig.add_trace(go.Scatter(
             x=pred_uc.predicted_mean.index,
             y=pred_uc.predicted_mean,
@@ -5600,38 +5676,68 @@ def healthprediction(request):
             marker=dict(size=8, color='#cf2d11', symbol='circle'),  # Dot styling
             fill='tozeroy',  # Fill color to zero on the y-axis
             fillcolor='rgba(207, 45, 17, 0.2)',  # Light transparent fill color
-            hoverinfo='x+y'
+            hoverinfo='x+y',  # Hover over the x (year) and y (percentage) values
+            hovertemplate='<b>Year:</b> %{x}<br><b>Predicted Health Expenditure Share of GDP:</b> %{y:.2f}%'  # Custom hover template
         ))
 
 
 
-        # Update layout
+
+        # # Update layout
+        # fig.update_layout(
+        #     title=f"Health Expenses Burden Prediction for {country}",
+        #     xaxis_title="Year",
+        #     yaxis_title="DALYs (Number)",
+        #     legend_title="Legend",
+        #     height=600,
+        #     width=1000,
+        #     title_font_size=26,
+        #     font=dict(family="Arial, sans-serif", size=16, color="black"),
+        #     title_font=dict(color='darkblue'),
+        #     title_x=0.5,
+        #     xaxis=dict(
+        #         showgrid=False,
+        #         zeroline=False,
+        #         showline=True,
+        #         linecolor="black",
+        #         tickangle=45
+        #     ),
+        #     yaxis=dict(
+        #         showgrid=False,
+        #         zeroline=False,
+        #         showline=True,
+        #         linecolor="black"
+        #     ),
+        #     margin=dict(l=70, r=40, t=100, b=40)
+        # )
+
         fig.update_layout(
-            title=f"Health Expenses Burden Prediction for {country}",
-            xaxis_title="Year",
-            yaxis_title="DALYs (Number)",
-            legend_title="Legend",
-            height=600,
-            width=1000,
-            title_font_size=26,
-            font=dict(family="Arial, sans-serif", size=16, color="black"),
-            title_font=dict(color='darkblue'),
-            title_x=0.5,
-            xaxis=dict(
-                showgrid=False,
-                zeroline=False,
-                showline=True,
-                linecolor="black",
-                tickangle=45
-            ),
-            yaxis=dict(
-                showgrid=False,
-                zeroline=False,
-                showline=True,
-                linecolor="black"
-            ),
-            margin=dict(l=70, r=40, t=100, b=40)
+        title=f"Health Expenses Burden Prediction for {country}",
+        xaxis_title="Year",
+        yaxis_title="Public Health Expenditure Share of GDP (%)",
+        legend_title="Legend",
+        height=600,
+        width=1000,
+        title_font_size=26,
+        font=dict(family="Arial, sans-serif", size=16, color="black"),
+        title_font=dict(color='darkblue'),
+        title_x=0.5,
+        xaxis=dict(
+            showgrid=False,
+            zeroline=False,
+            showline=True,
+            linecolor="black",
+            tickangle=45
+        ),
+        yaxis=dict(
+            showgrid=False,
+            zeroline=False,
+            showline=True,
+            linecolor="black"
+        ),
+        margin=dict(l=70, r=40, t=100, b=40)
         )
+
 
         # Convert the figure to HTML for rendering in Django template
         graph = fig.to_html()
@@ -5643,6 +5749,7 @@ def healthprediction(request):
         # column = data["Entity"].drop_duplicates().tolist()
         column = data[(data["Code"].notnull()) & (data["public_health_expenditure_pc_gdp"].notnull())]["Entity"].  drop_duplicates().tolist()
         return render(request, 'healthprediction.html', {"data": column, 'name':'health'})
+
 
 
 # Load the trained model
@@ -5658,42 +5765,99 @@ class_labels = {
 
 
 
+# def heartupload(request):
+#     if request.method == 'POST' and request.FILES['image']:
+#         # Handle the uploaded image
+#         uploaded_image = request.FILES['image']
+#         fs = FileSystemStorage()
+#         file_path = fs.save(uploaded_image.name, uploaded_image)
+#         image_url = fs.url(file_path)
+#         full_path = fs.path(file_path)
+
+#         # Preprocess the image for plant disease detection
+#         img = image.load_img(full_path, target_size=(256, 256))
+#         img_array = image.img_to_array(img)
+#         img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
+#         img_array = img_array / 255.0  # Normalize
+
+#         # Make prediction with the  disease model
+#         predictions = model1.predict(img_array)
+#         predicted_class = np.argmax(predictions, axis=1)[0]
+
+#         # Map class index to readable label
+#         predicted_label = class_labels.get(predicted_class, "Unknown Disease")
+       
+
+#         return render(request, 'heartresult.html', {'label': predicted_label, 'image_url': image_url})
+
+#     return render(request, 'heartupload.html')
+
+
+# def heartresult(request,file_path):
+#     context = {
+#         'image_url': file_path,
+        
+#     }
+#     return render(request, 'heartresult.html',context)
+
+
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import numpy as np
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render
+
+# Load the trained model (update with the correct path)
+model1 = load_model('lungcancerpred2.keras')
+
+# Define the class labels (0: Lung adenocarcinoma, 1: Lung benign tissue, 2: Lung squamous cell carcinoma)
+class_labels = {
+    0: 'Lung adenocarcinoma',
+    1: 'Lung benign tissue',
+    2: 'Lung squamous cell carcinoma'
+}
+
+# Function to upload and predict the image
 def heartupload(request):
     if request.method == 'POST' and request.FILES['image']:
-        # Handle the uploaded image
         uploaded_image = request.FILES['image']
         fs = FileSystemStorage()
         file_path = fs.save(uploaded_image.name, uploaded_image)
         image_url = fs.url(file_path)
         full_path = fs.path(file_path)
 
-        # Preprocess the image for plant disease detection
-        img = image.load_img(full_path, target_size=(256, 256))
+        # Preprocess the image for prediction
+        img = image.load_img(full_path, target_size=(224, 224))  # Resize to match input size of the model
         img_array = image.img_to_array(img)
         img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-        img_array = img_array / 255.0  # Normalize for the plant disease model
+        img_array = img_array / 255.0  # Normalize the image
 
-        # Make prediction with the plant disease model
+        # Make prediction with the trained model
         predictions = model1.predict(img_array)
         predicted_class = np.argmax(predictions, axis=1)[0]
+        prediction_confidence = np.max(predictions)  # Get confidence of the prediction
 
-        # Map class index to readable label
-        predicted_label = class_labels.get(predicted_class, "Unknown Disease")
-       
+        # Set a threshold for the prediction confidence
+        threshold = 0.75  # You can adjust this threshold
+
+        if prediction_confidence < threshold:
+            # If confidence is below threshold, it's a "wrong image"
+            predicted_label = "Wrong image type"  # Not a lung image
+        else:
+            # Map the predicted class index to the readable label
+            predicted_label = class_labels.get(predicted_class, "Unknown Disease")
 
         return render(request, 'heartresult.html', {'label': predicted_label, 'image_url': image_url})
 
     return render(request, 'heartupload.html')
 
-
-
-
-def heartresult(request,file_path):
+# Render the result page
+def heartresult(request, file_path):
     context = {
         'image_url': file_path,
-        
     }
-    return render(request, 'heartresult.html',context)
+    return render(request, 'heartresult.html', context)
+
 
 
 

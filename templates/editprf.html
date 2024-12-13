@@ -263,7 +263,7 @@ margin-bottom: 20px;
                 <!-- Username field -->
  <div class="labelinput">
   
-<label>Name</label>
+<label>UserName</label>
 <div class="group" style="margin-bottom: 20px;">
   <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon1">
       <path
@@ -308,7 +308,8 @@ d="M22 16.92V21a2 2 0 0 1-2.18 2 19.91 19.91 0 0 1-8.63-3.07 19.78 19.78 0 0 1-6
           
           
     
-    <input class="input1" type="text"  name="phone" value="{{user.phone_no|default_if_none:''}}">
+    <input class="input1" type="text"  name="phone" value="{{user.phone_no|default_if_none:''}}" pattern="^[0-9]{10}$" 
+    title="Phone number must be exactly 10 digits" >
     </div>
     </div>
 
@@ -342,7 +343,8 @@ d="M22 16.92V21a2 2 0 0 1-2.18 2 19.91 19.91 0 0 1-8.63-3.07 19.78 19.78 0 0 1-6
         />
     </svg>
     
-    <input class="input1" type="text"  name="pincode" value="{{user.pincode_no|default_if_none:''}}">
+    <input class="input1" type="text"  name="pincode" value="{{user.pincode_no|default_if_none:''}}"  pattern="^[0-9]{6}$" 
+    title="Pincode must be exactly 6 digits">
     </div>
     </div>
 
